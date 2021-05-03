@@ -38,6 +38,7 @@
                 {{answer}}
             </div>
             <button @click="checkWin"> Did I Win </button>
+            <div> {{is_winner}} </div>
         </div>
     </div>
 </template>
@@ -46,6 +47,7 @@
 import { reactive, toRefs } from 'vue'
 import { mapState, useStore } from 'vuex'
 import Run from "run-sdk"
+import axios from "axios"
 class Answers extends Run.Jig{
     init(answers){
         this.answers = answers;
@@ -59,9 +61,12 @@ export default {
         let game = await run.load(store.state.gameLocation);
         store.commit('setGameObject', game) 
         console.log("Hydrated Game from run in state:", store.state.gameObject);
+        await run.inventory.sync();
+        console.log(run.inventory.jigs)
         const state = reactive({
             count: 0,   
-            picked: null
+            picked: null,
+            is_winner: ""
         })
     
         return {
@@ -92,6 +97,34 @@ export default {
             const userAnswers = new Answers(this.$store.state.userAnswers)
             await userAnswers.sync()
             console.log(userAnswers);
+            await this.postLocation(userAnswers.location);
+            
+        },
+        async postLocation(location){
+            
+            axios({
+                method: 'POST',
+                url: `http://localhost:3000/check-win`,
+                params: {
+                "location": location,
+                },
+                headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-type': 'application/json',
+                }
+            })
+            .then(function (response) {
+                console.log(response.data);
+                if(response.data.winner === "YES!"){
+                    alert("You won the motherfuckin game, bitch!");
+                } else {
+                    alert('Nah sucker.... the you walked a shitty path');
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+            
         }
     },
     computed: {
