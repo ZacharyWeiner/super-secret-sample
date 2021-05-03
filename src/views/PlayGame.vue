@@ -26,19 +26,27 @@
             </div>
             {{answerAtIndex}}
         </div>
-        <div v-if="0 < displayIndex && displayIndex > 3">
-            <button @click="back"> &lt;= Back  </button>
-        </div>
-        <div v-if="displayIndex < 3">
-            <button @click="setAnswer"> Next => </button>
-        </div>
-        <div v-if="displayIndex === 3">
-            <h4> My Answers: </h4>
-            <div v-for="answer in userAnswers" :key="answer.toString()">  
-                {{answer}}
+        <div class="flex justify-center">
+            <div class='flex '>
+                    <div v-if="displayIndex > 0 && displayIndex < 3">
+                    <button class="bg-red-500 px-5 py-2 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-blue-600" @click="back"> &lt;= Back  </button>
+                </div>
             </div>
-            <button @click="checkWin"> Did I Win </button>
-            <div> {{is_winner}} </div>
+            <div class='flex'>
+                    <div v-if="displayIndex < 3">
+                    <button class="bg-blue-500 px-5 py-2 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-blue-600" @click="setAnswer"> Next => </button>
+                </div>
+            </div>
+            <div class='flex '>
+                <div v-if="displayIndex === 3">
+                    <h4> My Answers: </h4>
+                    <div v-for="answer in userAnswers" :key="answer.toString()">  
+                        {{answer}}
+                    </div>
+                    <button class-="bg-green-500 px-5 py-2 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-blue-600" @click="checkWin"> Did I Win </button>
+                    <div> {{is_winner}} </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -141,6 +149,30 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+
+
+input[type="radio"] + label span {
+    transition: background .2s,
+      transform .2s;
+}
+
+input[type="radio"] + label span:hover,
+input[type="radio"] + label:hover span{
+  transform: scale(1.2);
+} 
+
+input[type="radio"]:checked + label span {
+  background-color: #3490DC; 
+  box-shadow: 0px 0px 0px 2px white inset;
+  
+}
+
+input[type="radio"]:checked + label{
+   color: white;
+   border-radius: 4px;
+   background-color: #3490DC; 
+   padding: 4px;
+}
 
 </style>

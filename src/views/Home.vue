@@ -1,6 +1,6 @@
 <template >
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <img alt="Vue logo" class='m-auto' src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
     <div v-for="jig in jigs" :key="jig.location">
       <div> {{jig.location}} </div>
