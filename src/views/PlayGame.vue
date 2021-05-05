@@ -43,7 +43,7 @@
                     <div v-for="answer in userAnswers" :key="answer.toString()">  
                         {{answer}}
                     </div>
-                    <button class-="bg-green-500 px-5 py-2 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-blue-600" @click="checkWin"> Did I Win </button>
+                    <button class="bg-green-500 px-5 py-2 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-blue-600" @click="checkWin"> Did I Win </button>
                     <div> {{is_winner}} </div>
                 </div>
             </div>
@@ -56,10 +56,18 @@ import { reactive, toRefs } from 'vue'
 import { mapState, useStore } from 'vuex'
 import Run from "run-sdk"
 import axios from "axios"
+//import bsv, {Script} from "bsv"
 class Answers extends Run.Jig{
-    init(answers){
+    init(answers, sats, pk4w){
+        this.owner = "027ccec5c680b4de1b409a310a86bc41b0758d88bf34efa2636d3583b7248d0d4d";
         this.answers = answers;
+        this.satoshis = sats;
+        this.pubKey_for_winning = pk4w;
     }
+    withdraw(){
+        this.satoshis = 0; 
+    }
+
 }
 export default {
     async setup () {
@@ -79,6 +87,7 @@ export default {
     
         return {
             ...toRefs(state),
+            run
         }
     },
     methods:{
@@ -102,8 +111,26 @@ export default {
             
         },
         async createAnswerObject(){
-            const userAnswers = new Answers(this.$store.state.userAnswers)
-            await userAnswers.sync()
+            console.log('setting user answers with send(to) set as', this.run.owner.address)
+            const userAnswers = new Answers(this.$store.state.userAnswers, 10000, this.run.owner.address);
+            // const script = Script.fromAddress(this.purse.address).toHex()
+            // const utxos = await this.run.blockchain.utxos(script)
+            // const tx = new bsv.Transaction()
+            // .from(utxos)
+            // .change(this.purse.address)
+            // .to("n4GJ33kc5QTW6V5fqhgeMHDQsVzjK21ckd", 10000)
+            // .sign(this.run.purse.privkey)
+            // .toString('hex')
+                
+            // try{
+            // let txid = await this.run.blockchain.broadcast(tx)
+            // console.log("Transaction ID:", txid);
+            // }catch(err){console.log("Error sending transaction.", err)}
+
+            try{
+                await userAnswers.sync()
+            }catch(err){console.log("error Syncing asnwers obj:", err)}
+            
             console.log(userAnswers);
             await this.postLocation(userAnswers.location);
             

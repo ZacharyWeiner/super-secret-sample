@@ -22,14 +22,38 @@
 import { reactive, toRefs } from 'vue'
 import Run from "run-sdk"
 
+// Game Owner Details 
+// Private Key: cVdG6jSHB5DePtbQyLKJ1GQGF62FShc1Zksns5SosGgANnBa7p8n GameTest.vue:44
+// Public Key: 027ccec5c680b4de1b409a310a86bc41b0758d88bf34efa2636d3583b7248d0d4d GameTest.vue:45
+// Adddress: n1uKoT7vjsccrStkcdX8rsoAX951xdveDv
+
 class ZasteGame extends Run.Jig{
-    init(jsonObject){
+    init(jsonObject, satoshisForPlay){
+        this.satoshisForPlay = satoshisForPlay;
+        this.isWon = false;
+        this.pay_address = "n4GJ33kc5QTW6V5fqhgeMHDQsVzjK21ckd";
+        this.royalty_address = "";
         this.details = jsonObject;
+        this.plays = 0;
+    }
+    incrementPlays(){
+        this.plays = this.plays + 1; 
+    }
+    send(to){
+        this.owner = to;
+    }
+    setPayAddress(pa){
+        this.pay_address = pa;
     }
 }
 export default {
     async setup () {
         const run = new Run({network: "test", purse: "cQdpg2oTVvbeb47GzRxqn467RmJNp8rJzfoPMfkSBRyzqEdbJcSz", owner: 'cTQPGSZiCXQD3UmrF4rKE6Gub3tmjYYvrjspU7BhXCYbg5f2r7AW', trust: "*"})
+        //const run = new Run({network: "test", trust: "*"});
+        console.log("Private Key:", run.owner.privkey);
+        console.log("Public Key:", run.owner.pubkey);
+        console.log("Adddress:", run.owner.address);
+        console.log("Owner:", run.owner);
         await run.inventory.sync();
         console.log(run.inventory.jigs);
         const state = reactive({
@@ -54,8 +78,9 @@ export default {
             
             console.log(gameDetails);
             this.gameDetails = gameDetails;
-            const g = new ZasteGame(gameDetails);
+            const g = new ZasteGame(gameDetails, 10000);
             await g.sync();
+            console.log("New Game Location:", g.location);
             
         }
     },

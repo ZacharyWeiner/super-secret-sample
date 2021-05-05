@@ -2,7 +2,7 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    gameLocation: "7944ab6c5e8b926dc32b4c08e0aa5c6c2dc345435ac6c305e4c4936632901878_o2",
+    gameLocation: "6f3e4a0a6cd30fd037ec0033fc2cfb932a9a74843951f56dc42d2ed2d20083cd_o2",
     gameTitle: "",
     gameObject: null,
     questionIndex: 0,
