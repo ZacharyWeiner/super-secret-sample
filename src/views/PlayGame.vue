@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="">
-            <div v-if="displayIndex < 3" class=' flex-row'>
+            <div v-if="displayIndex < 3" class=' flex-row m-4 p-4'>
                         <div>Winners Pot: </div>
                         <div class='text-green-400 text-3xl'>{{gameBalance}} </div>
                         
@@ -85,7 +85,7 @@
             </div>
         </div>
         
-        <div v-if="displayIndex < 3" class="py-4 px-4 text-blue-500 bg-blue-100 w-full rounded-br-lg">
+        <div v-if="displayIndex < 3" class="py-4 px-4 text-blue-500 bg-gray-200 w-full rounded-br-lg">
             
             <div class="flex justify-center">
                 <div class='flex '>
@@ -111,10 +111,10 @@
                             
                         </div>
                     </div>
-                    <div class='flex flex-row '>
+                    <div class='flex flex-row p-4'>
                     <div class='flex  w-3/5'>
-                        <div class='flex flex-col justify-center bg-gray-200 rounded p-5 m-5 shadow-xl'>
-                            <div class=' p-2 m-2 text-left'>
+                        <div class='flex flex-col justify-center '>
+                            <div class=' p-2 m-2 text-left bg-blue-200 rounded shadow-xl'>
                                 <div class='flex flex-row '>
                                     <div class="w-1/4 rouded"> <img class="rounded" :src="gameObject.details.question_1.imgUrl" /> </div>
                                     <div class="p-2 m-2">
@@ -123,7 +123,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class=' p-2 m-2 text-left'>
+                            <div class=' p-2 m-2 text-left bg-blue-200 rounded  shadow-xl'>
                                 <div class='flex '>
                                     <div class="w-1/4 rouded"> <img class="rounded" :src="gameObject.details.question_2.imgUrl" /> </div>
                                     <div class="p-2 m-2">
@@ -132,7 +132,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class=' p-2 m-2 text-left'>
+                            <div class=' p-2 m-2 text-left bg-blue-200 rounded shadow-xl'>
                                 <div class='flex '>
                                     <div class="w-1/4 rouded"> <img class="rounded" :src="gameObject.details.question_3.imgUrl" /> </div>
                                     <div class="p-2 m-2">
@@ -143,30 +143,23 @@
                             </div>
                         </div>
                     </div>
-                     <div class=' flex-row w-2/5'>
+                    <div class=' flex-row w-2/5 '>
                         <div>Winners Pot: </div>
                         <div class='text-green-400 text-3xl'>{{gameBalance}} </div>
                         <div v-if="!showConfirm">
-                        <button class="bg-green-500 px-5 py-2 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-blue-600 shadow-xl" @click="confirmSpend"> Did My Journey Win? </button>
-                        <i class="fa fas-spinner spin"></i>
-                        </div>
+                            <button class="bg-green-500 px-5 py-2 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-blue-600 shadow-xl" @click="confirmSpend"> Did My Journey Win? </button>
+                                                    </div>
                         <div v-else>
                             <button class="bg-green-500 px-5 py-2 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-blue-600 shadow-xl" @click="checkWin"> <i :class="showSpin"></i> 5 Ðuros to Play </button>
                             
-                        
                         </div>
                         
-                        
+                            <button class="bg-red-500 p-2 m-2 mt-4 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-red-900 shadow-xl" @click="resetGame"> <i class="fas fa-sync"></i> Restart Game </button>
                     </div>
-                    </div>
-                        
-                    
-                    
-                    <div> {{is_winner}} </div>
                 </div>
-                
-            </div>
-            
+                <div> {{is_winner}} </div>
+            </div>                
+        </div>     
     </div>
 </template>
 
@@ -194,8 +187,16 @@ class Answers extends Run.Jig{
 }
 export default {
     async setup () {
-        const run = new Run({network: "test", purse: "cQdpg2oTVvbeb47GzRxqn467RmJNp8rJzfoPMfkSBRyzqEdbJcSz", owner: "cQ6T6gHBeRfYXNQmqQW81UgvK1umM6zoRkgZGCpGqtzceyTpVMr8", trust: "*"})
         const store = useStore();
+        //= new Run({network: "test", purse: "cQdpg2oTVvbeb47GzRxqn467RmJNp8rJzfoPMfkSBRyzqEdbJcSz", owner: "cQ6T6gHBeRfYXNQmqQW81UgvK1umM6zoRkgZGCpGqtzceyTpVMr8", trust: "*"})
+        let run; 
+        if(store.state.playerOwnerPrivKey !== "" && store.state.playerPursePrivKey !== ""){
+            run = new Run({network: "test", purse: store.state.playerPursePrivKey, owner: store.state.playerOwnerPrivKey, trust: "*"})
+        } else {
+            run =  new Run({network: "test", purse: "cQdpg2oTVvbeb47GzRxqn467RmJNp8rJzfoPMfkSBRyzqEdbJcSz", owner: "cQ6T6gHBeRfYXNQmqQW81UgvK1umM6zoRkgZGCpGqtzceyTpVMr8", trust: "*"})
+            store.commit("setPlayerOwnerPrivKey", run.owner.privkey);
+            store.commit("setPlayerPursePrivKey", run.purse.privkey);
+        }
 
         console.log("Owner Private Key:", run.owner.privkey);
         console.log("Owner Public Key:", run.owner.pubkey);
@@ -247,6 +248,9 @@ export default {
             this.$store.commit("setQuestionIndex", questionIndex);
             this.picked = this.$store.state.userAnswers[questionIndex];
             
+        },
+        resetGame(){
+            this.$store.dispatch("resetGame");
         },
         confirmSpend(){
             this.showConfirm = true;

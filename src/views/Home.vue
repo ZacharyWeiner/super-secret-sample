@@ -16,6 +16,7 @@
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 import Run from 'run-sdk'
+import {useStore} from 'vuex';
 //import {ref} from 'vue';
 
 // class SimpleStore extends Run.Jig {
@@ -29,26 +30,14 @@ import Run from 'run-sdk'
 export default {
   name: 'Home',
   async setup(){
-    const run = new Run({network: "test", purse: "cQdpg2oTVvbeb47GzRxqn467RmJNp8rJzfoPMfkSBRyzqEdbJcSz", owner: 'cTQPGSZiCXQD3UmrF4rKE6Gub3tmjYYvrjspU7BhXCYbg5f2r7AW', trust: "*"})
-    // //const jig2 = new SimpleStore()
-    // console.log("Balance:", await run.purse.balance())
-    // console.log(run.owner.privkey)
-    // console.log(run.purse.privkey)
-    // console.log(run.purse.address)
-
-    // //jig2.set('Satoshi Nakamoto5')
-
-    //  //await jig2.sync()
-
-    // //  console.log(jig.owner)
-    // // console.log(jig.location)
-    // // console.log(jig.origin)
-    // await run.inventory.sync();
-    // const simpleStore = run.inventory.jigs; 
-    // console.log(simpleStore);
-    // const jigs = new ref([]);
-    // jigs.value = simpleStore;
-    
+    const store = useStore();
+    let run;
+    if(store.state.playerOwnerPrivKey !== "" && store.state.playerPursePrivKey){
+      run = new Run({network: "test", purse: store.state.playerPursePrivKey, owner: store.state.playerOwnerPrivKey, trust: "*"})
+    }
+    else{
+       run = new Run({network: "test", purse: "cQdpg2oTVvbeb47GzRxqn467RmJNp8rJzfoPMfkSBRyzqEdbJcSz", owner: 'cTQPGSZiCXQD3UmrF4rKE6Gub3tmjYYvrjspU7BhXCYbg5f2r7AW', trust: "*"})
+    }
     return {run}
   },
   methods:{

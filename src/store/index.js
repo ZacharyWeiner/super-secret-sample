@@ -1,13 +1,20 @@
 import { createStore } from 'vuex'
 import Run from "run-sdk"
+import VuexPersistence from 'vuex-persist'
+const vuexLocal = new VuexPersistence({
+  key: "sto0pid-games",
+  storage: window.localStorage
+})
 
 export default createStore({
   state: {
-    gameLocation: "ffbd504e96bee30ce4f9d8d4555df1ebc68133924b797358b0a1e7d182613cbe_o2",
+    gameLocation: "0f99a65c223157e189ea50c20de00b982b3b93c914ae6d89771dd48e11f17d99_o2",
     gameTitle: "",
     gameObject: null,
     questionIndex: 0,
-    userAnswers: []
+    userAnswers: [],
+    playerPursePrivKey: "",
+    playerOwnerPrivKey: ""
   },
   mutations: {
     setGameLocation(state, location){
@@ -20,11 +27,20 @@ export default createStore({
       state.gameObject = obj;
       console.log("Set game obj", obj, obj.satoshis);
     },
+    setPlayerOwnerPrivKey(state, key){
+      state.playerOwnerPrivKey = key;
+    },
+    setPlayerPursePrivKey(state, key){
+      state.playerPursePrivKey = key;
+    },
     setQuestionIndex(state, index){
       state.questionIndex = index;
     },
     addUserAnswer(state, answer){
       state.userAnswers[state.questionIndex] = answer
+    },
+    clearUserAnswers(state){
+      state.userAnswers = [];
     }
   },
   actions: {
@@ -33,8 +49,13 @@ export default createStore({
       let g = await run.load(state.gameLocation);
       await g.sync();
       commit("setGameObject", g);
-    }
+    },
+    resetGame({commit}){
+      commit("setQuestionIndex", 0);
+      commit("clearUserAnswers");
+    },
   },
   modules: {
-  }
+  },
+  plugins: [vuexLocal.plugin]
 })
