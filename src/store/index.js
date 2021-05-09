@@ -14,9 +14,13 @@ export default createStore({
     questionIndex: 0,
     userAnswers: [],
     playerPursePrivKey: "",
-    playerOwnerPrivKey: ""
+    playerOwnerPrivKey: "",
+    playerSeed: ""
   },
   mutations: {
+    setPlayerSeed(state, seed){
+      state.playerSeed = seed;
+    },
     setGameLocation(state, location){
       state.gameLocation = location;
     },

@@ -18,7 +18,7 @@
         </div>
       </template>
       <template #fallback>
-        <div></div>
+        <div><i class="fas fa-spinner animate-spin"></i></div>
       </template>
   </Suspense>
 </div>
