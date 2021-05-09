@@ -16,7 +16,7 @@
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 import Run from 'run-sdk'
-import {ref} from 'vue';
+//import {ref} from 'vue';
 
 // class SimpleStore extends Run.Jig {
 //   set(value) {
@@ -29,29 +29,27 @@ import {ref} from 'vue';
 export default {
   name: 'Home',
   async setup(){
-    //father valve twelve miss opera tiger confirm hockey find cluster fury biology 
-    //mqJ1NfFN4xGTdsaVzwVEk7TzH1N1ArYhtV
-    //cQdpg2oTVvbeb47GzRxqn467RmJNp8rJzfoPMfkSBRyzqEdbJcSz 
     const run = new Run({network: "test", purse: "cQdpg2oTVvbeb47GzRxqn467RmJNp8rJzfoPMfkSBRyzqEdbJcSz", owner: 'cTQPGSZiCXQD3UmrF4rKE6Gub3tmjYYvrjspU7BhXCYbg5f2r7AW', trust: "*"})
-    //const jig2 = new SimpleStore()
-    console.log("Balance:", await run.purse.balance())
-    console.log(run.owner.privkey)
-    console.log(run.purse.privkey)
-    console.log(run.purse.address)
+    // //const jig2 = new SimpleStore()
+    // console.log("Balance:", await run.purse.balance())
+    // console.log(run.owner.privkey)
+    // console.log(run.purse.privkey)
+    // console.log(run.purse.address)
 
-    //jig2.set('Satoshi Nakamoto5')
+    // //jig2.set('Satoshi Nakamoto5')
 
-     //await jig2.sync()
+    //  //await jig2.sync()
 
-    //  console.log(jig.owner)
-    // console.log(jig.location)
-    // console.log(jig.origin)
-    await run.inventory.sync();
-    const simpleStore = run.inventory.jigs; 
-    console.log(simpleStore);
-    const jigs = new ref([]);
-    jigs.value = simpleStore;
-    return {run, jigs}
+    // //  console.log(jig.owner)
+    // // console.log(jig.location)
+    // // console.log(jig.origin)
+    // await run.inventory.sync();
+    // const simpleStore = run.inventory.jigs; 
+    // console.log(simpleStore);
+    // const jigs = new ref([]);
+    // jigs.value = simpleStore;
+    
+    return {run}
   },
   methods:{
     innards() {

@@ -23,10 +23,9 @@ import { reactive, toRefs } from 'vue'
 import Run from "run-sdk"
 
 // Game Owner Details 
-// Private Key: cVdG6jSHB5DePtbQyLKJ1GQGF62FShc1Zksns5SosGgANnBa7p8n GameTest.vue:44
-// Public Key: 027ccec5c680b4de1b409a310a86bc41b0758d88bf34efa2636d3583b7248d0d4d GameTest.vue:45
-// Adddress: n1uKoT7vjsccrStkcdX8rsoAX951xdveDv
-
+// Private Key: cTQPGSZiCXQD3UmrF4rKE6Gub3tmjYYvrjspU7BhXCYbg5f2r7AW GameTest.vue:53
+// Public Key: 02c08977652fb7b018598bbdcf7c760390d742befbf6b66f00aaae8dff7f6945ea GameTest.vue:54
+// Adddress: n4GJ33kc5QTW6V5fqhgeMHDQsVzjK21ckd
 class ZasteGame extends Run.Jig{
     init(jsonObject, satoshisForPlay){
         this.satoshisForPlay = satoshisForPlay;
@@ -34,10 +33,15 @@ class ZasteGame extends Run.Jig{
         this.pay_address = "n4GJ33kc5QTW6V5fqhgeMHDQsVzjK21ckd";
         this.royalty_address = "";
         this.details = jsonObject;
+        this.satoshis = 1000;
         this.plays = 0;
     }
     incrementPlays(){
         this.plays = this.plays + 1; 
+    }
+    fund(amount){
+        let newAmount = this.satoshis + amount;
+        this.satoshis = newAmount;
     }
     send(to){
         this.owner = to;
@@ -69,16 +73,16 @@ export default {
     methods:{
         async createGame(){
             let gameDetails = {title: "Our Cool Adventure"}; 
-            let question = {questionText: "Do you want to go on a cool adventure?", answers: ['yes', 'no', 'maybe', 'sometimes', 'always']}
+            let question = {questionText: "Do you want to go on a cool adventure?", answers: ['yes', 'no', 'maybe', 'sometimes', 'always'], imgUrl: "https://images.unsplash.com/photo-1551949730-c0b55d675af1"}
             gameDetails["question_1"] = question;
-            let question2 = {questionText: "International or stay in the States?", answers: ['international', 'stay in the states', 'surprise me', 'I dont care', 'everywehre but here sucks anyway']}
+            let question2 = {questionText: "International or stay in the States?", answers: ['international', 'stay in the states', 'surprise me', 'I dont care', 'everywehre but here sucks anyway'], imgUrl: "http://clipart-library.com/images/pc7ra4XXi.jpg"}
             gameDetails["question_2"] = question2;
-            let question3 = {questionText: "Should we fly or drive", answers: ['fly', 'drive', 'take a train', 'bus', 'boat']}
+            let question3 = {questionText: "Should we fly or drive", answers: ['fly', 'drive', 'take a train', 'bus', 'boat'], imgUrl:"http://clipart-library.com/images/8cxra6Rji.jpg"}
             gameDetails["question_3"] = question3;
             
             console.log(gameDetails);
             this.gameDetails = gameDetails;
-            const g = new ZasteGame(gameDetails, 10000);
+            const g = new ZasteGame(gameDetails, 2500);
             await g.sync();
             console.log("New Game Location:", g.location);
             
