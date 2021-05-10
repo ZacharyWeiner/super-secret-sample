@@ -169,6 +169,7 @@
 
 import { reactive, toRefs } from 'vue'
 import { mapState, useStore } from 'vuex'
+import {useRouter } from "vue-router"
 import Run from "run-sdk"
 import axios from "axios"
 //import bsv, {Script} from "bsv"
@@ -179,6 +180,11 @@ class Answers extends Run.Jig{
         
         this.satoshis = sats;
         this.pubKey_for_winning = pk4w;
+        this.checked = false;
+    }
+    check(){
+        this.checked = true;
+        this.satoshis = 0;
     }
     withdraw(){
         this.satoshis = 0; 
@@ -189,7 +195,11 @@ export default {
     async setup () {
         const store = useStore();
         //= new Run({network: "test", purse: "cQdpg2oTVvbeb47GzRxqn467RmJNp8rJzfoPMfkSBRyzqEdbJcSz", owner: "cQ6T6gHBeRfYXNQmqQW81UgvK1umM6zoRkgZGCpGqtzceyTpVMr8", trust: "*"})
-        let run; 
+        let run;
+        let router = useRouter();
+        if(router.currentRoute.value.query.id){
+            store.commit("setGameLocation", router.currentRoute.value.query.id);
+        }
         if(store.state.playerOwnerPrivKey !== "" && store.state.playerPursePrivKey !== ""){
             run = new Run({network: "test", purse: store.state.playerPursePrivKey, owner: store.state.playerOwnerPrivKey, trust: "*"})
         } else {
@@ -264,30 +274,14 @@ export default {
         async createAnswerObject(){
             console.log('setting user answers with send(to) set as', this.run.owner.address)
             const userAnswers = new Answers(this.$store.state.userAnswers, this.gameObject.satoshisForPlay, this.run.owner.address);
-            // const script = Script.fromAddress(this.purse.address).toHex()
-            // const utxos = await this.run.blockchain.utxos(script)
-            // const tx = new bsv.Transaction()
-            // .from(utxos)
-            // .change(this.purse.address)
-            // .to("n4GJ33kc5QTW6V5fqhgeMHDQsVzjK21ckd", 10000)
-            // .sign(this.run.purse.privkey)
-            // .toString('hex')
-                
-            // try{
-            // let txid = await this.run.blockchain.broadcast(tx)
-            // console.log("Transaction ID:", txid);
-            // }catch(err){console.log("Error sending transaction.", err)}
-
-            try{
+            try {
                 await userAnswers.sync()
-            }catch(err){console.log("error Syncing asnwers obj:", err)}
-            
+            } catch(err) {
+                console.log("error Syncing asnwers obj:", err)
+            }
             console.log(userAnswers);
-            
             await this.postLocation(userAnswers.location);
             this.$store.dispatch("updateBalance");
-            
-            
         },
         async postLocation(location){
             
@@ -296,6 +290,7 @@ export default {
                 url: `http://localhost:3000/check-win`,
                 params: {
                 "location": location,
+                "gameId": this.$store.state.gameObject.location
                 },
                 headers: {
                 'Access-Control-Allow-Origin': '*',

@@ -4,6 +4,8 @@ import GameTest from '../views/GameTest.vue';
 import PlayGame from '../views/PlayGame.vue';
 import FAQ from '../views/FAQ.vue';
 import Profile from '../views/Profile.vue';
+import NewGame from '../views/NewGame.vue';
+import GameList from '../views/GameList.vue';
 
 const routes = [
   {
@@ -17,9 +19,24 @@ const routes = [
     component: GameTest
   },
   {
+    path: '/new-game',
+    name: 'New Game',
+    component: NewGame
+  },
+  {
+    path: '/play-game/:id',
+    name: 'Play Game',
+    component: PlayGame
+  },
+  {
     path: '/play-game',
     name: 'Play Game',
     component: PlayGame
+  },
+  {
+    path: '/game-list',
+    name: 'Game List',
+    component: GameList
   },
   {
     path: '/profile',

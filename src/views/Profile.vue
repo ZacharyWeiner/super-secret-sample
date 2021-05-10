@@ -6,7 +6,7 @@
                 
                     <img class="relative object-cover w-full h-full rounded-xl" src="https://i.imgur.com/kGkSg1v.png">
                     
-                    <div class="w-full px-8 absolute top-8">
+                    <div class="w-full px-4 absolute top-8">
                         <div class="flex justify-between">
                             <div class="">
                                 <p class="font-light">
@@ -18,16 +18,20 @@
                             </div>
                             <!-- <img class="w-14" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1000px-Mastercard-logo.svg.png"/> -->
                         </div>
-                        <div class="pt-1">
+                        
+                        <div class="pt-1 flex-wrap">
                             <p class="font-light">
                                 Private Key
                             </p>
-                            <p class="font-medium tracking-more-wider font-mono">
+                            <p v-if="!showFullPurse" class="font-medium tracking-more-wider font-mono">
                                 {{store.state.playerPursePrivKey.substring(0, 8)}} <span class="bg-blue-700  rounded-full px-2 py-1 text-xs absolute">●●●●</span>
                             </p>
-                            
+                            <p v-if="showFullPurse" class="text-xs" style='word-wrap: break-word;'>
+                                <span class="flex-wrap">{{store.state.playerPursePrivKey}}</span>
+                            </p>
+                            <p class='pt-1'><button @click="showFullPurse = !showFullPurse">{{showFullPurse ? "hide":"show"}}</button></p>
                         </div>
-                        <div class="pt-6 pr-6">
+                        <div class="pt-2 pr-2">
                             <div class="flex justify-between">
                                 
                                 <div class="">
@@ -62,7 +66,7 @@
             <div class=" m-3 p-3 flex-col-5">
                 <div class="w-96 h-56 m-auto bg-red-100 rounded-xl relative text-white shadow-md transition-transform transform hover:scale-105 hover:shadow-2xl">
                 
-                    <img class="relative object-cover w-full h-full rounded-xl" src="https://i.imgur.com/kGkSg1v.png">
+                    <img class="relative object-cover w-full h-full rounded-xl" src="https://i.imgur.com/Zi6v09P.png">
                     
                     <div class="w-full px-8 absolute top-8">
                         <div class="flex justify-between">
@@ -76,13 +80,21 @@
                             </div>
                             <!-- <img class="w-14" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1000px-Mastercard-logo.svg.png"/> -->
                         </div>
-                        <div class="pt-1">
+                        <br/>
+                        <div class="pt-1 items-center">
                             <p class="font-light">
-                                Priv Key
+                                Private Key
                             </p>
-                            <p class="font-medium tracking-more-wider font-mono">
+                            <p v-if="!showFullOwner" class="font-medium tracking-more-wider font-mono">
                                 {{store.state.playerOwnerPrivKey.substring(0, 8)}} <span class="bg-blue-700  rounded-full px-2 py-1 text-xs absolute">●●●●</span>
                             </p>
+                            <div v-if="showFullOwner" class="items-center">
+                                <p v-if="showFullOwner" class="text-xs text-center" style='word-wrap: break-word;'>
+                                <span class="flex-wrap">{{store.state.playerOwnerPrivKey}}</span>
+                            </p>
+                            </div>
+                            
+                            <p class='pt-1'><button @click="showFullOwner = !showFullOwner">{{showFullOwner ? "hide":"show"}}</button></p>
                             
                         </div>
                         <!-- <div class="pt-6 pr-6">
@@ -190,6 +202,8 @@ export default {
             newOwner: "",
             newPurse:"",
             newMnemonic: store.state.playerSeed.toString(),
+            showFullPurse: false,
+            showFullOwner: false
         })
     
         return {

@@ -42,8 +42,13 @@ class ZasteGame extends Run.Jig{
     fund(amount){
         let newAmount = this.satoshis + amount;
         this.satoshis = newAmount;
+        this.plays = this.plays + 1; 
     }
     send(to){
+        this.owner = to;
+    }
+    win(to) {
+        this.isWon = true;
         this.owner = to;
     }
     setPayAddress(pa){
