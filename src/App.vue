@@ -9,7 +9,7 @@
               <span class="text-blue-500"> støºpˆd qåm3s </span>
             </a> 
             <div class="flex flex-grow"></div>
-            <router-link to="/about" class="no-underline text-blue-dark text-md flex-1 text-center sm:ml-4">Home</router-link> |
+            <router-link to="/" class="no-underline text-blue-dark text-md flex-1 text-center sm:ml-4">Home</router-link> |
             <router-link to="/play-game" class="no-underline text-blue-dark text-md flex-1 text-center sm:ml-4">Play </router-link> |
             <router-link to="/profile" class="no-underline text-blue-dark text-md flex-1 text-center sm:ml-4">Wallet</router-link> 
         </div>

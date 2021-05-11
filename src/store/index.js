@@ -8,6 +8,7 @@ const vuexLocal = new VuexPersistence({
 
 export default createStore({
   state: {
+    gameListLocation: "3abf31ab5fe29789ea0c14737065787760f31779561ec7edd0b3d018a15fc73d_o2",
     gameLocation: "0f99a65c223157e189ea50c20de00b982b3b93c914ae6d89771dd48e11f17d99_o2",
     gameTitle: "",
     gameObject: null,
