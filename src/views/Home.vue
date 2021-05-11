@@ -1,6 +1,7 @@
 <template >
-<div class="p-6 m-6 flex flex-col h-auto">
-  <div class="pb-5 bg-clip-text text-transparent font-extrabold text-5xl bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 "> 
+<div class="flex flex-col h-auto bg-white">
+  <div class=' p-6 m-6 '>
+  <div class="p-5 bg-clip-text text-transparent font-extrabold text-5xl bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 "> 
     Play Games With Us 
   </div>
   <div class="pt-3 bg-clip-text text-transparent font-extrabold text-3xl bg-gradient-to-r from-blue-400 via-purple-500 to-blue-500 "> 
@@ -20,73 +21,119 @@
     </div>
     <div class="flex-grow"></div>
   </div>
-
-  <!-- HOW IT WORKS --> 
-  <div class="w-full pt-4 pb-4">
-
+  
+  <div class="p-3 m-3"></div>
   </div>
-  <div> 
-    <div class="mb-3 flex flex justify-center">
-      <div class="bg-clip-text text-transparent font-extrabold text-4xl bg-gradient-to-b bg-gradient-to-r from-green-700 via-green-500 to-green-400"> How It Works </div>
+  <div class="p-3 m-3"></div>
+  <div class='bg-gray-200 rounded '>
+    <div class="p-3 m-3"></div>
+  <div class="pt-3 bg-clip-text text-transparent font-extrabold text-3xl bg-gradient-to-r from-gray-600 via-gray-700 to-gray-800"> 
+    How It Works
+  </div>
+  <div class="p-3 m-3"></div>
+  <!-- HOW IT WORKS 1--> 
+
+<!-- 
+  <div class="flex flex-col w-auto shadow-xl rounded-t m-2">
+    <div class="w-full rounded-t-xl  bg-gradient-to-r from-purple-400 via-purple-700 to-blue-400 text-white "> 
+      <h3 class='text-md pt-4'> Step 1.  </h3>
+      <div class="text-2xl font-extrabold" >Take The Journey </div>
     </div>
-    <div class="w-full shadow-xl rounded m-2">
-      <div class="grid grid-cols-10 gap-4">
-        <div class='col-span-2 h-24  bg-green-500 rounded-l-xl text-white'>
-          <h3 class='text-md pt-4'> Step 1.  </h3>
-          <span class='text-2xl font-extrabold'>Take The Journey</span>
-          </div>
-        <!-- ... -->
-        <div class='col-span-7'>
-          <div class="mt-4">
-            Each game asks a series of questions. Your answers to each question form your journey. After making it through all the doors, picking up all the jewels, and decoding all the scrolls, you'll reach the chance to see if youve won.
-          </div>
-        </div>
-      </div>
+    <div class="mt-4 text-lg">
+      Each game asks a series of questions. Your answers to each question form your journey. After making it through all the doors, picking up all the jewels, and decoding all the scrolls, you'll reach the chance to see if youve won.
     </div>
-    <div class="mb-3 w-full shadow-xl rounded m-2">
-      <div class="grid grid-cols-10 gap-4">
-        <div class='col-span-2 h-24  bg-green-500 rounded-l-xl text-white'>
-          <h3 class='text-md pt-4'> Step 2.  </h3>
-          <span class='text-2xl font-extrabold'>Save Your Story.</span>
-        </div>
-        <!-- ... -->
-        <div class='col-span-7'>
-          <div class="mt-4">
-            To check &amp; see if you won, you must first save your story to the blockchain for all time. (dont worry you just click a button)<br/>
-            Once your answers are written to the blockchain, you can check to see if you won. A hash of the game's winning code is stored at the release of the game. If the hash of your journey matches the winning hash you've won!
-          </div>
-        </div>
-      </div>
+    <div class="mt-4 text-lg">
+      After making it through all the doors, picking up all the jewels, and decoding all the scrolls, you'll reach the chance to see if youve won.
     </div>
-    <div class="mb-3 w-full shadow-xl rounded m-2">
-      <div class="grid grid-cols-10 gap-4">
-        <div class='col-span-2 h-24  bg-green-500 rounded-l-xl text-white'>
-          <h3 class='text-md pt-4'> Step 3.  </h3>
-          <span class='text-2xl font-extrabold'>Win.</span>
-        </div>
-        <!-- ... -->
-        <div class='col-span-7'>
-          <div class="mt-4">
+  </div>
+
+  <div class="flex flex-col w-auto shadow-xl rounded-t m-2">
+    <div class="w-full rounded-t-xl  bg-gradient-to-r from-blue-400 via-blue-900 to-green-600 text-white "> 
+      <h3 class='text-md pt-4'> Step 2.  </h3>
+      <div class="text-2xl font-extrabold" >Save Your Story </div>
+    </div>
+    <div class="mt-4">
+      To check &amp; see if you won, you must first save your story to the blockchain for all time. (dont worry you just click a button)<br/>
+      Once your answers are written to the blockchain, you can check to see if you won. A hash of the game's winning code is stored at the release of the game. If the hash of your journey matches the winning hash you've won!
+    </div>
+    <div class='pt-4'> Every time you check a journey to see if you've won the game will package up an NFT with a few satoshis. If your journey does not unlock the puzzle, 1/2 of the satoshis will be sent to the game, increasing the value of the game. </div>
+  </div>
+
+  <div class="flex flex-col w-auto shadow-xl rounded-t m-2">
+    <div class="w-full rounded-t-xl  bg-gradient-to-r from-green-700 via-green-500 to-green-200 text-white "> 
+      <h3 class='text-md pt-4'> Step 3.  </h3>
+      <div class="text-2xl font-extrabold" >Win </div>
+    </div>
+    <div class="mt-4">
             If you are the first to take the winning journey, you win the game! In our games that means you actually WIN the game. The records (NFT) on the bllockchain are transfered to your account immediately, and are avaialble on the next block confirmation. 
-          </div>
-        </div>
+    </div>
+  </div> -->
+
+
+<!-- HOW IT WORKS 2--> 
+
+ <div class="flex flex-col w-auto shadow-2xl rounded m-2 rounded-b-xl">
+   <div class="bg-white rounded-t">
+    <div class="w-full bg-clip-text text-transparent rounded  bg-gradient-to-r from-purple-400 via-purple-700 to-blue-400  "> 
+      <h3 class='text-md pt-4'> Step 1.  </h3>
+      <div class="text-2xl font-extrabold" >Take The Journey </div>
+    </div>
+   </div>
+    <div class="bg-gradient-to-r from-purple-700 via-purple-800 to-purple-900 rounded-b-xl text-white">
+      <div class="mt-4">
+        Each game asks a series of questions. Your answers to each question form your journey. After making it through all the doors, picking up all the jewels, and decoding all the scrolls, you'll reach the chance to see if youve won.
+      </div>
+      <div class="mb-4">
+        After making it through all the doors, picking up all the jewels, and decoding all the scrolls, you'll reach the chance to see if youve won.
       </div>
     </div>
-
+  </div>
+<div class="p-1 m-1"></div>
+  <div class="flex flex-col w-auto shadow-xl rounded-t m-2 rounded-b-xl">
+    <div class="bg-white rounded-t">
+    <div class="w-full bg-clip-text text-transparent rounded-t-xl  bg-gradient-to-r from-blue-400 via-blue-900 to-green-600 "> 
+      <h3 class='text-md pt-4'> Step 2.  </h3>
+      <div class="text-2xl font-extrabold" >Save Your Story </div>
+    </div>
+    </div>
+    <div class="bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900 rounded-b-xl text-white">
+    <div class="mt-4">
+      To check &amp; see if you won, you must first save your story to the blockchain for all time. (dont worry you just click a button)<br/>
+      Once your answers are written to the blockchain, you can check to see if you won. A hash of the game's winning code is stored at the release of the game. If the hash of your journey matches the winning hash you've won!
+    </div>
+    <div class='mb-4'> Every time you check a journey to see if you've won the game will package up an NFT with a few satoshis. If your journey does not unlock the puzzle, 1/2 of the satoshis will be sent to the game, increasing the value of the game. </div>
+    </div>
+  
+  </div>
+<div class="p-1 m-1"></div>
+  <div class="flex flex-col w-auto shadow-xl rounded-t m-2 rounded-b-xl">
+    <div class="bg-white rounded-t">
+    <div class="w-full bg-clip-text text-transparent rounded-t-xl  bg-gradient-to-r from-green-700 via-green-600 to-green-400 "> 
+      <h3 class='text-md pt-4'> Step 3.  </h3>
+      <div class="text-2xl font-extrabold" >Win </div>
+    </div>
+    </div>
+     <div class="bg-gradient-to-r from-green-700 via-green-800 to-green-900 rounded-b-xl text-white">
+    <div class="m-4 p-4">
+            If you are the first to take the winning journey, you win the game! In our games that means you actually WIN the game. The records (NFT) on the bllockchain are transfered to your account immediately, and are avaialble on the next block confirmation. 
+    </div>
+    </div>
   </div>
 
-
-
-
-
-
-
-
-  <div class="flex p-6 m-6  justify-center">
-    <div class="text-4xl font-bold underline"> Games </div>
+<!-- !HOW IT WORKS 2--> 
+</div>
+<div class="p-1 m-1"></div>
+  <div class="flex justify-center">
+    <div class="w-full bg-gray-200">
+      <div class="p-2 m-2"></div>
+      <div class="pt-3 bg-clip-text text-transparent font-extrabold text-3xl bg-gradient-to-b from-gray-600 via-gray-700 to-gray-800 "> 
+        Available Games
+      </div>
+      <div class="p-2 m-2"></div>
+    </div>
   </div>
-  <div class='flex'>
-    <div v-for="game in games" :key="game.location" class="rounded shadow w-1/4">
+  <div class='flex rounded-xl m-2 p-4 shadow'>
+    <div v-for="game in games" :key="game.location" class="rounded shadow sm:w-1/2 md:w-1/4">
       
       <div class="text-white rounded-t text-xl bg-blue-500">
         <span class="p-2 m-2"> {{game.details.title}} </span>
