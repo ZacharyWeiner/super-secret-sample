@@ -2,10 +2,10 @@
     <div>
         <div class="">
             <div v-if="displayIndex < 3" class=' flex-row m-4 p-4'>
-                        <div>Winners Pot: </div>
-                        <div class='text-green-400 text-3xl'>{{gameBalance}} </div>
-                        
-                    </div>
+                <div>Winners Pot: </div>
+                <div class='text-green-400 text-3xl'>{{gameBalance}} </div>
+
+            </div>
         </div>
         <div v-if="displayIndex === 0">
             <div class="p-20">
@@ -20,7 +20,7 @@
                             <h2 class="text-3xl text-gray-800 mb-4">
                                 {{gameObject.details.question_1.questionText ? gameObject.details.question_1.questionText : "Fuck off" }}
                             </h2>
-                        <div v-for="answer in gameObject.details.question_1.answers" :key="answer.toString()">
+                            <div v-for="answer in gameObject.details.question_1.answers" :key="answer.toString()">
                                 <input type="radio" :id="answer" :value="answer" v-model="picked">
                                 <label :for="answer">{{answer}}</label>
                             </div>
@@ -46,12 +46,12 @@
                             <h2 class="text-3xl text-gray-800 mb-4">
                                 {{gameObject.details.question_2.questionText ? gameObject.details.question_2.questionText : "Fuck off" }}
                             </h2>
-                        <div v-for="answer in gameObject.details.question_2.answers" :key="answer.toString()">
+                            <div v-for="answer in gameObject.details.question_2.answers" :key="answer.toString()">
                                 <input type="radio" :id="answer" :value="answer" v-model="picked">
                                 <label :for="answer">{{answer}}</label>
                             </div>
                         </div>
-                         <div v-if="picked !== '' && picked !== null" class="shadow-xl rounded m-4 p-4 bg-gray-200">
+                        <div v-if="picked !== '' && picked !== null" class="shadow-xl rounded m-4 p-4 bg-gray-200">
                             {{picked}}
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                                 <input type="radio" :id="answer" :value="answer" v-model="picked">
                                 <label :for="answer">{{answer}}</label>
                             </div>
-                             <div v-if="picked !== '' && picked !== null" class="shadow-xl rounded m-4 p-4 bg-gray-200">
+                            <div v-if="picked !== '' && picked !== null" class="shadow-xl rounded m-4 p-4 bg-gray-200">
                                 {{picked}}
                             </div>
                         </div>
@@ -84,34 +84,83 @@
                 </div>
             </div>
         </div>
-        
-        <div v-if="displayIndex < 3" class="py-4 px-4 text-blue-500 bg-gray-200 w-full rounded-br-lg">
-            
+        <div v-if="displayIndex === 3">
+            <div class="p-20">
+                <div class="rounded-lg shadow-lg flex h-auto">
+                    <!-- image -->
+                    <div class="h-50 bg-cover bg-center rounded-tl-lg rounded-bl-lg overflow-hidden w-1/2 bg-blue-400 text-center">
+                        <img :src="gameObject.details.question_4.imgUrl" alt="">
+                    </div>
+                    <!-- content -->
+                    <div class="flex-grow">
+                        <div class="p-4 text-gray-600">
+                            <h2 class="text-3xl text-gray-800 mb-4">
+                                {{gameObject.details.question_4.questionText ? gameObject.details.question_4.questionText : "Fuck off" }}
+                            </h2>
+                            <div v-for="answer in gameObject.details.question_4.answers" :key="answer.toString()">
+                                <input type="radio" :id="answer" :value="answer" v-model="picked">
+                                <label :for="answer">{{answer}}</label>
+                            </div>
+                            <div v-if="picked !== '' && picked !== null" class="shadow-xl rounded m-4 p-4 bg-gray-200">
+                                {{picked}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-if="displayIndex === 4">
+            <div class="p-20">
+                <div class="rounded-lg shadow-lg flex h-auto">
+                    <!-- image -->
+                    <div class="h-50 bg-cover bg-center rounded-tl-lg rounded-bl-lg overflow-hidden w-1/2 bg-blue-400 text-center">
+                        <img :src="gameObject.details.question_5.imgUrl" alt="">
+                    </div>
+                    <!-- content -->
+                    <div class="flex-grow">
+                        <div class="p-4 text-gray-600">
+                            <h2 class="text-3xl text-gray-800 mb-4">
+                                {{gameObject.details.question_5.questionText ? gameObject.details.question_5.questionText : "Fuck off" }}
+                            </h2>
+                            <div v-for="answer in gameObject.details.question_5.answers" :key="answer.toString()">
+                                <input type="radio" :id="answer" :value="answer" v-model="picked">
+                                <label :for="answer">{{answer}}</label>
+                            </div>
+                            <div v-if="picked !== '' && picked !== null" class="shadow-xl rounded m-4 p-4 bg-gray-200">
+                                {{picked}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-if="displayIndex < 5" class="py-4 px-4 text-blue-500 bg-gray-200 w-full rounded-br-lg">
+
             <div class="flex justify-center">
                 <div class='flex '>
-                        <div v-if="displayIndex > 0 && displayIndex < 3">
+                    <div v-if="displayIndex > 0 && displayIndex < 5">
                         <button class="bg-red-500 px-5 py-2 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-blue-600" @click="goBack"> <i class='fa fa-arrow-left'></i> Back  </button>
                     </div>
                 </div>
                 <div class='flex p-2 m-2'></div>
                 <div class='flex'>
-                        <div v-if="displayIndex < 3">
+                    <div v-if="displayIndex < 5">
                         <button class="bg-blue-500 px-5 py-2 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-blue-600" @click="setAnswer"> Next <i class='fa fa-arrow-right'></i> </button>
                     </div>
                 </div>
-           
+
             </div>
         </div>
-         <div class='flex '>
-                <div v-if="displayIndex === 3" class='w-full'>
-                    <div class='flex flex-row pt-3'>
-                        <div class="w-1/3"><h2 class='text-3xl'> Your Journey: </h2></div>
-                        <div class="w-2/3 text-right pr-4">
-                            {{}}
-                            
-                        </div>
+        <div class='flex '>
+            <div v-if="displayIndex === 5" class='w-full'>
+                <div class='flex flex-row pt-3'>
+                    <div class="w-1/3"><h2 class='text-3xl'> Your Journey: </h2></div>
+                    <div class="w-2/3 text-right pr-4">
+                        {{}}
+
                     </div>
-                    <div class='flex flex-row p-4'>
+                </div>
+                <div class='flex flex-row p-4'>
                     <div class='flex  w-3/5'>
                         <div class='flex flex-col justify-center '>
                             <div class=' p-2 m-2 text-left bg-blue-200 rounded shadow-xl'>
@@ -141,25 +190,68 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class=' p-2 m-2 text-left bg-blue-200 rounded shadow-xl'>
+                                <div class='flex '>
+                                    <div class="w-1/4 rouded"> <img class="rounded" :src="gameObject.details.question_4.imgUrl" /> </div>
+                                    <div class="p-2 m-2">
+                                        <div class="text-xl">{{gameObject.details.question_4.questionText}}</div>
+                                        <div class="italic bold text-2xl pl-4">{{userAnswers[3]}}</div> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=' p-2 m-2 text-left bg-blue-200 rounded shadow-xl'>
+                                <div class='flex '>
+                                    <div class="w-1/4 rouded"> <img class="rounded" :src="gameObject.details.question_5.imgUrl" /> </div>
+                                    <div class="p-2 m-2">
+                                        <div class="text-xl">{{gameObject.details.question_5.questionText}}</div>
+                                        <div class="italic bold text-2xl pl-4">{{userAnswers[4]}}</div> 
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class=' flex-row w-2/5 '>
                         <div>Winners Pot: </div>
                         <div class='text-green-400 text-3xl'>{{gameBalance}} </div>
-                        <div v-if="!showConfirm">
-                            <button class="bg-green-500 px-5 py-2 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-blue-600 shadow-xl" @click="confirmSpend"> Did My Journey Win? </button>
-                                                    </div>
-                        <div v-else>
-                            <button class="bg-green-500 px-5 py-2 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-blue-600 shadow-xl" @click="checkWin"> <i :class="showSpin"></i> 5 Ðuros to Play </button>
-                            
+                        <div v-if="!gameObject.isWon">
+                            <div v-if="!showConfirm">
+                                <button class="bg-green-500 px-5 py-2 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-blue-600 shadow-xl" @click="confirmSpend"> Did My Journey Win? </button>
+                            </div>
+                            <div v-else>
+                                <button class="bg-green-500 px-5 py-2 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-blue-600 shadow-xl" @click="checkWin"> <i :class="showSpin"></i> 5 Ðuros to Play </button>
+
+                            </div>
                         </div>
-                        
-                            <button class="bg-red-500 p-2 m-2 mt-4 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-red-900 shadow-xl" @click="resetGame"> <i class="fas fa-sync"></i> Restart Game </button>
+                        <div v-else> 
+                            Won By: {{gameObject.owner}}
+                        </div>
+                        <button class="bg-red-500 p-2 m-2 mt-4 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-red-900 shadow-xl" @click="resetGame"> <i class="fas fa-sync"></i> Restart Game </button>
                     </div>
                 </div>
                 <div> {{is_winner}} </div>
             </div>                
-        </div>     
+        </div>
+        <Modal v-if="showModal" @close="showModal = false">
+            <template v-slot:header>
+                <div :class='modalHeaderBackground' class='w-full flex'>
+                    
+                    <h3 class='flex-grow text-white font-extrabold p-2 m-2'>{{modalHeaderText}}</h3>
+                    <button class="modal-default-button p-2 m-2 " @click="showModal = false">
+                    X
+                    </button>
+                </div>
+            </template>
+             <template v-slot:body>
+                <div class='w-full p-2 m-2'>
+                    <h3 class='font-extrabold'>{{modalBodyText}}</h3>
+                </div>
+            </template>
+            <template v-if="showConfirm" v-slot:footer>
+                <div class="p-2 m-2 border-t-2">
+                    <button  v-if="showConfirm" class="bg-blue-500 px-5 py-2 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-green-600 shadow-xl" @click="checkWin"> <i :class="showSpin"></i> Confirm Spend 5 Ðuros</button>
+                </div>
+            </template>
+        </Modal>     
     </div>
 </template>
 
@@ -172,6 +264,7 @@ import { mapState, useStore } from 'vuex'
 import {useRouter } from "vue-router"
 import Run from "run-sdk"
 import axios from "axios"
+import Modal from './../components/Modal.vue';
 //import bsv, {Script} from "bsv"
 class Answers extends Run.Jig{
     init(answers, sats, pk4w){
@@ -229,7 +322,11 @@ export default {
             picked: null,
             is_winner: "",
             showConfirm: false,
-            spinning: false
+            spinning: false,
+            modalHeaderBackground: 'white',
+            modalHeaderText: "Are you sure?",
+            showModal: false,
+            modalBodyText: ""
         })
     
         return {
@@ -263,7 +360,11 @@ export default {
             this.$store.dispatch("resetGame");
         },
         confirmSpend(){
+            this.modalHeaderBackground = "bg-green-400";
+            this.modalHeaderText = "Confirm Spend";
+            this.modalBodyText = "Are you sure you want to spend 5 Ðuros?"
             this.showConfirm = true;
+            this.showModal = true;
         },
         async checkWin(){
             this.spinning = true;
@@ -285,7 +386,7 @@ export default {
         },
         async postLocation(location){
             
-            axios({
+            let response = await axios({
                 method: 'POST',
                 url: `http://localhost:3000/check-win`,
                 params: {
@@ -297,18 +398,19 @@ export default {
                 'Content-type': 'application/json',
                 }
             })
-            .then(async function (response) {
-                console.log(response.data);
-                if(response.data.winner === "YES!"){
-                    alert("You won the motherfuckin game, bitch!");
-                } else {
-                    alert('Nah sucker.... the you walked a shitty path');
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-            
+            console.log({response});
+            if(response.data.winner === "YES!"){
+                alert("You won the motherfuckin game, bitch!");
+                this.modalHeaderBackground = 'bg-green-400';
+                
+            } else {
+                
+                this.modalHeaderBackground = 'bg-red-400';
+                this.modalHeaderText = "You didnt win";
+                this.modalBodyText = 'Sorry sukka. \r ¯\\_(ツ)_/¯ \r You didnt take the winning path. Try again.';
+                this.showConfirm = false;
+                this.showModal = true; 
+            }
         }
     },
     computed: {
@@ -328,6 +430,9 @@ export default {
         },
         // mix this into the outer object with the object spread operator
         ...mapState(["gameLocation", "gameTitle", "gameObject", "userAnswers"])
+    },
+    components:{
+        Modal
     }
 }
 </script>

@@ -172,6 +172,7 @@ export default {
   name: 'Home',
   async setup(){
     const store = useStore();
+    store.dispatch("resetGame");
     let run;
     if(store.state.playerOwnerPrivKey !== "" && store.state.playerPursePrivKey !== ""){
       console.log("has priv keys");

@@ -6,6 +6,7 @@ import FAQ from '../views/FAQ.vue';
 import Profile from '../views/Profile.vue';
 import NewGame from '../views/NewGame.vue';
 import GameList from '../views/GameList.vue';
+import ThemeTest from '../views/ThemeTest.vue';
 
 const routes = [
   {
@@ -47,6 +48,11 @@ const routes = [
     path: '/faq',
     name: 'FAQ',
     component: FAQ
+  },
+  {
+    path: '/theme',
+    name: 'theme',
+    component: ThemeTest
   },
   {
     path: '/about',

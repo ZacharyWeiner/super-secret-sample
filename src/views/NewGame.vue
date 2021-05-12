@@ -113,6 +113,9 @@
             <button @click="createGame" class="text-gray-100 bg-green-600 rounded-full px-4 py-2 hover:bg-teal-400 font-semibold w-24 duration-700">
                 Save
             </button> 
+             <button @click="getWinningHash" class="text-gray-100 bg-green-600 rounded-full px-4 py-2 hover:bg-teal-400 font-semibold w-24 duration-700">
+                Get Hash
+            </button> 
         </div>
     </div>
 </template>
@@ -120,13 +123,16 @@
 <script>
 import { reactive, toRefs } from 'vue'
 import Run from "run-sdk"
+import SHA256 from "crypto-js/sha256"
+import hmacSHA512 from "crypto-js/hmac-sha512"
+import Base64 from "crypto-js/enc-base64"
 
 // Game Owner Details 
 // Private Key: cTQPGSZiCXQD3UmrF4rKE6Gub3tmjYYvrjspU7BhXCYbg5f2r7AW GameTest.vue:53
 // Public Key: 02c08977652fb7b018598bbdcf7c760390d742befbf6b66f00aaae8dff7f6945ea GameTest.vue:54
 // Adddress: n4GJ33kc5QTW6V5fqhgeMHDQsVzjK21ckd
 class ZasteGame extends Run.Jig{
-    init(jsonObject, satoshisForPlay){
+    init(jsonObject, satoshisForPlay, winningHash){
         this.satoshisForPlay = satoshisForPlay;
         this.isWon = false;
         this.pay_address = "n4GJ33kc5QTW6V5fqhgeMHDQsVzjK21ckd";
@@ -134,6 +140,8 @@ class ZasteGame extends Run.Jig{
         this.details = jsonObject;
         this.satoshis = 1000;
         this.plays = 0;
+        this.hashtype = 1;
+        this.winningHash = winningHash
     }
     incrementPlays(){
         this.plays = this.plays + 1; 
@@ -158,7 +166,7 @@ class ZasteGame extends Run.Jig{
 
 export default {
     setup () {
-        
+        const run = new Run({network: "test", purse: "cQdpg2oTVvbeb47GzRxqn467RmJNp8rJzfoPMfkSBRyzqEdbJcSz", owner: 'cTQPGSZiCXQD3UmrF4rKE6Gub3tmjYYvrjspU7BhXCYbg5f2r7AW', trust: "*"})
         const state = reactive({
             // base_name: "b",
             // title: "",
@@ -217,6 +225,7 @@ export default {
     
         return {
             ...toRefs(state),
+            run
         }
     },
     methods:{
@@ -241,8 +250,8 @@ export default {
             this.q5AnswerText = ""
         },
          async createGame(){
-            const run = new Run({network: "test", purse: "cQdpg2oTVvbeb47GzRxqn467RmJNp8rJzfoPMfkSBRyzqEdbJcSz", owner: 'cTQPGSZiCXQD3UmrF4rKE6Gub3tmjYYvrjspU7BhXCYbg5f2r7AW', trust: "*"})
-            await run.inventory.sync();
+            
+            await this.run.inventory.sync();
             let gameDetails = {title: this.title}; 
             let question = {questionText: this.question_1_text, answers: this.question_1_answers, imgUrl: this.q1ImageUrl}
             gameDetails["question_1"] = question;
@@ -257,11 +266,43 @@ export default {
             
             console.log(gameDetails);
             this.gameDetails = gameDetails;
-            const g = new ZasteGame(gameDetails, 2500);
+            let _winningHash = await this.getWinningHash();
+            const g = new ZasteGame(gameDetails, 2500, _winningHash.hash);
             await g.sync();
             console.log("New Game Location:", g.location);
             alert(g.location);
+            const gameListClassOrigin = '3abf31ab5fe29789ea0c14737065787760f31779561ec7edd0b3d018a15fc73d_o1'
+            const gameList = this.run.inventory.jigs.find((jig)=> jig.constructor.origin === gameListClassOrigin)
+            gameList.addGame(g.location);
+            await gameList.sync();
+            console.log({gameList})
             
+        },
+        async getWinningHash(){
+            let winningAnswers = [];
+            winningAnswers.push(this.getRandomAnswer(this.question_1_answers));
+            winningAnswers.push(this.getRandomAnswer(this.question_2_answers));
+            winningAnswers.push(this.getRandomAnswer(this.question_3_answers));
+            winningAnswers.push(this.getRandomAnswer(this.question_4_answers));
+            winningAnswers.push(this.getRandomAnswer(this.question_5_answers));
+            let ht = this.getRandomInt(2);
+            console.log({ht})
+            let toHash = winningAnswers[0] + winningAnswers[1] + winningAnswers[2]  + winningAnswers[3] + winningAnswers[4];
+            console.log({winningAnswers});
+            console.log({toHash})
+            const winHashDigest = SHA256(toHash);
+            const winHmacDigest = Base64.stringify(hmacSHA512(1 + winHashDigest, this.run.purse.privkey));
+            console.log({ht: ht, hash: winHmacDigest});
+            return {ht: ht, hash: winHmacDigest}
+
+        },
+        getRandomAnswer(answers){
+            let rnd = this.getRandomInt(5);
+            console.log(rnd)
+            return answers[rnd];
+        },
+        getRandomInt(max) {
+            return Math.floor(Math.random() * max);
         }
     }
 }
