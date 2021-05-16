@@ -16,9 +16,14 @@ export default createStore({
     userAnswers: [],
     playerPursePrivKey: "",
     playerOwnerPrivKey: "",
-    playerSeed: ""
+    playerSeed: "",
+    loadingText: "",
+    currentUserAnswer: "",
   },
   mutations: {
+    setLoadingText(state, text){
+      state.loadingText = text;
+    },
     setPlayerSeed(state, seed){
       state.playerSeed = seed;
     },
@@ -40,6 +45,9 @@ export default createStore({
     },
     setQuestionIndex(state, index){
       state.questionIndex = index;
+    },
+    setCurrentUserAnswer(state, answer){
+      state.currentUserAnswer = answer;
     },
     addUserAnswer(state, answer){
       state.userAnswers[state.questionIndex] = answer

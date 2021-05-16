@@ -4,7 +4,8 @@
     <Suspense >
       <template #default>
         <div>
-          <div id="nav" class="shadow sm:flex items-center bg-grey-lightest">
+          <MainMenu />
+          <!-- <div id="nav" class="shadow sm:flex items-center bg-grey-lightest">
             <a href="/" >
               <span class="text-blue-500"> støºpˆd qåm3s </span>
             </a> 
@@ -12,19 +13,34 @@
             <router-link to="/" class="no-underline text-blue-dark text-md flex-1 text-center sm:ml-4">Home</router-link> |
             <router-link to="/play-game" class="no-underline text-blue-dark text-md flex-1 text-center sm:ml-4">Play </router-link> |
             <router-link to="/profile" class="no-underline text-blue-dark text-md flex-1 text-center sm:ml-4">Wallet</router-link> 
-        </div>
-        <div>
-          <router-view/>
-        </div>
+          </div> -->
+          <div>
+            <router-view/>
+          </div>
+          <Footer />
         </div>
       </template>
       <template #fallback>
-        <div><i class="fas fa-spinner animate-spin"></i></div>
+        <div><i class="fas fa-spinner animate-spin"></i> {{}}</div>
       </template>
   </Suspense>
 </div>
 </template>
-
+<script>
+ import Footer from "./components/shared/Footer.vue"
+ import MainMenu from "./components/shared/menus/MainMenu.vue"
+ export default {
+   computed:{
+     loadingText(){
+       return this.$store.state.loadingText
+     }
+   },
+   components:{
+     Footer,
+     MainMenu
+   }
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

@@ -6,7 +6,8 @@ import FAQ from '../views/FAQ.vue';
 import Profile from '../views/Profile.vue';
 import NewGame from '../views/NewGame.vue';
 import GameList from '../views/GameList.vue';
-import ThemeTest from '../views/ThemeTest.vue';
+//import ThemeTest from '../views/ThemeTest.vue';
+import HowItWorks from "../views/HowItWorks.vue";
 
 const routes = [
   {
@@ -34,6 +35,7 @@ const routes = [
     name: 'Play Game',
     component: PlayGame
   },
+  
   {
     path: '/game-list',
     name: 'Game List',
@@ -50,10 +52,15 @@ const routes = [
     component: FAQ
   },
   {
-    path: '/theme',
-    name: 'theme',
-    component: ThemeTest
+    path: '/how-it-works',
+    name: 'How It Works',
+    component: HowItWorks
   },
+  // {
+  //   path: '/theme',
+  //   name: 'theme',
+  //   component: ThemeTest
+  // },
   {
     path: '/about',
     name: 'About',

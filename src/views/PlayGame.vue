@@ -4,138 +4,23 @@
             <div v-if="displayIndex < 3" class=' flex-row m-4 p-4'>
                 <div>Winners Pot: </div>
                 <div class='text-green-400 text-3xl'>{{gameBalance}} </div>
-
-            </div>
-        </div>
-        <div v-if="displayIndex === 0">
-            <div class="p-20">
-                <div class="rounded-lg shadow-lg flex h-auto">
-                    <!-- image -->
-                    <div class="h-50 bg-cover bg-center rounded-tl-lg rounded-bl-lg overflow-hidden w-1/2 bg-blue-400 text-center">
-                        <img :src="gameObject.details.question_1.imgUrl" alt="">
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                    <div class="w-full border-t border-green-300" />
                     </div>
-                    <!-- content -->
-                    <div class="flex-grow shadow rounded">
-                        <div class="p-4 text-gray-600">
-                            <h2 class="text-3xl text-gray-800 mb-4">
-                                {{gameObject.details.question_1.questionText ? gameObject.details.question_1.questionText : "Fuck off" }}
-                            </h2>
-                            <div v-for="answer in gameObject.details.question_1.answers" :key="answer.toString()">
-                                <input type="radio" :id="answer" :value="answer" v-model="picked">
-                                <label :for="answer">{{answer}}</label>
-                            </div>
-                        </div>
-                        <div v-if="picked !== '' && picked !== null" class="shadow-xl rounded m-4 p-4 bg-gray-200">
-                            {{picked}}
-                        </div>
+                    <div class="relative flex justify-center">
+                    <span class="px-2 bg-white text-sm text-green-500">
+                        Ðuros
+                    </span>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div v-if="displayIndex === 1">
-            <div class="p-20">
-                <div class="rounded-lg shadow-lg flex h-auto">
-                    <!-- image -->
-                    <div class="h-50 bg-cover bg-center rounded-tl-lg rounded-bl-lg overflow-hidden w-1/2 bg-blue-400 text-center">
-                        <img :src="gameObject.details.question_2.imgUrl" alt="">
-                    </div>
-                    <!-- content -->
-                    <div class="flex-grow">
-                        <div class="p-4 text-gray-600">
-                            <h2 class="text-3xl text-gray-800 mb-4">
-                                {{gameObject.details.question_2.questionText ? gameObject.details.question_2.questionText : "Fuck off" }}
-                            </h2>
-                            <div v-for="answer in gameObject.details.question_2.answers" :key="answer.toString()">
-                                <input type="radio" :id="answer" :value="answer" v-model="picked">
-                                <label :for="answer">{{answer}}</label>
-                            </div>
-                        </div>
-                        <div v-if="picked !== '' && picked !== null" class="shadow-xl rounded m-4 p-4 bg-gray-200">
-                            {{picked}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div v-if="displayIndex === 2">
-            <div class="p-20">
-                <div class="rounded-lg shadow-lg flex h-auto">
-                    <!-- image -->
-                    <div class="h-50 bg-cover bg-center rounded-tl-lg rounded-bl-lg overflow-hidden w-1/2 bg-blue-400 text-center">
-                        <img :src="gameObject.details.question_3.imgUrl" alt="">
-                    </div>
-                    <!-- content -->
-                    <div class="flex-grow">
-                        <div class="p-4 text-gray-600">
-                            <h2 class="text-3xl text-gray-800 mb-4">
-                                {{gameObject.details.question_3.questionText ? gameObject.details.question_3.questionText : "Fuck off" }}
-                            </h2>
-                            <div v-for="answer in gameObject.details.question_3.answers" :key="answer.toString()">
-                                <input type="radio" :id="answer" :value="answer" v-model="picked">
-                                <label :for="answer">{{answer}}</label>
-                            </div>
-                            <div v-if="picked !== '' && picked !== null" class="shadow-xl rounded m-4 p-4 bg-gray-200">
-                                {{picked}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div v-if="displayIndex === 3">
-            <div class="p-20">
-                <div class="rounded-lg shadow-lg flex h-auto">
-                    <!-- image -->
-                    <div class="h-50 bg-cover bg-center rounded-tl-lg rounded-bl-lg overflow-hidden w-1/2 bg-blue-400 text-center">
-                        <img :src="gameObject.details.question_4.imgUrl" alt="">
-                    </div>
-                    <!-- content -->
-                    <div class="flex-grow">
-                        <div class="p-4 text-gray-600">
-                            <h2 class="text-3xl text-gray-800 mb-4">
-                                {{gameObject.details.question_4.questionText ? gameObject.details.question_4.questionText : "Fuck off" }}
-                            </h2>
-                            <div v-for="answer in gameObject.details.question_4.answers" :key="answer.toString()">
-                                <input type="radio" :id="answer" :value="answer" v-model="picked">
-                                <label :for="answer">{{answer}}</label>
-                            </div>
-                            <div v-if="picked !== '' && picked !== null" class="shadow-xl rounded m-4 p-4 bg-gray-200">
-                                {{picked}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div v-if="displayIndex === 4">
-            <div class="p-20">
-                <div class="rounded-lg shadow-lg flex h-auto">
-                    <!-- image -->
-                    <div class="h-50 bg-cover bg-center rounded-tl-lg rounded-bl-lg overflow-hidden w-1/2 bg-blue-400 text-center">
-                        <img :src="gameObject.details.question_5.imgUrl" alt="">
-                    </div>
-                    <!-- content -->
-                    <div class="flex-grow">
-                        <div class="p-4 text-gray-600">
-                            <h2 class="text-3xl text-gray-800 mb-4">
-                                {{gameObject.details.question_5.questionText ? gameObject.details.question_5.questionText : "Fuck off" }}
-                            </h2>
-                            <div v-for="answer in gameObject.details.question_5.answers" :key="answer.toString()">
-                                <input type="radio" :id="answer" :value="answer" v-model="picked">
-                                <label :for="answer">{{answer}}</label>
-                            </div>
-                            <div v-if="picked !== '' && picked !== null" class="shadow-xl rounded m-4 p-4 bg-gray-200">
-                                {{picked}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div v-if="displayIndex < 5">
+        <Question />
         </div>
         <div v-if="displayIndex < 5" class="py-4 px-4 text-blue-500 bg-gray-200 w-full rounded-br-lg">
-
+            
             <div class="flex justify-center">
                 <div class='flex '>
                     <div v-if="displayIndex > 0 && displayIndex < 5">
@@ -153,103 +38,33 @@
         </div>
         <div class='flex '>
             <div v-if="displayIndex === 5" class='w-full'>
-                <div class='flex flex-row pt-3'>
-                    <div class="w-1/3"><h2 class='text-3xl'> Your Journey: </h2></div>
-                    <div class="w-2/3 text-right pr-4">
-                        {{}}
-
-                    </div>
-                </div>
-                <div class='flex flex-row p-4'>
-                    <div class='flex  w-3/5'>
-                        <div class='flex flex-col justify-center '>
-                            <div class=' p-2 m-2 text-left bg-blue-200 rounded shadow-xl'>
-                                <div class='flex flex-row '>
-                                    <div class="w-1/4 rouded"> <img class="rounded" :src="gameObject.details.question_1.imgUrl" /> </div>
-                                    <div class="p-2 m-2">
-                                        <div class="text-xl">{{gameObject.details.question_1.questionText}}</div>
-                                        <div class="italic bold text-2xl pl-4">{{userAnswers[0]}}</div> 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class=' p-2 m-2 text-left bg-blue-200 rounded  shadow-xl'>
-                                <div class='flex '>
-                                    <div class="w-1/4 rouded"> <img class="rounded" :src="gameObject.details.question_2.imgUrl" /> </div>
-                                    <div class="p-2 m-2">
-                                        <div class="text-xl">{{gameObject.details.question_2.questionText}}</div>
-                                        <div class="italic bold text-2xl pl-4">{{userAnswers[1]}}</div> 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class=' p-2 m-2 text-left bg-blue-200 rounded shadow-xl'>
-                                <div class='flex '>
-                                    <div class="w-1/4 rouded"> <img class="rounded" :src="gameObject.details.question_3.imgUrl" /> </div>
-                                    <div class="p-2 m-2">
-                                        <div class="text-xl">{{gameObject.details.question_3.questionText}}</div>
-                                        <div class="italic bold text-2xl pl-4">{{userAnswers[2]}}</div> 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class=' p-2 m-2 text-left bg-blue-200 rounded shadow-xl'>
-                                <div class='flex '>
-                                    <div class="w-1/4 rouded"> <img class="rounded" :src="gameObject.details.question_4.imgUrl" /> </div>
-                                    <div class="p-2 m-2">
-                                        <div class="text-xl">{{gameObject.details.question_4.questionText}}</div>
-                                        <div class="italic bold text-2xl pl-4">{{userAnswers[3]}}</div> 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class=' p-2 m-2 text-left bg-blue-200 rounded shadow-xl'>
-                                <div class='flex '>
-                                    <div class="w-1/4 rouded"> <img class="rounded" :src="gameObject.details.question_5.imgUrl" /> </div>
-                                    <div class="p-2 m-2">
-                                        <div class="text-xl">{{gameObject.details.question_5.questionText}}</div>
-                                        <div class="italic bold text-2xl pl-4">{{userAnswers[4]}}</div> 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=' flex-row w-2/5 '>
-                        <div>Winners Pot: </div>
-                        <div class='text-green-400 text-3xl'>{{gameBalance}} </div>
-                        <div v-if="!gameObject.isWon">
-                            <div v-if="!showConfirm">
-                                <button class="bg-green-500 px-5 py-2 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-blue-600 shadow-xl" @click="confirmSpend"> Did My Journey Win? </button>
-                            </div>
-                            <div v-else>
-                                <button class="bg-green-500 px-5 py-2 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-blue-600 shadow-xl" @click="checkWin"> <i :class="showSpin"></i> 5 Ðuros to Play </button>
-
-                            </div>
-                        </div>
-                        <div v-else> 
-                            Won By: {{gameObject.owner}}
-                        </div>
-                        <button class="bg-red-500 p-2 m-2 mt-4 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-red-900 shadow-xl" @click="resetGame"> <i class="fas fa-sync"></i> Restart Game </button>
-                    </div>
-                </div>
+                <FinalAnswers :create="confirmSpend"/>
                 <div> {{is_winner}} </div>
             </div>                
         </div>
         <Modal v-if="showModal" @close="showModal = false">
+            <template v-slot:icon>
+               <h3 class='text-green-800 font-extrabold'> Ð25 </h3>
+            </template>
             <template v-slot:header>
-                <div :class='modalHeaderBackground' class='w-full flex'>
-                    
-                    <h3 class='flex-grow text-white font-extrabold p-2 m-2'>{{modalHeaderText}}</h3>
-                    <button class="modal-default-button p-2 m-2 " @click="showModal = false">
-                    X
-                    </button>
-                </div>
+                {{modalHeaderText}}
             </template>
              <template v-slot:body>
-                <div class='w-full p-2 m-2'>
-                    <h3 class='font-extrabold'>{{modalBodyText}}</h3>
-                </div>
+                {{modalBodyText}}
             </template>
-            <template v-if="showConfirm" v-slot:footer>
-                <div class="p-2 m-2 border-t-2">
-                    <button  v-if="showConfirm" class="bg-blue-500 px-5 py-2 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-green-600 shadow-xl" @click="checkWin"> <i :class="showSpin"></i> Confirm Spend 5 Ðuros</button>
-                </div>
+            <template v-if="showConfirm || showModal" v-slot:footer>
+            <div class="mt-5 sm:mt-6 ">
+              
+              
+              <button v-if="showConfirm" @click="checkWin" type="button" class="pb-2 mb-2 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">
+                <span><i :class="showSpin"></i> 
+                Confirm Spend 25 Ðuros</span>
+              </button>
+
+              <button type="button" class="pt-3 mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:col-start-1 sm:text-sm" @click="showModal = false" ref="cancelButtonRef">
+                Cancel
+              </button>
+            </div>
             </template>
         </Modal>     
     </div>
@@ -265,6 +80,9 @@ import {useRouter } from "vue-router"
 import Run from "run-sdk"
 import axios from "axios"
 import Modal from './../components/Modal.vue';
+//import AnswerList from './../components/games/AnswerList.vue';
+import Question from './../components/games/Question.vue';
+import FinalAnswers from './../components/games/FinalAnswers.vue';
 //import bsv, {Script} from "bsv"
 class Answers extends Run.Jig{
     init(answers, sats, pk4w){
@@ -287,9 +105,9 @@ class Answers extends Run.Jig{
 export default {
     async setup () {
         const store = useStore();
-        //= new Run({network: "test", purse: "cQdpg2oTVvbeb47GzRxqn467RmJNp8rJzfoPMfkSBRyzqEdbJcSz", owner: "cQ6T6gHBeRfYXNQmqQW81UgvK1umM6zoRkgZGCpGqtzceyTpVMr8", trust: "*"})
         let run;
         let router = useRouter();
+        console.log("Current Route:", router.currentRoute.value.params.id)
         if(router.currentRoute.value.query.id){
             store.commit("setGameLocation", router.currentRoute.value.query.id);
         }
@@ -319,7 +137,6 @@ export default {
         console.log(run.inventory.jigs)
         const state = reactive({
             count: 0,   
-            picked: null,
             is_winner: "",
             showConfirm: false,
             spinning: false,
@@ -348,12 +165,12 @@ export default {
             const newIndex = this.$store.state.questionIndex += 1;
             this.$store.commit("setQuestionIndex", newIndex);
             console.log(this.$store.state.questionIndex);
-            this.picked = "";
+            this.$store.commit("setCurrentUserAnswer", "");
         },
         goBack(){
             let questionIndex = this.$store.state.questionIndex -1;
             this.$store.commit("setQuestionIndex", questionIndex);
-            this.picked = this.$store.state.userAnswers[questionIndex];
+            this.$store.commit("setCurrentUserAnswer", this.$store.state.userAnswers[questionIndex]);
             
         },
         resetGame(){
@@ -362,7 +179,7 @@ export default {
         confirmSpend(){
             this.modalHeaderBackground = "bg-green-400";
             this.modalHeaderText = "Confirm Spend";
-            this.modalBodyText = "Are you sure you want to spend 5 Ðuros?"
+            this.modalBodyText = "Are you sure you want to spend 25 Ðuros?"
             this.showConfirm = true;
             this.showModal = true;
         },
@@ -374,7 +191,7 @@ export default {
         },
         async createAnswerObject(){
             console.log('setting user answers with send(to) set as', this.run.owner.address)
-            const userAnswers = new Answers(this.$store.state.userAnswers, this.gameObject.satoshisForPlay, this.run.owner.address);
+            const userAnswers = new Answers(this.$store.state.userAnswers, 12500, this.run.owner.address);
             try {
                 await userAnswers.sync()
             } catch(err) {
@@ -422,17 +239,71 @@ export default {
             return this.$store.state.userAnswers[this.$store.state.questionIndex] ? this.$store.state.userAnswers[this.$store.state.questionIndex] : this.picked;
         },
         gameBalance(){
-            return (this.$store.state.gameObject.satoshis / 500) +  " Ðuros";
+            return (this.$store.state.gameObject.satoshis / 500) +  " ";
         },
         showSpin(){
             let response =  this.spinning === true ? "fas fa-spinner animate-spin" : "";
             return response;
         },
+        picked(){
+            return this.$store.state.currentUserAnswer;
+        },
+        questionText(){
+            let text = "";
+            switch(this.$store.state.questionIndex){
+                case 0:
+                    text =  this.gameObject.details.question_1.questionText;
+                    break;
+                case 1:
+                    text =  this.gameObject.details.question_2.questionText;
+                    break;
+                case 2:
+                    text =  this.gameObject.details.question_3.questionText;
+                    break;
+                case 3:
+                    text =  this.gameObject.details.question_4.questionText;
+                    break;
+                case 5:
+                    text =  this.gameObject.details.question_5.questionText;
+                    break;
+                default: 
+                    text = ""
+                    break;
+            }
+            return text;
+        },
+        questionImage(){
+            let text = "";
+            switch(this.$store.state.questionIndex){
+                case 0:
+                    text =  this.gameObject.details.question_1.imgUrl;
+                    break;
+                case 1:
+                    text =  this.gameObject.details.question_2.imgUrl;
+                    break;
+                case 2:
+                    text =  this.gameObject.details.question_3.imgUrl;
+                    break;
+                case 3:
+                    text =  this.gameObject.details.question_4.imgUrl;
+                    break;
+                case 5:
+                    text =  this.gameObject.details.question_5.imgUrl;
+                    break;
+                default: 
+                    text = ""
+                    break;
+            }
+            return text;
+        },
         // mix this into the outer object with the object spread operator
         ...mapState(["gameLocation", "gameTitle", "gameObject", "userAnswers"])
     },
     components:{
-        Modal
+        Modal,
+        //AnswerList,
+        Question,
+        FinalAnswers
     }
 }
 </script>

@@ -3,7 +3,6 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import "./index.css"
-import "./main.css"
 import "tailwindcss/tailwind.css"
 
 

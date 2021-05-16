@@ -9,6 +9,8 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.2.0",
+    "@heroicons/vue": "^1.0.1",
     "axios": "^0.21.1",
     "crypto-js": "^4.0.0",
     "express": "^4.17.1",
