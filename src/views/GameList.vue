@@ -83,13 +83,19 @@
         <div class="relative md:bg-white md:p-6">
           <div class="lg:grid lg:grid-cols-2 lg:gap-6">
             <div class="prose prose-indigo prose-lg text-gray-500 lg:max-w-none">
-                <ul class="space-y-3">
-                    <li v-for="game in list" :key="game" class="bg-white shadow overflow-hidden px-4 py-4 sm:px-6 sm:rounded-md">
-                        <img class="h-10 w-10 rounded-full" :src="getImage(game)" alt="" />
+                <ul class="space-y-3 bg-gray-200" style=" max-height:500px;overflow-y: scroll;">
+                    <li v-for="game in games" :key="game" class="flex bg-white shadow overflow-hidden px-4 py-4 m-2 sm:px-6 sm:rounded-md">
+                        <img class="h-16 w-16 rounded-full" :src="game.details.question_1.imgUrl" alt="" />
                         <div class="ml-3">
-                            <p class="text-sm font-medium text-gray-900">{{ game}}</p>
-                            <button @click="gameDetails(game)"> view details </button> | 
-                            <a class='text-green-500' :href="gameLink(game)"> launch </a> 
+                            <p class="text-md font-medium text-gray-900">{{ game.details.title}}</p>
+                            <button class="inline-flex items-center m-1 px-4 py-2 text-sm border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="gameDetails(game.location)"> 
+                                <EyeIcon class='h-4 w-4 m-2' />
+                                view details 
+                            </button>
+                            <a class='inline-flex items-center px-4 py-2 text-sm border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500' :href="gameLink(game.location)"> 
+                                <PlayIcon class='h-4 w-4 m-2'/> 
+                                launch 
+                            </a> 
                         </div>
                     </li>
                 </ul>         
@@ -117,8 +123,9 @@
 </template>
 
 <script>
-import { reactive, toRefs } from 'vue'
+import { ref, reactive, toRefs } from 'vue'
 import Run from "run-sdk"
+import {EyeIcon, PlayIcon} from "@heroicons/vue/outline"
 // class GameList extends Run.Jig {
 //     init(title){
 //         this.title = title;
@@ -144,6 +151,12 @@ export default {
         console.log(gameList);
         await gameList.sync();
         console.log(gameList.gameList);
+        let games = ref([]);
+        gameList.gameList.forEach(async (g) => {
+            let hydrated = await run.load(g);
+            games.value.push(hydrated);
+
+        })
         const state = reactive({
             count: 0,
             list: gameList.gameList,
@@ -157,7 +170,8 @@ export default {
         return {
             ...toRefs(state),
             run,
-            gameList
+            gameList,
+            games
         }
     },
     methods:{
@@ -169,7 +183,6 @@ export default {
             await game.sync();
             this.currentGame = game;
             this.details = game.details;
-            this.details = JSON.stringify(JSON.parse(game.details),null,2)
         },
         async addToList(){
             this.gameList.addgame(this.toAdd);
@@ -180,12 +193,16 @@ export default {
             this.gameList.sync();
         },
         async getImage(game){
-            let _game = await this.run.load(game);
-            await _game.sync();
-            return _game.details.question_1.imgUrl;
+            await this.run.load(game).then((g) => {
+                console.log(g.details.question_1.imgUrl)
+                return g.details.question_1.imgUrl;
+            })
+            
         }
     },
     components: {
+        EyeIcon,
+        PlayIcon
     }
 }
 </script>

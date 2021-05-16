@@ -190,7 +190,7 @@ export default {
             
             let response = await axios({
                 method: 'POST',
-                url: `http://localhost:3000/check-win`,
+                url: `https://rocky-depths-28908.herokuapp.com/check-win`,
                 params: {
                 "location": location,
                 "gameId": this.$store.state.gameObject.location
