@@ -8,6 +8,7 @@ import NewGame from '../views/NewGame.vue';
 import GameList from '../views/GameList.vue';
 //import ThemeTest from '../views/ThemeTest.vue';
 import HowItWorks from "../views/HowItWorks.vue";
+import MyAnswers from "../views/MyAnswers.vue";
 
 const routes = [
   {
@@ -45,6 +46,11 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '/my-answers',
+    name: 'My Answers',
+    component: MyAnswers
   },
   {
     path: '/faq',

@@ -14,6 +14,9 @@
               <MenuIcon class="h-6 w-6" aria-hidden="true" />
             </PopoverButton>
           </div>
+          <a href="/" class="text-base font-medium text-gray-500 hover:text-gray-900">
+              Home
+            </a>
           <PopoverGroup as="nav" class="hidden md:flex space-x-10">
             <Popover class="relative" v-slot="{ open }">
               <PopoverButton :class="[open ? 'text-gray-900' : 'text-gray-500', 'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500']">
@@ -43,17 +46,17 @@
                 </PopoverPanel>
               </transition>
             </Popover>
-
+            
             <a v-for="item in navigation" :key="item.name" :href="item.href" class="text-base font-medium text-gray-500 hover:text-gray-900">
               {{ item.name }}
             </a>
           </PopoverGroup>
           <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-            <a href="#" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
-              Sign in
+            <a href="/my-answers" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
+              My Answers
             </a>
-            <a href="#" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
-              Sign up
+            <a href="/profile" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+              My Account
             </a>
           </div>
         </div>
@@ -93,13 +96,13 @@
                   </a>
                 </div>
                 <div class="mt-6">
-                  <a href="#" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
-                    Sign up
+                  <a href="/profile" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                    My Account
                   </a>
                   <p class="mt-6 text-center text-base font-medium text-gray-500">
-                    Existing customer?
-                    <a href="#" class="text-gray-900">
-                      Sign in
+                    
+                    <a href="/my-answers" class="text-gray-900">
+                      My Answers
                     </a>
                   </p>
                 </div>
@@ -126,8 +129,8 @@ import { reactive, toRefs } from 'vue'
 import { Popover, PopoverButton, PopoverGroup, PopoverPanel } from '@headlessui/vue'
 const navigation = [
   { name: 'Play', href: '/play-game' },
-  { name: 'Wallet', href: '/profile' },
-  { name: 'Company', href: '#' },
+  // { name: 'My Answers', href: '/my-answers' },
+  // { name: 'Wallet', href: '/profile' },
 ]
 const categories = [
   {

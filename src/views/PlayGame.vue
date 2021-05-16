@@ -84,24 +84,7 @@ import Modal from './../components/Modal.vue';
 import Question from './../components/games/Question.vue';
 import FinalAnswers from './../components/games/FinalAnswers.vue';
 //import bsv, {Script} from "bsv"
-class Answers extends Run.Jig{
-    init(answers, sats, pk4w){
-        this.owner = "n4GJ33kc5QTW6V5fqhgeMHDQsVzjK21ckd";
-        this.answers = answers;
-        
-        this.satoshis = sats;
-        this.pubKey_for_winning = pk4w;
-        this.checked = false;
-    }
-    check(){
-        this.checked = true;
-        this.satoshis = 0;
-    }
-    withdraw(){
-        this.satoshis = 0; 
-    }
 
-}
 export default {
     async setup () {
         const store = useStore();
@@ -148,7 +131,8 @@ export default {
     
         return {
             ...toRefs(state),
-            run
+            run,
+            game
         }
     },
     methods:{
@@ -191,7 +175,8 @@ export default {
         },
         async createAnswerObject(){
             console.log('setting user answers with send(to) set as', this.run.owner.address)
-            const userAnswers = new Answers(this.$store.state.userAnswers, 12500, this.run.owner.address);
+            let AnswersTemplate = await this.run.load(this.$store.state.answerCodeLocation)
+            const userAnswers = new AnswersTemplate(this.$store.state.gameObject.location, this.$store.state.userAnswers, this.game.satoshisForPlay, this.run.owner.address);
             try {
                 await userAnswers.sync()
             } catch(err) {

@@ -131,42 +131,65 @@ import Base64 from "crypto-js/enc-base64"
 // Private Key: cTQPGSZiCXQD3UmrF4rKE6Gub3tmjYYvrjspU7BhXCYbg5f2r7AW GameTest.vue:53
 // Public Key: 02c08977652fb7b018598bbdcf7c760390d742befbf6b66f00aaae8dff7f6945ea GameTest.vue:54
 // Adddress: n4GJ33kc5QTW6V5fqhgeMHDQsVzjK21ckd
-class ZasteGame extends Run.Jig{
-    init(jsonObject, satoshisForPlay, winningHash){
-        this.satoshisForPlay = satoshisForPlay;
-        this.isWon = false;
-        this.pay_address = "n4GJ33kc5QTW6V5fqhgeMHDQsVzjK21ckd";
-        this.royalty_address = "";
-        this.details = jsonObject;
-        this.satoshis = 1000;
-        this.plays = 0;
-        this.hashtype = 1;
-        this.winningHash = winningHash
-    }
-    incrementPlays(){
-        this.plays = this.plays + 1; 
-    }
-    fund(amount){
-        let newAmount = this.satoshis + amount;
-        this.satoshis = newAmount;
-        this.plays = this.plays + 1; 
-    }
-    send(to){
-        this.owner = to;
-    }
-    win(to) {
-        this.isWon = true;
-        this.owner = to;
-    }
-    setPayAddress(pa){
-        this.pay_address = pa;
-    }
-}
+// class ZasteGame extends Run.Jig {
+//     init(jsonObject, satoshisForPlay, winningHash){
+//         this.satoshisForPlay = satoshisForPlay;
+//         this.isWon = false;
+//         this.pay_address = "n4GJ33kc5QTW6V5fqhgeMHDQsVzjK21ckd";
+//         this.royalty_address = "";
+//         this.details = jsonObject;
+//         this.satoshis = 1000;
+//         this.plays = 0;
+//         this.hashtype = 1;
+//         this.winningHash = winningHash
+//     }
+//     incrementPlays(){
+//         this.plays = this.plays + 1; 
+//     }
+//     fund(amount){
+//         let newAmount = this.satoshis + amount;
+//         this.satoshis = newAmount;
+//         this.plays = this.plays + 1; 
+//     }
+//     send(to){
+//         this.owner = to;
+//     }
+//     win(to) {
+//         this.isWon = true;
+//         this.owner = to;
+//     }
+//     setPayAddress(pa){
+//         this.pay_address = pa;
+//     }
+// }
 
+// class Answers extends Run.Jig{
+//     init(gameId, answers, sats, winAddress){
+//         this.owner = "n4GJ33kc5QTW6V5fqhgeMHDQsVzjK21ckd";
+//         this.answers = answers;
+//         this.gameId = gameId;
+        
+//         this.satoshis = sats;
+//         this.address_for_winning = winAddress;
+//         this.checked = false;
+//     }
+//     check(){
+//         this.checked = true;
+//         this.satoshis = 0;
+//     }
+//     withdraw(){
+//         this.satoshis = 0; 
+//     }
+//     resetOwner(){
+//         this.owner = this.address_for_winning;
+//     }
+
+// }
 
 export default {
     setup () {
         const run = new Run({network: "test", purse: "cQdpg2oTVvbeb47GzRxqn467RmJNp8rJzfoPMfkSBRyzqEdbJcSz", owner: 'cTQPGSZiCXQD3UmrF4rKE6Gub3tmjYYvrjspU7BhXCYbg5f2r7AW', trust: "*"})
+        let game = null;
         const state = reactive({
             // base_name: "b",
             // title: "",
@@ -194,8 +217,9 @@ export default {
             // question_5_answers:[],
             // q5AnswerText: "",
             // q5ImageUrl: "",
+            gameId: "",
 
-            title: "The Coolest Game Ever",
+            title: "The Coolest Game Ever x25",
             question_1_text: "What do you want to do?",
             question_1_answers:["eat","pray","love","sing","dance"],
             q1AnswerText: "",
@@ -225,7 +249,8 @@ export default {
     
         return {
             ...toRefs(state),
-            run
+            run,
+            game
         }
     },
     methods:{
@@ -267,15 +292,32 @@ export default {
             console.log(gameDetails);
             this.gameDetails = gameDetails;
             let _winningHash = await this.getWinningHash();
-            const g = new ZasteGame(gameDetails, 2500, _winningHash.hash);
+            // const emoji = '🏆'
+            // //a87f93af5d9721b2871583e3cbab60aea181c5975c35b4a2d5a819d69ade0ce0
+            // const image = await Run.extra.B.loadWithMetadata('a87f93af5d9721b2871583e3cbab60aea181c5975c35b4a2d5a819d69ade0ce0', {
+            //     title: 'Gold Trophy icon',
+            // })
+            let ZasteGame = await this.run.load(this.$store.state.gameCodeLocation);
+            //ZasteGame.metadata = { emoji, image }
+            const g = new ZasteGame(gameDetails, 12500, _winningHash.hash);
             await g.sync();
             console.log("New Game Location:", g.location);
+            this.gameId = g.location;
             alert(g.location);
+            this.game = g;
             const gameListClassOrigin = '3abf31ab5fe29789ea0c14737065787760f31779561ec7edd0b3d018a15fc73d_o1'
             const gameList = this.run.inventory.jigs.find((jig)=> jig.constructor.origin === gameListClassOrigin)
             gameList.addGame(g.location);
             await gameList.sync();
             console.log({gameList})
+            await this.createAnswers();
+            
+        },
+        async createAnswers(){
+            let AnswersTemplate = await this.run.load(this.$store.state.answerCodeLocation);
+            let answers = new AnswersTemplate(this.gameId, ["","","","",""], this.game.satoshisForPlay, this.run.owner.address);
+            await answers.sync()
+            console.log("Answer Location: ", answers.location)
             
         },
         async getWinningHash(){
