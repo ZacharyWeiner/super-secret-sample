@@ -1,4 +1,5 @@
 <template>
+<!-- <NewQuestion title="this is awesome" :questionText="question_1_text" :q1AnswerText="q1AnswerText" :addQ1Answer="addQ1Answer" :question_1_answers="question_1_answers" /> -->
     <div class="p-6  outline shadow-xl flex flex-col bg-gray-400 ">
         <div class="title bg-blue-500 w-full rounded shadow p-2">
             <label for="gameTitle" class="text-3xl text-gray-100"> Give the Game a Creative Title</label>
@@ -126,7 +127,7 @@ import Run from "run-sdk"
 import SHA256 from "crypto-js/sha256"
 import hmacSHA512 from "crypto-js/hmac-sha512"
 import Base64 from "crypto-js/enc-base64"
-
+// import NewQuestion from './../components/games/form/NewQuestion.vue'
 // Game Owner Details 
 // Private Key: cTQPGSZiCXQD3UmrF4rKE6Gub3tmjYYvrjspU7BhXCYbg5f2r7AW GameTest.vue:53
 // Public Key: 02c08977652fb7b018598bbdcf7c760390d742befbf6b66f00aaae8dff7f6945ea GameTest.vue:54
@@ -346,6 +347,9 @@ export default {
         getRandomInt(max) {
             return Math.floor(Math.random() * max);
         }
+    },
+    components:{
+        //NewQuestion
     }
 }
 </script>

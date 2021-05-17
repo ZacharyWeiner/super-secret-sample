@@ -1,0 +1,25 @@
+title: "The Coolest Game Ever x25",
+question_1_text: "What do you want to do?",
+question_1_answers:["eat","pray","love","sing","dance"],
+q1AnswerText: "",
+q1ImageUrl: "https://images.pexels.com/photos/1097456/pexels-photo-1097456.jpeg",
+
+question_2_text: "When do you want to play?",
+question_2_answers:["morning","noon","night","tomorrow","next week"],
+q2AnswerText: "",
+q2ImageUrl: "https://images.pexels.com/photos/333850/pexels-photo-333850.jpeg",
+
+question_3_text: "How do you want to see the show?",
+question_3_answers:["TV","mobile","VR","AR","I dont want to see it"],
+q3AnswerText: "",
+q3ImageUrl: "https://images.pexels.com/photos/1473215/pexels-photo-1473215.jpeg",
+
+question_4_text: "We are heading to an after party, which one do you want to hit?",
+question_4_answers:["warehouse","rooftop","underground","penthouse","road trip to the desert"],
+q4AnswerText: "",
+q4ImageUrl: "https://images.pexels.com/photos/130621/pexels-photo-130621.jpeg",
+
+question_5_text: "Damn that was fun. Lets hang out again....",
+question_5_answers:["after breakfast","tonight","this week","next weekend","sometime soon"],
+q5AnswerText: "",
+q5ImageUrl: "https://images.pexels.com/photos/733745/pexels-photo-733745.jpeg",
