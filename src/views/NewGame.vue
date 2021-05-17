@@ -1,121 +1,234 @@
 <template>
 <!-- <NewQuestion title="this is awesome" :questionText="question_1_text" :q1AnswerText="q1AnswerText" :addQ1Answer="addQ1Answer" :question_1_answers="question_1_answers" /> -->
-    <div class="p-6  outline shadow-xl flex flex-col bg-gray-400 ">
-        <div class="title bg-blue-500 w-full rounded shadow p-2">
-            <label for="gameTitle" class="text-3xl text-gray-100"> Give the Game a Creative Title</label>
-            <input id="gameTitle" class="title rounded focus:b-blue-500 w-full bg-gray-200" v-model="title" />
+    <div class="p-6  outline shadow-xl flex flex-col bg-gray-100 ">
+        <div class="title bg-white w-full rounded shadow p-2">
+            <label for="gameTitle" class="text-3xl text-indigo-600 font-extrabold"> Give the Game a Creative Title</label>
+            
+            <div class="">
+                  <label for="first_name" class="block text-sm font-medium text-indigo-700">Title</label>
+                  <input v-model="title" type="text" name="first_name" id="first_name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                </div>
         </div>
-        <div class="flex bg-blue-500 rounded shadow m-2">
-            <div class="question1 w-full p-2 ">
-                <span class="font-extrabold text-gray-100 text-xl">Question 1 </span>
-                <textarea v-model="question_1_text" class="question-text w-full h-24 rounded border bg-gray-200"></textarea>
-                 <div class="question1 w-full p-2 text-md">
-                     <label class="font-extrabold text-gray-100">Image Url </label>
-                    <input v-model="q1ImageUrl" class="question-text w-full h-rounded border bg-gray-200"/>
+        <div class=" bg-white rounded shadow m-2">
+            <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                <span class="block text-indigo-600 p-4 m-4 ">Question 1 <span class="block text-gray-800 text-sm ">Add a question, image and answers </span></span>
+            </h2>
+            
+            <div class='flex'>
+                <div class="question1 w-full p-2 ">
+                    <span class="font-extrabold text-indigo-800 text-sm">Question Text </span>
+                    <textarea v-model="question_1_text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
+                    <div class="question1 w-full p-2 text-sm pt-2 mt-2">
+                        <label class="font-extrabold text-indigo-800">Image Url </label>
+                        <input v-model="q1ImageUrl" type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
+                    </div>
+                    <div class="font-extrabold text-sm text-indigo-800 pt-2 mt-2">
+                        <label >New Answer</label>
+                    </div>
+                    <div class="flex">
+                        <input v-model="q1AnswerText" type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
+                        <button @click="addQ1Answer" class='rounded bg-green-500 px-2 mx-2 text-white'> + </button>
+                    </div>
                 </div>
-            </div>
-           
-            <div class="question1 w-full p-2">
-                <span class="font-extrabold text-gray-100 text-xl">Answers</span>
-                <div class="flex">
-                    <input id="newAnswer" class="answer-text rounded focus:b-blue-500 w-full bg-gray-200" v-model="q1AnswerText" />
-                    <button @click="addQ1Answer"> + answer </button>
-                </div>
-                <div v-for="a in question_1_answers" :key="a">
-                    <span class="font-normal text-gray-100">{{a}}</span>
-                </div>
-            </div>
-        </div>
-        <div class="flex bg-blue-500 rounded shadow m-2">
-            <div class="question1 w-full p-2 ">
-                  <span class="font-extrabold text-gray-100 text-xl">Question 2 </span>
-                <textarea v-model="question_2_text" class="question-text w-full h-24 rounded border bg-gray-200"></textarea>
-                 <div class="question2 w-full p-2">
-                  <span class="font-extrabold text-gray-100">Image Url </span>
-                <input v-model="q2ImageUrl" class="question-text w-full h-rounded border bg-gray-200"/>
-            </div>
-            </div>
-           
-            <div class="question1 w-full p-2">
-                <span class="font-extrabold text-gray-100 text-xl">Answers</span>
-                <div class="flex">
-                <input id="newAnswer" class="answer-text rounded focus:b-blue-500 w-full bg-gray-200" v-model="q2AnswerText" />
-                <button @click="addQ2Answer"> + answer </button>
-                </div>
-                <div v-for="a in question_2_answers" :key="a">
-                    <span class="font-normal text-gray-100">{{a}}</span>
-                </div>
-            </div>
-        </div>
-        <div class="flex bg-blue-500 rounded shadow m-2">
-            <div class="question1 w-full p-2">
-                <span class="font-extrabold text-gray-100 text-xl">Question 3 </span>
-                <textarea v-model="question_3_text" class="question-text w-full h-24 rounded border bg-gray-200"></textarea>
-                 <div class="question3 w-full p-2">
-                <span class="font-extrabold text-gray-100">Image Url </span>
-                <input v-model="q3ImageUrl" class="question-text w-full h-rounded border bg-gray-200"/>
-            </div>
-            </div>
-           
-            <div class="question1 w-full p-2">
-                <span class="font-extrabold text-gray-100 text-xl">Answers</span>
-                <div class="flex">
-                <input id="newAnswer" class="answer-text rounded focus:b-blue-500 w-full bg-gray-200" v-model="q3AnswerText" />
-                <button @click="addQ3Answer"> + answer </button>
-                </div>
-                <div v-for="a in question_3_answers" :key="a">
-                    <span class="font-normal text-gray-100">{{a}}</span>
+            
+                <div class="question1 w-full p-2">
+                    <div class='flex-grow items-center pb-4'>
+                        <img class="h-32 w-32 mx-auto " :src="q1ImageUrl" />
+                    </div>
+                    <div class="relative ">
+                        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                        <div class="w-full border-t border-gray-300" />
+                        </div>
+                        <div class="relative flex justify-center">
+                        <span class="px-2 bg-indigo-500 text-sm text-gray-100 rounded">
+                            Answers
+                        </span>
+                        </div>
+                    </div>
+                    <div class='p-1 m-1'></div>
+                    <div v-for="a in question_1_answers" :key="a">
+                        <span class="font-normal text-indigo-600">{{a}}</span>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="flex bg-blue-500 rounded shadow m-2">
-            <div class="question1 w-full p-2">
-                <span class="font-extrabold text-gray-100 text-xl">Question 4 </span>
-                <textarea v-model="question_4_text" class="question-text w-full h-24 rounded border bg-gray-200"></textarea>
-                 <div class="question4 w-full p-2">
-                <span class="font-extrabold text-gray-100">Image Url </span>
-                <input v-model="q4ImageUrl" class="question-text w-full h-rounded border bg-gray-200"/>
-            </div>
-            </div>
-           
-            <div class="question1 w-full p-2">
-                <span class="font-extrabold text-gray-100 text-xl">Answers</span>
-                <div class="flex">
-                <input id="newAnswer4" class="answer-text rounded focus:b-blue-500 w-full bg-gray-200" v-model="q4AnswerText" />
-                <button @click="addQ4Answer"> + answer </button>
+        <div class=" bg-white rounded shadow m-2">
+            <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                <span class="block text-indigo-600 p-4 m-4 ">Question 2 <span class="block text-gray-800 text-sm ">Add a question, image and answers </span></span>
+            </h2>
+            
+            <div class='flex'>
+                <div class="question1 w-full p-2 ">
+                    <span class="font-extrabold text-indigo-800 text-sm">Question Text </span>
+                    <textarea v-model="question_2_text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
+                    <div class="question1 w-full p-2 text-sm pt-2 mt-2">
+                        <label class="font-extrabold text-indigo-800">Image Url </label>
+                        <input v-model="q2ImageUrl" type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
+                    </div>
+                    <div class="font-extrabold text-sm text-indigo-800 pt-2 mt-2">
+                        <label >New Answer</label>
+                    </div>
+                    <div class="flex">
+                        <input v-model="q2AnswerText" type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
+                        <button @click="addQ2Answer" class='rounded bg-green-500 px-2 mx-2 text-white'> + </button>
+                    </div>
                 </div>
-                <div v-for="a in question_4_answers" :key="a">
-                    <span class="font-normal text-gray-100">{{a}}</span>
+            
+                <div class="question1 w-full p-2">
+                    <div class='flex-grow items-center pb-4'>
+                        <img class="h-32 w-32 mx-auto " :src="q2ImageUrl" />
+                    </div>
+                    <div class="relative ">
+                        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                        <div class="w-full border-t border-gray-300" />
+                        </div>
+                        <div class="relative flex justify-center">
+                        <span class="px-2 bg-indigo-500 text-sm text-gray-100 rounded">
+                            Answers
+                        </span>
+                        </div>
+                    </div>
+                    <div class='p-1 m-1'></div>
+                    <div v-for="a in question_2_answers" :key="a">
+                        <span class="font-normal text-indigo-600">{{a}}</span>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="flex bg-blue-500 rounded shadow m-2">
-            <div class="question1 w-full p-2">
-                <span class="font-extrabold text-gray-100 text-xl">Question 4 </span>
-                <textarea v-model="question_5_text" class="question-text w-full h-24 rounded border bg-gray-200"></textarea>
-                 <div class="question1 w-full p-2">
-                <span class="font-extrabold text-gray-100">Image Url </span>
-                <input v-model="q5ImageUrl" class="question-text w-full h-rounded border bg-gray-200"/>
-            </div>
-            </div>
-           
-            <div class="question1 w-full p-2">
-                <span class="font-extrabold text-gray-100 text-xl">Answers</span>
-                <div class="flex">
-                <input id="newAnswer" class="answer-text rounded focus:b-blue-500 w-full bg-gray-200" v-model="q5AnswerText" />
-                <button @click="addQ5Answer"> add answer </button>
+
+        <div class=" bg-white rounded shadow m-2">
+            <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                <span class="block text-indigo-600 p-4 m-4 ">Question 3 <span class="block text-gray-800 text-sm ">Add a question, image and answers </span></span>
+            </h2>
+            
+            <div class='flex'>
+                <div class="question1 w-full p-2 ">
+                    <span class="font-extrabold text-indigo-800 text-sm">Question Text </span>
+                    <textarea v-model="question_3_text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
+                    <div class="question1 w-full p-2 text-sm pt-2 mt-2">
+                        <label class="font-extrabold text-indigo-800">Image Url </label>
+                        <input v-model="q3ImageUrl" type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
+                    </div>
+                    <div class="font-extrabold text-sm text-indigo-800 pt-2 mt-2">
+                        <label >New Answer</label>
+                    </div>
+                    <div class="flex">
+                        <input v-model="q3AnswerText" type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
+                        <button @click="addQ3Answer" class='rounded bg-green-500 px-2 mx-2 text-white'> + </button>
+                    </div>
                 </div>
-                <div v-for="a in question_5_answers" :key="a">
-                    <span class="font-normal text-gray-100">{{a}}</span>
+            
+                <div class="question1 w-full p-2">
+                    <div class='flex-grow items-center pb-4'>
+                        <img class="h-32 w-32 mx-auto " :src="q3ImageUrl" />
+                    </div>
+                    <div class="relative ">
+                        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                        <div class="w-full border-t border-gray-300" />
+                        </div>
+                        <div class="relative flex justify-center">
+                        <span class="px-2 bg-indigo-500 text-sm text-gray-100 rounded">
+                            Answers
+                        </span>
+                        </div>
+                    </div>
+                    <div class='p-1 m-1'></div>
+                    <div v-for="a in question_3_answers" :key="a">
+                        <span class="font-normal text-indigo-600">{{a}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class=" bg-white rounded shadow m-2">
+            <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                <span class="block text-indigo-600 p-4 m-4 ">Question 4 <span class="block text-gray-800 text-sm ">Add a question, image and answers </span></span>
+            </h2>
+            
+            <div class='flex'>
+                <div class="question1 w-full p-2 ">
+                    <span class="font-extrabold text-indigo-800 text-sm">Question Text </span>
+                    <textarea v-model="question_4_text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
+                    <div class="question1 w-full p-2 text-sm pt-2 mt-2">
+                        <label class="font-extrabold text-indigo-800">Image Url </label>
+                        <input v-model="q4ImageUrl" type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
+                    </div>
+                    <div class="font-extrabold text-sm text-indigo-800 pt-2 mt-2">
+                        <label >New Answer</label>
+                    </div>
+                    <div class="flex">
+                        <input v-model="q4AnswerText" type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
+                        <button @click="addQ4Answer" class='rounded bg-green-500 px-2 mx-2 text-white'> + </button>
+                    </div>
+                </div>
+            
+                <div class="question1 w-full p-2">
+                    <div class='flex-grow items-center pb-4'>
+                        <img class="h-32 w-32 mx-auto " :src="q4ImageUrl" />
+                    </div>
+                    <div class="relative ">
+                        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                        <div class="w-full border-t border-gray-300" />
+                        </div>
+                        <div class="relative flex justify-center">
+                        <span class="px-2 bg-indigo-500 text-sm text-gray-100 rounded">
+                            Answers
+                        </span>
+                        </div>
+                    </div>
+                    <div class='p-1 m-1'></div>
+                    <div v-for="a in question_4_answers" :key="a">
+                        <span class="font-normal text-indigo-600">{{a}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" bg-white rounded shadow m-2">
+            <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                <span class="block text-indigo-600 p-4 m-4 ">Question 5 <span class="block text-gray-800 text-sm ">Add a question, image and answers </span></span>
+            </h2>
+            
+            <div class='flex'>
+                <div class="question1 w-full p-2 ">
+                    <span class="font-extrabold text-indigo-800 text-sm">Question Text </span>
+                    <textarea v-model="question_5_text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
+                    <div class="question1 w-full p-2 text-sm pt-2 mt-2">
+                        <label class="font-extrabold text-indigo-800">Image Url </label>
+                        <input v-model="q5ImageUrl" type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
+                    </div>
+                    <div class="font-extrabold text-sm text-indigo-800 pt-2 mt-2">
+                        <label >New Answer</label>
+                    </div>
+                    <div class="flex">
+                        <input v-model="q5AnswerText" type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
+                        <button @click="addQ5Answer" class='rounded bg-green-500 px-2 mx-2 text-white'> + </button>
+                    </div>
+                </div>
+            
+                <div class="question1 w-full p-2">
+                    <div class='flex-grow items-center pb-4'>
+                        <img class="h-32 w-32 mx-auto " :src="q5ImageUrl" />
+                    </div>
+                    <div class="relative ">
+                        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                        <div class="w-full border-t border-gray-300" />
+                        </div>
+                        <div class="relative flex justify-center">
+                        <span class="px-2 bg-indigo-500 text-sm text-gray-100 rounded">
+                            Answers
+                        </span>
+                        </div>
+                    </div>
+                    <div class='p-1 m-1'></div>
+                    <div v-for="a in question_5_answers" :key="a">
+                        <span class="font-normal text-indigo-600">{{a}}</span>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="">
-            <button @click="createGame" class="text-gray-100 bg-green-600 rounded-full px-4 py-2 hover:bg-teal-400 font-semibold w-24 duration-700">
+            <button @click="createGame" class="text-gray-100 bg-green-600 rounded px-4 py-2 hover:bg-teal-400 font-semibold w-24 duration-700">
                 Save
-            </button> 
-             <button @click="getWinningHash" class="text-gray-100 bg-green-600 rounded-full px-4 py-2 hover:bg-teal-400 font-semibold w-24 duration-700">
-                Get Hash
             </button> 
         </div>
     </div>
