@@ -60,7 +60,7 @@ export default createStore({
   },
   actions: {
     async updateBalance({commit, state}){
-      const run = new Run({network: "test", purse: "cQdpg2oTVvbeb47GzRxqn467RmJNp8rJzfoPMfkSBRyzqEdbJcSz", owner: 'cTQPGSZiCXQD3UmrF4rKE6Gub3tmjYYvrjspU7BhXCYbg5f2r7AW', trust: "*"})
+      const run = new Run({network: "test", purse: state.playerPursePrivKey, owner: state.playerOwnerPrivKey, trust: "*"})
       let g = await run.load(state.gameLocation);
       await g.sync();
       commit("setGameObject", g);

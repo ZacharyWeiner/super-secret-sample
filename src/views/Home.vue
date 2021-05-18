@@ -2,6 +2,17 @@
 <div class="flex flex-col h-auto bg-white">
   <Hero />
   <div class="border-t-2"></div>
+    <div class="bg-indigo-700">
+    <div class="max-w-4xl mx-auto px-4 py-16 sm:px-6 sm:pt-20 sm:pb-24 lg:max-w-7xl lg:pt-24 lg:px-8">
+      <h2 class="text-base font-semibold text-white tracking-wide uppercase">Active</h2>
+      <p class="mt-1 text-4xl font-extrabold text-white sm:text-5xl sm:tracking-tight lg:text-6xl">Games</p>
+       <p class="max-w-xl mt-5 mx-auto text-xl text-white">Each game is a unique journey. </p>
+        <p class="max-w-xl mt-5 mx-auto text-xl text-white">There are many answer combos, only one unlocks the game.</p>
+      <div class="mt-12 gap-x-6 gap-y-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-16">
+        <GamesCardList :games="games" />
+      </div>
+    </div>
+  </div>
 <div class="bg-white pt-12 lg:pt-32">
     <div class="max-w-7xl mx-auto py-0 px-4 sm:px-6 lg:pb-12 lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
       <div>
@@ -14,19 +25,10 @@
       </div>
     </div>
   </div>
+  <NFT />
 
 
-  <div class="bg-indigo-700">
-    <div class="max-w-4xl mx-auto px-4 py-16 sm:px-6 sm:pt-20 sm:pb-24 lg:max-w-7xl lg:pt-24 lg:px-8">
-      <h2 class="text-base font-semibold text-white tracking-wide uppercase">Active</h2>
-      <p class="mt-1 text-4xl font-extrabold text-white sm:text-5xl sm:tracking-tight lg:text-6xl">Games</p>
-       <p class="max-w-xl mt-5 mx-auto text-xl text-white">Each game is a unique journey. </p>
-        <p class="max-w-xl mt-5 mx-auto text-xl text-white">There are many answer combos, only one unlocks the game.</p>
-      <div class="mt-12 gap-x-6 gap-y-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-16">
-        <GamesCardList :games="games" />
-      </div>
-    </div>
-  </div>
+
 
 
 
@@ -45,6 +47,7 @@ import { ref, reactive, toRefs } from 'vue'
 import Run from 'run-sdk'
 import {useStore} from 'vuex';
 import Hero from "./../components/home/Hero.vue"
+import NFT from "./../components/home/NFT.vue"
 import GamesCardList from './../components/games/GameCardList.vue';
 import Steps from './../components/shared/Steps.vue';
 //import {ref} from 'vue';
@@ -126,7 +129,8 @@ export default {
   components: {
     Hero,
     GamesCardList,
-    Steps
+    Steps,
+    NFT
   }
 }
 </script>

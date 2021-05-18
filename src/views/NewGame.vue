@@ -245,60 +245,6 @@ import Base64 from "crypto-js/enc-base64"
 // Private Key: cTQPGSZiCXQD3UmrF4rKE6Gub3tmjYYvrjspU7BhXCYbg5f2r7AW GameTest.vue:53
 // Public Key: 02c08977652fb7b018598bbdcf7c760390d742befbf6b66f00aaae8dff7f6945ea GameTest.vue:54
 // Adddress: n4GJ33kc5QTW6V5fqhgeMHDQsVzjK21ckd
-// class ZasteGame extends Run.Jig {
-//     init(jsonObject, satoshisForPlay, winningHash){
-//         this.satoshisForPlay = satoshisForPlay;
-//         this.isWon = false;
-//         this.pay_address = "n4GJ33kc5QTW6V5fqhgeMHDQsVzjK21ckd";
-//         this.royalty_address = "";
-//         this.details = jsonObject;
-//         this.satoshis = 1000;
-//         this.plays = 0;
-//         this.hashtype = 1;
-//         this.winningHash = winningHash
-//     }
-//     incrementPlays(){
-//         this.plays = this.plays + 1; 
-//     }
-//     fund(amount){
-//         let newAmount = this.satoshis + amount;
-//         this.satoshis = newAmount;
-//         this.plays = this.plays + 1; 
-//     }
-//     send(to){
-//         this.owner = to;
-//     }
-//     win(to) {
-//         this.isWon = true;
-//         this.owner = to;
-//     }
-//     setPayAddress(pa){
-//         this.pay_address = pa;
-//     }
-// }
-
-// class Answers extends Run.Jig{
-//     init(gameId, answers, sats, winAddress){
-//         this.owner = "n4GJ33kc5QTW6V5fqhgeMHDQsVzjK21ckd";
-//         this.answers = answers;
-//         this.gameId = gameId;
-        
-//         this.satoshis = sats;
-//         this.address_for_winning = winAddress;
-//         this.checked = false;
-//     }
-//     check(){
-//         this.checked = true;
-//         this.satoshis = 0;
-//     }
-//     withdraw(){
-//         this.satoshis = 0; 
-//     }
-//     resetOwner(){
-//         this.owner = this.address_for_winning;
-//     }
-
-// }
 
 export default {
     setup () {
@@ -333,32 +279,26 @@ export default {
             // q5ImageUrl: "",
             gameId: "",
 
-            title: "The Coolest Game Ever x25",
-            question_1_text: "What do you want to do?",
-            question_1_answers:["eat","pray","love","sing","dance"],
-            q1AnswerText: "",
-            q1ImageUrl: "https://images.pexels.com/photos/1097456/pexels-photo-1097456.jpeg",
+            title: "Heavy that Lies the Crown",
+            question_1_text: "Word has come that the evil army lead by Lord Grey Bones, approaches your kingdom. As the wise and noble ruler, you decide your first move.. ",
+            question_1_answers:["Wake your generals from their slumber","Sound for the naval fleet","Consult the grand oracle for wisdom","Think nothing of it, as your kingdom is well fortified","Prepare your kingdom for a grand feast before the war to come"],
+            q1ImageUrl: "https://lh4.googleusercontent.com/7ZiiplJExhdgyokxvznPO5e_uIcKtRmZNSAkZSELWGXCD4UKTYpgBnjnjfKSrWeLhNgR1zM53BNO32GZR6jVGlZAg62xOgAuNjIP17Qq=s1600",
 
-            question_2_text: "When do you want to play?",
-            question_2_answers:["morning","noon","night","tomorrow","next week"],
-            q2AnswerText: "",
-            q2ImageUrl: "https://images.pexels.com/photos/333850/pexels-photo-333850.jpeg",
+            question_2_text: "As you enter the council chambers, you are welcomed by your loyal commanders.  They wish to know how your excellence would like to handle the winter food supplies.",
+            question_2_answers:["Increase food supply for all soldiers","Save more food for the citizens in hiding","Hide half of all food supplies for later battles","Send  troops to hunt for more food","We have plenty of food for the coming winter"],
+            q2ImageUrl: "https://lh6.googleusercontent.com/BJqUdpeQuyN4jEYxtU6oHa9J1KSpkDMWOoWa1lcsgWE11qMe1mi4-2AhsS4l69pMqsRs8DcXOjCQBuyp6pw7bCpY8hZDdPTQgjndC5xP=s1600",
 
-            question_3_text: "How do you want to see the show?",
-            question_3_answers:["TV","mobile","VR","AR","I dont want to see it"],
-            q3AnswerText: "",
-            q3ImageUrl: "https://images.pexels.com/photos/1473215/pexels-photo-1473215.jpeg",
+            question_3_text: "The next morning your scouts report activity coming in from both land and sea. You look out over your preparing armies and recall your royal oath. ‘Be the Light that shines through the darkness",
+            question_3_answers:["Sound the naval fleet to attack, and prepare your armies for defense","Advance ground troops to meet them on the open field and establish a water blockade","Send word to attack on all fronts with full force","Hold your position until the enemy comes into range" , "Prepare a trap for the enemy by hiding your forces to appear defenseless"],
+            q3ImageUrl: "https://lh3.googleusercontent.com/V0vOvsjWYtmKjPWiazhf1lZWnIKk1UWd48rbHLDieJB_5LMwH9P3bWkjFHCM1KXLZgRFIj1EwqMdOH-wFuSTB1NyC-4yAG3qUFryZX-QroVmT0TQ2ZAmIRaY_LzcbtcL05jCY-ll=s1600",
 
-            question_4_text: "We are heading to an after party, which one do you want to hit?",
-            question_4_answers:["warehouse","rooftop","underground","penthouse","road trip to the desert"],
-            q4AnswerText: "",
-            q4ImageUrl: "https://images.pexels.com/photos/130621/pexels-photo-130621.jpeg",
+            question_4_text: "Despite all your efforts, the enemy continues to attack. You must take action if your forces are to prevail.",
+            question_4_answers:["Sound retreat and regroup remaining forces","Call for archers to use fire arrows","Send your most trusted emissary to negotiate with the enemy","Task a horseman with delivering a plea to your allies for assistance","Gather your family and riches in the underground caves"],
+            q4ImageUrl: "https://lh5.googleusercontent.com/OdZgOfac6Or3VH29byuiRVohRdmJ-otkq3KYgoeVKb1TmeMUCEYSOOl44MtSGS6wUOjK09LkIUxmli9CBLzlLSRy8o8xO7uKY2L3cZig=s1600",
 
-            question_5_text: "Damn that was fun. Lets hang out again....",
-            question_5_answers:["after breakfast","tonight","this week","next weekend","sometime soon"],
-            q5AnswerText: "",
-            q5ImageUrl: "https://images.pexels.com/photos/733745/pexels-photo-733745.jpeg",
-
+            question_5_text: "As the enemy overwhelms your forces, you have time for one last maneuver.",
+            question_5_answers:["Pray to the many gods for help","Light the ancient candle of hope","Ready your horse to join the battle","Give your sword to the golden knight","Gather the remaining troops and make one last glorious stand"],
+            q5ImageUrl: "https://lh4.googleusercontent.com/S3ay4ttZl6Pqasbo8-BwSCNThcUaMwGMwGlAAFPFBGP6ZMIRSbAT4NVzk4BK8nQek7zz7JqM6l3k-D_Sdubi72UUUEjdozaNAmEKiJ_2=s1600",
         })
     
         return {
@@ -406,13 +346,7 @@ export default {
             console.log(gameDetails);
             this.gameDetails = gameDetails;
             let _winningHash = await this.getWinningHash();
-            // const emoji = '🏆'
-            // //a87f93af5d9721b2871583e3cbab60aea181c5975c35b4a2d5a819d69ade0ce0
-            // const image = await Run.extra.B.loadWithMetadata('a87f93af5d9721b2871583e3cbab60aea181c5975c35b4a2d5a819d69ade0ce0', {
-            //     title: 'Gold Trophy icon',
-            // })
             let ZasteGame = await this.run.load(this.$store.state.gameCodeLocation);
-            //ZasteGame.metadata = { emoji, image }
             const g = new ZasteGame(gameDetails, 12500, _winningHash.hash);
             await g.sync();
             console.log("New Game Location:", g.location);

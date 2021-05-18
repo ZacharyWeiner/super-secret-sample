@@ -2,8 +2,11 @@
     <div>
         <div class="">
             <div v-if="displayIndex < 3" class=' flex-row m-4 p-4'>
-                <div>Winners Pot: </div>
-                <div class='text-green-400 text-3xl'>{{gameBalance}} </div>
+                <span class="px-2 bg-white text-sm">
+                    <span class='text-red-500 text-lg'>{{game.plays}} </span> failed to unlock the prize
+                </span>
+                <!-- <div class='text-green-700'>This Game Now Owns </div> -->
+                <div class='text-green-400 text-3xl'>Ð {{gameBalance}} </div>
                 <div class="relative">
                     <div class="absolute inset-0 flex items-center" aria-hidden="true">
                     <div class="w-full border-t border-green-300" />

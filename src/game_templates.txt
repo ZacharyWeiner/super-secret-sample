@@ -1,0 +1,22 @@
+================= Templates ====================
+
+title: "Heavy that Lies the Crown",
+question_1_text: "Word has come that the evil army lead by Lord Grey Bones, approaches your kingdom. As the wise and noble ruler, you decide your first move.. ",
+question_1_answers:["Wake your generals from their slumber","Sound for the naval fleet","Consult the grand oracle for wisdom","Think nothing of it, as your kingdom is well fortified","Prepare your kingdom for a grand feast before the war to come"],
+q1ImageUrl: "https://lh4.googleusercontent.com/7ZiiplJExhdgyokxvznPO5e_uIcKtRmZNSAkZSELWGXCD4UKTYpgBnjnjfKSrWeLhNgR1zM53BNO32GZR6jVGlZAg62xOgAuNjIP17Qq=s1600",
+
+question_2_text: "As you enter the council chambers, you are welcomed by your loyal commanders.  They wish to know how your excellence would like to handle the winter food supplies.",
+question_2_answers:["Increase food supply for all soldiers","Save more food for the citizens in hiding","Hide half of all food supplies for later battles","Send  troops to hunt for more food","We have plenty of food for the coming winter"],
+q2ImageUrl: "https://lh6.googleusercontent.com/BJqUdpeQuyN4jEYxtU6oHa9J1KSpkDMWOoWa1lcsgWE11qMe1mi4-2AhsS4l69pMqsRs8DcXOjCQBuyp6pw7bCpY8hZDdPTQgjndC5xP=s1600",
+
+question_3_text: "The next morning your scouts report activity coming in from both land and sea. You look out over your preparing armies and recall your royal oath. ‘Be the Light that shines through the darkness",
+question_3_answers:["Sound the naval fleet to attack, and prepare your armies for defense","Advance ground troops to meet them on the open field and establish a water blockade","Send word to attack on all fronts with full force","Hold your position until the enemy comes into range" , "Prepare a trap for the enemy by hiding your forces to appear defenseless"],
+q3ImageUrl: "https://lh3.googleusercontent.com/V0vOvsjWYtmKjPWiazhf1lZWnIKk1UWd48rbHLDieJB_5LMwH9P3bWkjFHCM1KXLZgRFIj1EwqMdOH-wFuSTB1NyC-4yAG3qUFryZX-QroVmT0TQ2ZAmIRaY_LzcbtcL05jCY-ll=s1600",
+
+question_4_text: "Despite all your efforts, the enemy continues to attack. You must take action if your forces are to prevail.",
+question_4_answers:["Sound retreat and regroup remaining forces","Call for archers to use fire arrows","Send your most trusted emissary to negotiate with the enemy","Task a horseman with delivering a plea to your allies for assistance","Gather your family and riches in the underground caves"],
+q4ImageUrl: "https://lh5.googleusercontent.com/OdZgOfac6Or3VH29byuiRVohRdmJ-otkq3KYgoeVKb1TmeMUCEYSOOl44MtSGS6wUOjK09LkIUxmli9CBLzlLSRy8o8xO7uKY2L3cZig=s1600",
+
+question_5_text: "As the enemy overwhelms your forces, you have time for one last maneuver.",
+question_5_answers:["Pray to the many gods for help","Light the ancient candle of hope","Ready your horse to join the battle","Give your sword to the golden knight","Gather the remaining troops and make one last glorious stand"],
+q5ImageUrl: "https://lh4.googleusercontent.com/S3ay4ttZl6Pqasbo8-BwSCNThcUaMwGMwGlAAFPFBGP6ZMIRSbAT4NVzk4BK8nQek7zz7JqM6l3k-D_Sdubi72UUUEjdozaNAmEKiJ_2=s1600",
