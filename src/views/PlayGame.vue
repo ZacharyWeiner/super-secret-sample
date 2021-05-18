@@ -114,6 +114,10 @@ export default {
         console.log(store.state.gameLocation);
         let game = await run.load(store.state.gameLocation);
         await game.sync();
+        if(game.isWon){
+            router.push(`/game-won/?id=${game.location}`)
+            return
+        }
         store.commit('setGameObject', game) 
         console.log("Hydrated Game from run in state:", store.state.gameObject);
         await run.inventory.sync();

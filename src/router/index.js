@@ -2,13 +2,14 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import GameTest from '../views/GameTest.vue';
 import PlayGame from '../views/PlayGame.vue';
-import FAQ from '../views/FAQ.vue';
+//import FAQ from '../views/FAQ.vue';
 import Profile from '../views/Profile.vue';
 import NewGame from '../views/NewGame.vue';
 import GameList from '../views/GameList.vue';
 //import ThemeTest from '../views/ThemeTest.vue';
 import HowItWorks from "../views/HowItWorks.vue";
 import MyAnswers from "../views/MyAnswers.vue";
+import WonGame from "../views/WonGame.vue";
 
 const routes = [
   {
@@ -53,9 +54,14 @@ const routes = [
     component: MyAnswers
   },
   {
-    path: '/faq',
-    name: 'FAQ',
-    component: FAQ
+    path: '/my-answers',
+    name: 'My Answers',
+    component: MyAnswers
+  },
+  {
+    path: '/game-won',
+    name: 'Won Game',
+    component: WonGame
   },
   {
     path: '/how-it-works',
