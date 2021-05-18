@@ -144,7 +144,7 @@
         <div class='flex row flex-wrap justify-center items-center'>
             <div class="shadow rounded w-3/4"> 
                 <div class="flex flex-col shadow-xl">
-                    <div class="py-6 px-14 bg-gradient-to-tr from-blue-500 to-blue-300 rounded-tl-2xl rounded-tr-2xl text-center space-y-8">
+                    <div class="py-6 px-14 bg-gradient-to-tr from-blue-500 to-indigo-600 rounded-tl-2xl rounded-tr-2xl text-center space-y-8">
                     <h4 class="text-white text-center font-bold text-xl">
                         Want to start with new random keys
                         
@@ -155,7 +155,8 @@
                     <div class="flex flex-col py-6 px-8 space-y-5 bg-white">
                     <!-- <input v-model="newMnemonic" type="text" placeholder="small fun stupid wallet lock..." class="px-2 py-2 border-2 rounded-md border-gray-200 focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent" /> -->
                     <!-- <button class="w-full py-3 bg-blue-400 text-white rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent shadow-lg" @click="saveNewMnemonic">Save</button> -->
-                    <span class="text-center text-gray-400 text-xl">Generate Random Keys</span>
+                    <span class="text-center text-indigo-600 text-2xl font-extrabold">Generate Random Keys</span>
+                    <span class="text-center text-gray-400 text-xl">You Must Press Save After Generating The Keys To Store Them In Your Browser</span>
                     <div class="flex justify-between">
                         <div class="w-16 h-16 p-3 flex items-center justify-center border-2 border-transparent hover:border-gray-200 fill-current text-blue-300">
                         <!-- <svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -193,7 +194,6 @@ import {KeyIcon} from "@heroicons/vue/outline"
 export default {
     async setup () {
         const store = useStore();
-        console.log(store);
         const run = new Run({network: "test", owner: store.state.playerOwnerPrivKey, purse: store.state.playerPursePrivKey})
         let ownerAddress = run.owner.address;
         let purseAddress = run.purse.address;
