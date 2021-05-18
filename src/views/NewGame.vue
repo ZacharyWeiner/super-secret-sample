@@ -1,13 +1,46 @@
 <template>
 <!-- <NewQuestion title="this is awesome" :questionText="question_1_text" :q1AnswerText="q1AnswerText" :addQ1Answer="addQ1Answer" :question_1_answers="question_1_answers" /> -->
     <div class="p-6  outline shadow-xl flex flex-col bg-gray-100 ">
-        <div class="title bg-white w-full rounded shadow p-2">
+        <div class="title bg-white w-full rounded shadow p-2 m-2">
             <label for="gameTitle" class="text-3xl text-indigo-600 font-extrabold"> Give the Game a Creative Title</label>
             
             <div class="">
                   <label for="first_name" class="block text-sm font-medium text-indigo-700">Title</label>
                   <input v-model="title" type="text" name="first_name" id="first_name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
+        </div>
+        <div class="flex grid grid-cols-2">
+        <div class="title bg-white w-full rounded shadow p-2 m-2">
+            <!-- <label for="gameTitle" class="text-xl text-gray-800 font-extrabold"> Give the Game a Creative Description</label> -->
+            
+            <div class="">
+                  <label for="first_name" class="block text-sm font-medium text-indigo-700">Description</label>
+                  <textarea v-model="description" rows="3" name="first_name" id="first_name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                </div>
+        </div>
+        <div class="title bg-white w-full rounded shadow p-2 m-2">
+            <!-- <label for="gameTitle" class="text-xl text-gray-800 font-extrabold"> Give the Game a Creative Backstory</label> -->
+            
+            <div class="">
+                  <label for="first_name" class="block text-sm font-medium text-indigo-700">Backstory</label>
+                  <textarea v-model="backstory" rows="3" name="first_name" id="first_name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                </div>
+        </div>
+        </div>
+        <div class="title bg-white w-full rounded shadow p-2 m-2">
+            <!-- <label for="gameTitle" class="text-xl text-gray-800 font-extrabold"> Give The Game A Cover Photo</label> -->
+            
+            <div class="flex grid grid-cols-2">
+                <div>
+                    <img class="rounded-xl" :src="gameImgUrl" /> 
+                </div>
+                <div>
+                    <div class='m-2 p-2'>
+                    <label for="first_name" class="block text-sm font-medium text-indigo-700">Cover Photo</label>
+                    <input v-model="gameImgUrl" type="text" name="first_name" id="first_name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    </div>    
+                </div>
+            </div>
         </div>
         <div class=" bg-white rounded shadow m-2">
             <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
@@ -280,6 +313,9 @@ export default {
             gameId: "",
 
             title: "Heavy that Lies the Crown",
+            description: "This is a super cool description",
+            backstory:"The backstory should set the stage for the questions to come.",
+            gameImgUrl: "https://lh4.googleusercontent.com/W_zCAiQuxAWWZWeNvIi2OJbAaC9hqQlUw3xqRqmU6f0Vvf1pxsyD_RJDweo5_ALNeCcnedyvFLysKfu80p2AzY0eC8wOC6Qjzn224iFh",
             question_1_text: "Word has come that the evil army lead by Lord Grey Bones, approaches your kingdom. As the wise and noble ruler, you decide your first move.. ",
             question_1_answers:["Wake your generals from their slumber","Sound for the naval fleet","Consult the grand oracle for wisdom","Think nothing of it, as your kingdom is well fortified","Prepare your kingdom for a grand feast before the war to come"],
             q1ImageUrl: "https://lh4.googleusercontent.com/7ZiiplJExhdgyokxvznPO5e_uIcKtRmZNSAkZSELWGXCD4UKTYpgBnjnjfKSrWeLhNgR1zM53BNO32GZR6jVGlZAg62xOgAuNjIP17Qq=s1600",
@@ -332,6 +368,9 @@ export default {
             
             await this.run.inventory.sync();
             let gameDetails = {title: this.title}; 
+            gameDetails['backstory'] = this.backstory;
+            gameDetails['description'] = this.description;
+            gameDetails['gameImgUrl'] = this.gameImgUrl;
             let question = {questionText: this.question_1_text, answers: this.question_1_answers, imgUrl: this.q1ImageUrl}
             gameDetails["question_1"] = question;
             let question2 = {questionText: this.question_2_text, answers: this.question_2_answers, imgUrl: this.q2ImageUrl}

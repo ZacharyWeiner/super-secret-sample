@@ -1,6 +1,13 @@
 ================= Templates ====================
 
+
+
+================= Heavy Lies The Head ====================
+
 title: "Heavy that Lies the Crown",
+backstory: "",
+description:"",
+gameImgUrl: "",
 question_1_text: "Word has come that the evil army lead by Lord Grey Bones, approaches your kingdom. As the wise and noble ruler, you decide your first move.. ",
 question_1_answers:["Wake your generals from their slumber","Sound for the naval fleet","Consult the grand oracle for wisdom","Think nothing of it, as your kingdom is well fortified","Prepare your kingdom for a grand feast before the war to come"],
 q1ImageUrl: "https://lh4.googleusercontent.com/7ZiiplJExhdgyokxvznPO5e_uIcKtRmZNSAkZSELWGXCD4UKTYpgBnjnjfKSrWeLhNgR1zM53BNO32GZR6jVGlZAg62xOgAuNjIP17Qq=s1600",
@@ -20,3 +27,8 @@ q4ImageUrl: "https://lh5.googleusercontent.com/OdZgOfac6Or3VH29byuiRVohRdmJ-otkq
 question_5_text: "As the enemy overwhelms your forces, you have time for one last maneuver.",
 question_5_answers:["Pray to the many gods for help","Light the ancient candle of hope","Ready your horse to join the battle","Give your sword to the golden knight","Gather the remaining troops and make one last glorious stand"],
 q5ImageUrl: "https://lh4.googleusercontent.com/S3ay4ttZl6Pqasbo8-BwSCNThcUaMwGMwGlAAFPFBGP6ZMIRSbAT4NVzk4BK8nQek7zz7JqM6l3k-D_Sdubi72UUUEjdozaNAmEKiJ_2=s1600",
+
+
+
+
+================= Puzzle of the Pyramids ====================
