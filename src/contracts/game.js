@@ -6,13 +6,14 @@ import Run from 'run-sdk';
 // })
 //ZasteGame.metadata = { emoji, image }
 class ZasteGame extends Run.Jig {
-    init(jsonObject, satoshisForPlay, winningHash){
+    init(jsonObject, satoshisForPlay, winningHash, royalty_accounts = {}){
         this.satoshisForPlay = satoshisForPlay;
         this.isWon = false;
         this.pay_address = "n4GJ33kc5QTW6V5fqhgeMHDQsVzjK21ckd";
-        this.royalty_address = "";
+        this.author = royalty_accounts.author;
+        this.illustrator = royalty_accounts.illustrator;
         this.details = jsonObject;
-        this.satoshis = 1000;
+        this.satoshis = 10000;
         this.plays = 0;
         this.hashtype = 1;
         this.winningHash = winningHash

@@ -9,6 +9,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@handcash/handcash-connect": "^0.2.6",
     "@headlessui/vue": "^1.2.0",
     "@heroicons/vue": "^1.0.1",
     "@tailwindcss/forms": "^0.3.2",

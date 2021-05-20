@@ -21,13 +21,21 @@ export default createStore({
     playerSeed: "",
     loadingText: "",
     currentUserAnswer: "",
+    handcash_client_token:"",
+    network: "test",
   },
   mutations: {
     setLoadingText(state, text){
       state.loadingText = text;
     },
+    setNetwork(state, network){
+      state.network = network;
+    },
     setPlayerSeed(state, seed){
       state.playerSeed = seed;
+    },
+    setHandcashClientToken(state, token){
+      state.handcash_client_token = token;
     },
     setGameLocation(state, location){
       state.gameLocation = location;

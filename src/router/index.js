@@ -10,12 +10,18 @@ import GameList from '../views/GameList.vue';
 import HowItWorks from "../views/HowItWorks.vue";
 import MyAnswers from "../views/MyAnswers.vue";
 import WonGame from "../views/WonGame.vue";
+import Success from "../views/login/Success.vue";
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/login/success',
+    name: 'Success',
+    component: Success
   },
   {
     path: '/game-test',

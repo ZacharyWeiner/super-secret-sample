@@ -1,5 +1,9 @@
 <template>
     <div>
+        <div class="bg-gray-200 p-2 m-2 rounded-xl shadow flex flex-items">
+            <div class='flex-grow'></div> 
+            <network-toggle />
+        </div>
         <div class="flex row flex-wrap justify-center items-center">
             <div class=" m-3 p-3 flex-col-5 border-indigo-500 border-2 rounded-xl">
                 <div class="w-96 h-56 m-auto bg-red-100 rounded-xl relative text-white shadow-md transition-transform transform hover:scale-105 hover:shadow-2xl">
@@ -191,6 +195,9 @@ import { mapState, useStore } from 'vuex'
 //import { mapState } from 'vuex'
 // import Mnemonic from 'bsv/mnemonic'
 import {KeyIcon} from "@heroicons/vue/outline"
+import NetworkToggle from '../components/shared/NetworkToggle.vue';
+const {HandCashConnect} = require('@handcash/handcash-connect');
+
 export default {
     async setup () {
         const store = useStore();
@@ -198,6 +205,7 @@ export default {
         let ownerAddress = run.owner.address;
         let purseAddress = run.purse.address;
         let purseBalance = await run.purse.balance();
+        const handCashConnect = new HandCashConnect('60a4315c49a57e0ba0aa357a');
         const state = reactive({
             count: 0,
             ownerAddress: ownerAddress,
@@ -212,11 +220,16 @@ export default {
     
         return {
             ...toRefs(state),
-            store
+            store,
+            handCashConnect
         }
     },
     components:{
-        KeyIcon
+        KeyIcon,
+        NetworkToggle
+    },
+    mounted(){
+        this.generateRedirect();
     },
     methods:{
         saveNewInfo(){
@@ -237,6 +250,13 @@ export default {
             this.newOwner = run.owner.privkey;
             this.newPurse = run.purse.privkey;
 
+        },
+        generateRedirect(){
+          const redirectionLoginUrl =  this.handCashConnect.getRedirectionUrl();
+          //const account = this.handCashConnect.getAccountFromAuthToken(token);
+          console.log({redirectionLoginUrl})
+          return redirectionLoginUrl;
+          //console.log({account})
         }
     }, 
     computed:{
