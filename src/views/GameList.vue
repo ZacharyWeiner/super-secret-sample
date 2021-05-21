@@ -124,6 +124,7 @@
 
 <script>
 import { ref, reactive, toRefs } from 'vue'
+import {useStore} from "vuex"
 import Run from "run-sdk"
 import {EyeIcon, PlayIcon} from "@heroicons/vue/outline"
 // class GameList extends Run.Jig {
@@ -143,11 +144,20 @@ import {EyeIcon, PlayIcon} from "@heroicons/vue/outline"
 // }
 export default {
     async setup () {
-        const run = new Run({network: "test", purse: "cQdpg2oTVvbeb47GzRxqn467RmJNp8rJzfoPMfkSBRyzqEdbJcSz", owner: 'cTQPGSZiCXQD3UmrF4rKE6Gub3tmjYYvrjspU7BhXCYbg5f2r7AW', trust: "*"})
+        const store = useStore();
+        let run;
+        if(store.state.playerOwnerPrivKey !== "" && store.state.playerPursePrivKey !== ""){
+            run = new Run({network: "test", purse: store.state.playerPursePrivKey, owner: store.state.playerOwnerPrivKey, trust: "*"})
+        } else {
+            run =  new Run({network: "test", purse: "cQdpg2oTVvbeb47GzRxqn467RmJNp8rJzfoPMfkSBRyzqEdbJcSz", owner: "cQ6T6gHBeRfYXNQmqQW81UgvK1umM6zoRkgZGCpGqtzceyTpVMr8", trust: "*"})
+            store.commit("setPlayerOwnerPrivKey", run.owner.privkey);
+            store.commit("setPlayerPursePrivKey", run.purse.privkey);
+        }
         console.log("Run loaded with purse address:", run.purse.address);
         await run.inventory.sync();
-        const gameListClassOrigin = '3abf31ab5fe29789ea0c14737065787760f31779561ec7edd0b3d018a15fc73d_o1'
-        const gameList = run.inventory.jigs.find((jig)=> jig.constructor.origin === gameListClassOrigin)
+        //const gameListClassOrigin = '3abf31ab5fe29789ea0c14737065787760f31779561ec7edd0b3d018a15fc73d_o1'
+        //const gameList = run.inventory.jigs.find((jig)=> jig.constructor.origin === gameListClassOrigin)
+        const gameList = await  run.load(store.state.gameListLocation);
         console.log(gameList);
         await gameList.sync();
         console.log(gameList.gameList);

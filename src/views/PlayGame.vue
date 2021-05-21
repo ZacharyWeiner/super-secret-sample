@@ -209,14 +209,17 @@ export default {
             })
             console.log({response});
             if(response.data.winner === "YES!"){
-                alert("You won the motherfuckin game, bitch!");
                 this.modalHeaderBackground = 'bg-green-400';
+                this.modalHeaderText = "You WON!";
+                this.modalBodyText = this.$store.state.gameObject.details.winner_text ? this.$store.state.gameObject.details.winner_text : 'Sorry sukka. \r ¯\\_(ツ)_/¯ \r You didnt take the winning path. Try again.';
+                this.showConfirm = false;
+                this.showModal = true; 
                 
             } else {
                 
                 this.modalHeaderBackground = 'bg-red-400';
                 this.modalHeaderText = "You didnt win";
-                this.modalBodyText = 'Sorry sukka. \r ¯\\_(ツ)_/¯ \r You didnt take the winning path. Try again.';
+                this.modalBodyText = this.$store.state.gameObject.details.loser_text ? this.$store.state.gameObject.details.loser_text : 'Sorry sukka. \r ¯\\_(ツ)_/¯ \r You didnt take the winning path. Try again.';
                 this.showConfirm = false;
                 this.showModal = true; 
             }

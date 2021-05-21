@@ -315,6 +315,8 @@ export default {
             title: "Heavy that Lies the Crown",
             description: "This is a super cool description",
             backstory:"The backstory should set the stage for the questions to come.",
+            win_text: " You've defeted this shitfuck Grey Bones (now that youve won hes no longer a lord)",
+            loss_text: " You've been defeted in battle",
             gameImgUrl: "https://lh4.googleusercontent.com/W_zCAiQuxAWWZWeNvIi2OJbAaC9hqQlUw3xqRqmU6f0Vvf1pxsyD_RJDweo5_ALNeCcnedyvFLysKfu80p2AzY0eC8wOC6Qjzn224iFh",
             question_1_text: "Word has come that the evil army lead by Lord Grey Bones, approaches your kingdom. As the wise and noble ruler, you decide your first move.. ",
             question_1_answers:["Wake your generals from their slumber","Sound for the naval fleet","Consult the grand oracle for wisdom","Think nothing of it, as your kingdom is well fortified","Prepare your kingdom for a grand feast before the war to come"],
