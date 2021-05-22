@@ -204,7 +204,7 @@ export default {
         const run = new Run({network: "test", owner: store.state.playerOwnerPrivKey, purse: store.state.playerPursePrivKey})
         let ownerAddress = run.owner.address;
         let purseAddress = run.purse.address;
-        let purseBalance = await run.purse.balance();
+        let purseBalance = null;
         const handCashConnect = new HandCashConnect('60a4315c49a57e0ba0aa357a');
         const state = reactive({
             count: 0,
@@ -221,14 +221,16 @@ export default {
         return {
             ...toRefs(state),
             store,
-            handCashConnect
+            handCashConnect,
+            run
         }
     },
     components:{
         KeyIcon,
         NetworkToggle
     },
-    mounted(){
+    async mounted(){
+        this.purseBalance = await this.run.purse.balance();
         this.generateRedirect();
     },
     methods:{
