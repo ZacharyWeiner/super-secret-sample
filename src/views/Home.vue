@@ -121,10 +121,12 @@ export default {
           console.log(ga)
         })
         //this.games = _games;
+        this.$store.commit("setLoading", false);
     },
   },
   async mounted(){
     await this.hydrateGames();
+    
   },
   components: {
     Hero,

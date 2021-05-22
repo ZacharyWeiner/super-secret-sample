@@ -23,8 +23,13 @@ export default createStore({
     currentUserAnswer: "",
     handcash_client_token:"",
     network: "test",
+    loading: false
   },
   mutations: {
+    setLoading(state, _loading){
+      console.log("Committing loading", _loading)
+      state.loading = _loading
+    },
     setLoadingText(state, text){
       state.loadingText = text;
     },

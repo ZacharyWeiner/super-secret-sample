@@ -1,9 +1,10 @@
 <template>
     <div>
-        <div class="">
+        <div v-if="loading"> <i class='fa fa-spinner animate-spin'></i> Loading ...</div>
+        <div v-if="game !== null" class="">
             <div v-if="displayIndex < 3" class=' flex-row m-4 p-4'>
                 <span class="px-2 bg-white text-sm">
-                    <span class='text-red-500 text-lg'>{{game.plays}} </span> failed to unlock the prize
+                    <span class='text-red-500 text-lg'>{{game.plays}} </span> failed to unlock the
                 </span>
                 <!-- <div class='text-green-700'>This Game Now Owns </div> -->
                 <div class='text-green-400 text-3xl'>Ð {{gameBalance}} </div>
@@ -13,7 +14,7 @@
                     </div>
                     <div class="relative flex justify-center">
                     <span class="px-2 bg-white text-sm text-green-500">
-                        Ðuros
+                        Ðuro Prize
                     </span>
                     </div>
                 </div>
@@ -77,7 +78,7 @@
 
 
 
-import { reactive, toRefs } from 'vue'
+import { ref, reactive, toRefs } from 'vue'
 import { mapState, useStore } from 'vuex'
 import {useRouter } from "vue-router"
 import Run from "run-sdk"
@@ -92,6 +93,7 @@ export default {
     async setup () {
         const store = useStore();
         let run;
+        let game = ref(null);
         let router = useRouter();
         console.log("Current Route:", router.currentRoute.value.params.id)
         if(router.currentRoute.value.query.id){
@@ -114,17 +116,9 @@ export default {
         console.log("Purse Adddress:", run.purse.address);
 
 
-        console.log(store.state.gameLocation);
-        let game = await run.load(store.state.gameLocation);
-        await game.sync();
-        if(game.isWon){
-            router.push(`/game-won/?id=${game.location}`)
-            return
-        }
-        store.commit('setGameObject', game) 
-        console.log("Hydrated Game from run in state:", store.state.gameObject);
-        await run.inventory.sync();
-        console.log(run.inventory.jigs)
+       
+        //await run.inventory.sync();
+        //console.log(run.inventory.jigs)
         const state = reactive({
             count: 0,   
             is_winner: "",
@@ -141,6 +135,21 @@ export default {
             run,
             game
         }
+    },
+    async mounted(){
+        console.log("In mounted: ", this.$store.state.gameLocation);
+        let _game  = await this.run.load(this.$store.state.gameLocation);
+        
+        await _game.sync();
+        console.log("game", _game)
+        this.game = _game
+        if(this.game.isWon){
+            this.router.push(`/game-won/?id=${this.game.location}`)
+            return
+        }
+        this.$store.commit('setGameObject', this.game) 
+        console.log("Hydrated Game from run in state:", this.$store.state.gameObject);
+        this.$store.commit("setLoading", false);
     },
     methods:{
         setAnswer(){
@@ -211,7 +220,7 @@ export default {
             if(response.data.winner === "YES!"){
                 this.modalHeaderBackground = 'bg-green-400';
                 this.modalHeaderText = "You WON!";
-                this.modalBodyText = this.$store.state.gameObject.details.winner_text ? this.$store.state.gameObject.details.winner_text : 'Sorry sukka. \r ¯\\_(ツ)_/¯ \r You didnt take the winning path. Try again.';
+                this.modalBodyText = this.$store.state.gameObject.details.winner_text ? this.$store.state.gameObject.details.winner_text : 'You won the game. Now, you own it.';
                 this.showConfirm = false;
                 this.showModal = true; 
                 
@@ -292,7 +301,7 @@ export default {
             return text;
         },
         // mix this into the outer object with the object spread operator
-        ...mapState(["gameLocation", "gameTitle", "gameObject", "userAnswers"])
+        ...mapState(["gameLocation", "gameTitle", "gameObject", "userAnswers", "loading"])
     },
     components:{
         Modal,

@@ -1,5 +1,5 @@
 <template>
-<div>
+    <div>
         <div class="flex">
             <div class="m-1 flex-grow border-indigo-500 border-2 shadow sm:rounded-lg">
                 <div class="px-4 py-5 sm:p-6">
@@ -55,70 +55,7 @@
             </div> -->
         </div>
 
-    <div class="py-16 xl:py-36 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
-    <div class="max-w-max lg:max-w-7xl mx-auto">
-      <div class="relative z-10 mb-8 md:mb-2 md:px-6">
-        <div class="text-base max-w-prose lg:max-w-none">
-          <h2 class="leading-6 text-indigo-600 font-semibold tracking-wide uppercase">Games In Process</h2>
-          <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">Explore all the games in the list</p>
-        </div>
-      </div>
-      <div class="relative">
-        <svg class="hidden md:block absolute top-0 right-0 -mt-20 -mr-20" width="404" height="384" fill="none" viewBox="0 0 404 384" aria-hidden="true">
-          <defs>
-            <pattern id="95e8f2de-6d30-4b7e-8159-f791729db21b" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-              <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
-            </pattern>
-          </defs>
-          <rect width="404" height="384" fill="url(#95e8f2de-6d30-4b7e-8159-f791729db21b)" />
-        </svg>
-        <svg class="hidden md:block absolute bottom-0 left-0 -mb-20 -ml-20" width="404" height="384" fill="none" viewBox="0 0 404 384" aria-hidden="true">
-          <defs>
-            <pattern id="7a00fe67-0343-4a3c-8e81-c145097a3ce0" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-              <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
-            </pattern>
-          </defs>
-          <rect width="404" height="384" fill="url(#7a00fe67-0343-4a3c-8e81-c145097a3ce0)" />
-        </svg>
-        <div class="relative md:bg-white md:p-6">
-          <div class="lg:grid lg:grid-cols-2 lg:gap-6">
-            <div class="prose prose-indigo prose-lg text-gray-500 lg:max-w-none">
-                <ul class="space-y-3 bg-gray-200" style=" max-height:500px;overflow-y: scroll;">
-                    <li v-for="game in games" :key="game" class="flex bg-white shadow overflow-hidden px-4 py-4 m-2 sm:px-6 sm:rounded-md">
-                        <img class="h-16 w-16 rounded-full" :src="game.details.question_1.imgUrl" alt="" />
-                        <div class="ml-3">
-                            <p class="text-md font-medium text-gray-900">{{ game.details.title}}</p>
-                            <button class="inline-flex items-center m-1 px-4 py-2 text-sm border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="gameDetails(game.location)"> 
-                                <EyeIcon class='h-4 w-4 m-2' />
-                                view details 
-                            </button>
-                            <a class='inline-flex items-center px-4 py-2 text-sm border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500' :href="gameLink(game.location)"> 
-                                <PlayIcon class='h-4 w-4 m-2'/> 
-                                launch 
-                            </a> 
-                        </div>
-                    </li>
-                </ul>         
-            </div>
-            <div class="mt-6 prose prose-indigo prose-lg text-gray-500 lg:mt-0">
-                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">Details</p>
-                 <div class="relative">
-                    <div class="absolute inset-0 flex items-center" aria-hidden="true">
-                    <div class="w-full border-t border-gray-300" />
-                    </div>
-                    <div class="relative flex justify-center">
-                    <span class="px-3 bg-white text-lg font-medium text-gray-900">
-                        As JSON
-                    </span>
-                    </div>
-                </div>
-               {{details }} 
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+        <game-list-basic :games="games" :run="run"></game-list-basic >
     </div>
 </template>
 
@@ -126,25 +63,11 @@
 import { ref, reactive, toRefs } from 'vue'
 import {useStore} from "vuex"
 import Run from "run-sdk"
-import {EyeIcon, PlayIcon} from "@heroicons/vue/outline"
-// class GameList extends Run.Jig {
-//     init(title){
-//         this.title = title;
-//         this.gameList = [];
-//     }
-//     updateTitle(title){
-//         this.title = title;
-//     }
-//     addGame(id){
-//         this.gameList.push(id);
-//     }
-//     removeGame(id){
-//         this.gameList.pop(id);
-//     }
-// }
+import GameListBasic from "./../components/games/GameListBasic.vue"
 export default {
     async setup () {
         const store = useStore();
+        store.commit("setLoading", true);
         let run;
         if(store.state.playerOwnerPrivKey !== "" && store.state.playerPursePrivKey !== ""){
             run = new Run({network: "test", purse: store.state.playerPursePrivKey, owner: store.state.playerOwnerPrivKey, trust: "*"})
@@ -153,47 +76,44 @@ export default {
             store.commit("setPlayerOwnerPrivKey", run.owner.privkey);
             store.commit("setPlayerPursePrivKey", run.purse.privkey);
         }
-        console.log("Run loaded with purse address:", run.purse.address);
-        await run.inventory.sync();
-        //const gameListClassOrigin = '3abf31ab5fe29789ea0c14737065787760f31779561ec7edd0b3d018a15fc73d_o1'
-        //const gameList = run.inventory.jigs.find((jig)=> jig.constructor.origin === gameListClassOrigin)
-        const gameList = await  run.load(store.state.gameListLocation);
-        console.log(gameList);
-        await gameList.sync();
-        console.log(gameList.gameList);
         let games = ref([]);
-        gameList.gameList.forEach(async (g) => {
-            let hydrated = await run.load(g);
-            games.value.push(hydrated);
-
-        })
+        const gameList = ref([])
+       
         const state = reactive({
             count: 0,
-            list: gameList.gameList,
+            list: [],
             currentGame: null,
-            details: {},
             toAdd: "",
             toRemove: "",
-            showModal: false
         })
-    
+        
         return {
             ...toRefs(state),
             run,
             gameList,
-            games
+            games,
+            store
         }
     },
+    async mounted(){
+        console.log("Run loaded with purse address:", this.run.purse.address);
+        const gameList = await  this.run.load(this.$store.state.gameListLocation);
+        console.log(gameList);
+        await gameList.sync();
+        console.log(gameList.gameList);
+        this.list = gameList.gameList;
+        gameList.gameList.forEach(async (g) => {
+            let hydrated = await this.run.load(g);
+            this.games.push(hydrated);
+            if(this.games.length === gameList.gameList.length){
+                this.$store.commit("setLoading", false);
+            }
+
+        })
+    },
     methods:{
-        gameLink(game){
-            return "/play-game?id=" + game;
-        },
-        async gameDetails(id){
-            let game = await this.run.load(id);
-            await game.sync();
-            this.currentGame = game;
-            this.details = game.details;
-        },
+        
+        
         async addToList(){
             this.gameList.addgame(this.toAdd);
             this.gameList.sync();
@@ -211,8 +131,8 @@ export default {
         }
     },
     components: {
-        EyeIcon,
-        PlayIcon
+       GameListBasic
+        // Modal
     }
 }
 </script>

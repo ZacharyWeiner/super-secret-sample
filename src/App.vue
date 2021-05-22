@@ -15,13 +15,14 @@
             <router-link to="/profile" class="no-underline text-blue-dark text-md flex-1 text-center sm:ml-4">Wallet</router-link> 
           </div> -->
           <div>
+            
             <router-view/>
           </div>
           <Footer />
         </div>
       </template>
       <template #fallback>
-        <div><i class="fas fa-spinner animate-spin"></i> {{}}</div>
+        <div><i class="fas fa-spinner animate-spin"></i> Loading ...</div>
       </template>
   </Suspense>
 </div>
@@ -29,11 +30,24 @@
 <script>
  import Footer from "./components/shared/Footer.vue"
  import MainMenu from "./components/shared/menus/MainMenu.vue"
+ import {useStore} from 'vuex'
  export default {
+   setup(){
+     let store = useStore()
+     store.commit("setLoading", true);
+     return {store}
+   },
+   methods:{
+     isLoading(){
+       console.log("Calling isLoading", this.$store.state.loading)
+       return this.$store.state.loading;
+     }
+   },
    computed:{
      loadingText(){
        return this.$store.state.loadingText
-     }
+     },
+     
    },
    components:{
      Footer,

@@ -1,4 +1,5 @@
 <template>
+<div v-if="loading"><h2 class='text-xl text-white'><i class='fa fa-spinner animate-spin'></i> Loading Games </h2> </div>
   <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
     <li v-for="game in games" :key="game.location" class="col-span-1 flex flex-col text-center bg-white rounded-lg shadow divide-y divide-gray-200">
       <div class="flex-1 flex flex-col p-8">
@@ -36,6 +37,7 @@
 <script>
 import {  PlayIcon } from '@heroicons/vue/solid'
 import {  reactive, toRefs } from 'vue'
+import {mapState} from "vuex"
 export default {
   components: {
     PlayIcon
@@ -48,6 +50,9 @@ export default {
         return {
             ...toRefs(state),
         }
+    },
+    computed:{
+      ...mapState(['loading'])
     },
   props: {
     games: Array
