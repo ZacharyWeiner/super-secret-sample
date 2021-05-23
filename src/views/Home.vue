@@ -102,6 +102,7 @@ export default {
       async hydrateGames(){
         try{
           let _run = RunStore.useRun(this.$store);
+          _run.activate();
           console.log("Trying to load game list:", this.$store.state.gameListLocation);
         const gameList =  await _run.load(this.$store.state.gameListLocation);
         await gameList.sync();
