@@ -5,5 +5,4 @@ import store from './store'
 import "./index.css"
 import "tailwindcss/tailwind.css"
 
-
 createApp(App).use(store).use(router).mount('#app')

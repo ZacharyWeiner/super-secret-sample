@@ -14,9 +14,20 @@
             <router-link to="/play-game" class="no-underline text-blue-dark text-md flex-1 text-center sm:ml-4">Play </router-link> |
             <router-link to="/profile" class="no-underline text-blue-dark text-md flex-1 text-center sm:ml-4">Wallet</router-link> 
           </div> -->
-          <div>
-            
+          {{ $browserDetect }}
+          <div v-if="!isSafari">
             <router-view/>
+          </div>
+          <div v-else>
+            <div class="lg:text-center">
+              <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">We Apologize</h2>
+              <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                This browser is not supported 
+              </p>
+              <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                Please Try Chrome or Firefox. 
+              </p>
+            </div>
           </div>
           <Footer />
         </div>
@@ -47,6 +58,19 @@
      loadingText(){
        return this.$store.state.loadingText
      },
+     isSafari(){
+       var isSafari = !!navigator.userAgent.match(/Version\/[\d.]+.*Safari/);
+        var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        
+        if (isSafari && iOS) {
+            //alert("You are using Safari on iOS!");
+            return true;
+        } else if(isSafari) {
+            //alert("You are using Safari.");
+            return true
+        }
+        return false;
+     }
      
    },
    components:{

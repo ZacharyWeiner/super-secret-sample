@@ -1,5 +1,6 @@
 <template >
 <div class="flex flex-col h-auto bg-white">
+  
   <Hero />
   <div class="border-t-2"></div>
     <div class="bg-indigo-700">
