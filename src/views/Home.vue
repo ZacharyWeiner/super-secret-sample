@@ -101,14 +101,15 @@ export default {
       },
       async hydrateGames(){
         try{
+          let _run = RunStore.useRun(this.$store);
           console.log("Trying to load game list:", this.$store.state.gameListLocation);
-        const gameList =  await this.run.load(this.$store.state.gameListLocation);
+        const gameList =  await _run.load(this.$store.state.gameListLocation);
         await gameList.sync();
         this.gameList = gameList.gameList;
         console.log(gameList);
         //let _games = [];
         await this.gameList.forEach(async (g) => {
-          let ga = await this.run.load(g);
+          let ga = await _run.load(g);
           await ga.sync();
           this.games.push(ga);
           console.log(ga)

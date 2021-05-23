@@ -173,6 +173,7 @@ export default {
             
         },
         async createAnswerObject(){
+            this.run.activate();
             console.log('setting user answers with send(to) set as', this.run.owner.address)
             let AnswersTemplate = await this.run.load(this.$store.state.answerCodeLocation)
             const userAnswers = new AnswersTemplate(this.$store.state.gameObject.location, this.$store.state.userAnswers, this.game.satoshisForPlay, this.run.owner.address);
