@@ -27,6 +27,7 @@ export default {
         const state = reactive({
             count: 0,
         })
+        router.push("/profile")
     
         return {
             ...toRefs(state),

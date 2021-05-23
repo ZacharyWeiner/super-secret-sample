@@ -9,7 +9,7 @@
        <p class="max-w-xl mt-5 mx-auto text-xl text-white">Each game is a unique journey. </p>
         <p class="max-w-xl mt-5 mx-auto text-xl text-white">There are many answer combos, only one unlocks the game.</p>
       <div class="mt-12 gap-x-6 gap-y-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-16">
-        <GamesCardList :games="games" />
+        <GameCardList :games="games.slice(1, 5)" />
       </div>
     </div>
   </div>
@@ -44,12 +44,13 @@
 // @ is an alias to /src
 //import HelloWorld from '@/components/HelloWorld.vue'
 import { ref, reactive, toRefs } from 'vue'
-import Run from 'run-sdk'
+//import Run from 'run-sdk'
 import {useStore} from 'vuex';
 import Hero from "./../components/home/Hero.vue"
 import NFT from "./../components/home/NFT.vue"
-import GamesCardList from './../components/games/GameCardList.vue';
+import GameCardList from './../components/games/GameCardList.vue';
 import Steps from './../components/shared/Steps.vue';
+import RunStore from "./../store/RunStore.js"
 //import {ref} from 'vue';
 
 // class SimpleStore extends Run.Jig {
@@ -65,17 +66,7 @@ export default {
   async setup(){
     const store = useStore();
     store.dispatch("resetGame");
-    let run;
-    if(store.state.playerOwnerPrivKey !== "" && store.state.playerPursePrivKey !== ""){
-      console.log("has priv keys");
-      run = new Run({network: "test", purse: store.state.playerPursePrivKey, owner: store.state.playerOwnerPrivKey, trust: "*"})
-    }
-    else{
-       //run = new Run({network: "test", purse: "cQdpg2oTVvbeb47GzRxqn467RmJNp8rJzfoPMfkSBRyzqEdbJcSz", owner: 'cTQPGSZiCXQD3UmrF4rKE6Gub3tmjYYvrjspU7BhXCYbg5f2r7AW', trust: "*"})
-       run = new Run({network: "test", trust: "*"})
-       store.commit("setPlayerOwnerPrivKey", run.owner.privkey);
-       store.commit("setPlayerPursePrivKey", run.purse.privkey)
-    }
+    let run = RunStore.useRun(store);
     const games = ref([]);
     const state = reactive({
         gameList: []
@@ -109,7 +100,9 @@ export default {
         return ""
       },
       async hydrateGames(){
-        const gameList = await this.run.load(this.$store.state.gameListLocation);
+        try{
+          console.log("Trying to load game list:", this.$store.state.gameListLocation);
+        const gameList =  await this.run.load(this.$store.state.gameListLocation);
         await gameList.sync();
         this.gameList = gameList.gameList;
         console.log(gameList);
@@ -122,6 +115,11 @@ export default {
         })
         //this.games = _games;
         this.$store.commit("setLoading", false);
+        }
+        catch(err){
+          this.$store.commit("setLoading", false);
+          console.log(err);
+        }
     },
   },
   async mounted(){
@@ -130,7 +128,7 @@ export default {
   },
   components: {
     Hero,
-    GamesCardList,
+    GameCardList,
     Steps,
     NFT
   }

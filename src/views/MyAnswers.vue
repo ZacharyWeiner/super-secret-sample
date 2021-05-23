@@ -66,11 +66,11 @@
 import { ref, reactive, toRefs } from 'vue'
 import {useStore} from 'vuex'
 import TwoColBackground  from "./../components/shared/sections/TwoColBackground.vue";
-import Run from 'run-sdk'
+import RunStore from './../store/RunStore.js'
 export default {
     async setup () {
         let store = useStore()
-        let run = new Run({network: "test", purse: store.state.playerPursePrivKey, owner: store.state.playerOwnerPrivKey, trust: "*"})
+        let run = RunStore.useRun(store);
         let games = ref([]);
         let gameObjects = ref([]);
         let answers = ref([]);

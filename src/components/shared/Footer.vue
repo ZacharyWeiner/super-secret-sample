@@ -15,7 +15,7 @@
         </a>
       </div>
       <p class="mt-8 text-center text-base text-gray-400">
-        &copy; 2020 støºpˆd qåm3s, Inc. All rights reserved.
+        &copy; 2021 powpurse, Inc. All rights reserved.
       </p>
     </div>
   </footer>

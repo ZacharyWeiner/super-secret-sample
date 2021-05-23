@@ -2,6 +2,7 @@
     <div>
         <Won /> 
     </div>
+    
 </template>
 
 <script>

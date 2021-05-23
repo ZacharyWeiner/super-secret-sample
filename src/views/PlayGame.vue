@@ -2,7 +2,7 @@
     <div>
         <div v-if="loading"> <i class='fa fa-spinner animate-spin'></i> Loading ...</div>
         <div v-if="game !== null" class="">
-            <div v-if="displayIndex < 3" class=' flex-row m-4 p-4'>
+            <div v-if="displayIndex < 3" class=' flex-row m-1 p-1'>
                 <span class="px-2 bg-white text-sm">
                     <span class='text-red-500 text-lg'>{{game.plays}} </span> failed to unlock the
                 </span>
@@ -81,44 +81,27 @@
 import { ref, reactive, toRefs } from 'vue'
 import { mapState, useStore } from 'vuex'
 import {useRouter } from "vue-router"
-import Run from "run-sdk"
+//import Run from "run-sdk"
 import axios from "axios"
 import Modal from './../components/Modal.vue';
 //import AnswerList from './../components/games/AnswerList.vue';
 import Question from './../components/games/Question.vue';
 import FinalAnswers from './../components/games/FinalAnswers.vue';
 //import bsv, {Script} from "bsv"
+import RunStore from "./../store/RunStore.js"
 
 export default {
     async setup () {
         const store = useStore();
-        let run;
+        let run = RunStore.useRun(store);
         let game = ref(null);
         let router = useRouter();
         console.log("Current Route:", router.currentRoute.value.params.id)
         if(router.currentRoute.value.query.id){
             store.commit("setGameLocation", router.currentRoute.value.query.id);
         }
-        if(store.state.playerOwnerPrivKey !== "" && store.state.playerPursePrivKey !== ""){
-            run = new Run({network: "test", purse: store.state.playerPursePrivKey, owner: store.state.playerOwnerPrivKey, trust: "*"})
-        } else {
-            run =  new Run({network: "test", purse: "cQdpg2oTVvbeb47GzRxqn467RmJNp8rJzfoPMfkSBRyzqEdbJcSz", owner: "cQ6T6gHBeRfYXNQmqQW81UgvK1umM6zoRkgZGCpGqtzceyTpVMr8", trust: "*"})
-            store.commit("setPlayerOwnerPrivKey", run.owner.privkey);
-            store.commit("setPlayerPursePrivKey", run.purse.privkey);
-        }
+        
 
-        console.log("Owner Private Key:", run.owner.privkey);
-        console.log("Owner Public Key:", run.owner.pubkey);
-        console.log("Owner Adddress:", run.owner.address);
-
-        console.log("Purse Private Key:", run.purse.privkey);
-        console.log("Purse Script:", run.purse.script);
-        console.log("Purse Adddress:", run.purse.address);
-
-
-       
-        //await run.inventory.sync();
-        //console.log(run.inventory.jigs)
         const state = reactive({
             count: 0,   
             is_winner: "",
@@ -206,7 +189,7 @@ export default {
             
             let response = await axios({
                 method: 'POST',
-                url: `https://rocky-depths-28908.herokuapp.com/check-win`,
+                url: `https://rocky-depths-28908.herokuapp.com/check-win-test`,
                 params: {
                 "location": location,
                 "gameId": this.$store.state.gameObject.location

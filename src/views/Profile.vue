@@ -28,10 +28,10 @@
                                 Private Key
                             </p>
                             <p v-if="!showFullPurse" class="font-medium tracking-more-wider font-mono">
-                                {{store.state.playerPursePrivKey.substring(0, 8)}} <span class="bg-blue-700  rounded-full px-2 py-1 text-xs absolute">●●●●</span>
+                                {{pursePrivKey.substring(0, 8)}} <span class="bg-blue-700  rounded-full px-2 py-1 text-xs absolute">●●●●</span>
                             </p>
                             <p v-if="showFullPurse" class="text-xs" style='word-wrap: break-word;'>
-                                <span class="flex-wrap">{{store.state.playerPursePrivKey}}</span>
+                                <span class="flex-wrap">{{pursePrivKey}}</span>
                             </p>
                             <p class='pt-1'><button @click="showFullPurse = !showFullPurse">{{showFullPurse ? "hide":"show"}}</button></p>
                         </div>
@@ -94,11 +94,11 @@
                                 Private Key
                             </p>
                             <p v-if="!showFullOwner" class="font-medium tracking-more-wider font-mono">
-                                {{store.state.playerOwnerPrivKey.substring(0, 8)}} <span class="bg-blue-700  rounded-full px-2 py-1 text-xs absolute">●●●●</span>
+                                {{ownerPrivKey.substring(0, 8)}} <span class="bg-blue-700  rounded-full px-2 py-1 text-xs absolute">●●●●</span>
                             </p>
                             <div v-if="showFullOwner" class="items-center">
                                 <p v-if="showFullOwner" class="text-xs text-center" style='word-wrap: break-word;'>
-                                <span class="flex-wrap">{{store.state.playerOwnerPrivKey}}</span>
+                                <span class="flex-wrap">{{ownerPrivKey}}</span>
                             </p>
                             </div>
                             
@@ -142,15 +142,23 @@
                 </div>
             </div>
         </div>
+        
         <div class='p-5 m-5'>
          <button class="px-8 rounded-lg bg-blue-400  text-white font-bold p-4 uppercase border-red-500 border-t border-b border-r" @click="saveNewInfo"> Save </button>
+        </div>
+        <a v-if="!hasHandcashToken" :href="generateRedirect()" target="_blank" id="connectButton" class='px-2 py-4 m-2 font-bold'> Connect Handcash </a>
+        <div v-if="isLive && hasHandcashToken" ><Fund :purseAddress="purseAddress"/> </div>
+        <div v-else-if="!isLive" class='p-3 m-3 border-indigo-600 border-2 rounded shadow' >
+            <p class='text-gray-700 text-xl'>Need Testnet BSV to try the games for free? </p>
+            <p class='text-gray-700 text-lg'>Copy Your purse address (blue) and paste it into the textbox of the page that launches when you click the green button below </p>
+            <div class="p-4 "> <a class=" px-2 py-4 text-gray-100 bg-green-600 rounded hover:bg-teal-400 font-semibold w-24 duration-700" href="https://faucet.bitcoincloud.net/" target="_blank" norel noopener> $ Fund With Test Coins </a></div>
         </div>
         <div class='flex row flex-wrap justify-center items-center'>
             <div class="shadow rounded w-3/4"> 
                 <div class="flex flex-col shadow-xl">
                     <div class="py-6 px-14 bg-gradient-to-tr from-blue-500 to-indigo-600 rounded-tl-2xl rounded-tr-2xl text-center space-y-8">
                     <h4 class="text-white text-center font-bold text-xl">
-                        Want to start with new random keys
+                        Want to start with new random keys?
                         
                     </h4>
                     <span class='text-md text-white'> We do NOT store your keys. </span>
@@ -190,26 +198,40 @@
 
 <script>
 import { reactive, toRefs } from 'vue'
-import Run from "run-sdk";
+import Run from "run-sdk"
+import RunStore from "./../store/RunStore.js";
 import { mapState, useStore } from 'vuex'
 //import { mapState } from 'vuex'
 // import Mnemonic from 'bsv/mnemonic'
 import {KeyIcon} from "@heroicons/vue/outline"
 import NetworkToggle from '../components/shared/NetworkToggle.vue';
+import Fund from "./../components/payments/Fund.vue"
 const {HandCashConnect} = require('@handcash/handcash-connect');
 
 export default {
     async setup () {
         const store = useStore();
-        const run = new Run({network: "test", owner: store.state.playerOwnerPrivKey, purse: store.state.playerPursePrivKey})
+        let run;
+        try{
+            run = RunStore.useRun(store);
+        } catch(err){
+            alert(err); 
+            return {}
+        }
+         
         let ownerAddress = run.owner.address;
+        let ownerPrivKey = run.owner.privkey
         let purseAddress = run.purse.address;
+        let pursePrivKey = run.purse.privkey
+        
         let purseBalance = null;
         const handCashConnect = new HandCashConnect('60a4315c49a57e0ba0aa357a');
         const state = reactive({
             count: 0,
             ownerAddress: ownerAddress,
+            ownerPrivKey: ownerPrivKey,
             purseAddress: purseAddress,
+            pursePrivKey: pursePrivKey,
             purseBalance: purseBalance,
             newOwner: "",
             newPurse:"",
@@ -227,20 +249,29 @@ export default {
     },
     components:{
         KeyIcon,
-        NetworkToggle
+        NetworkToggle,
+        Fund
     },
     async mounted(){
         this.purseBalance = await this.run.purse.balance();
-        this.generateRedirect();
     },
     methods:{
         saveNewInfo(){
             if(confirm("Are you sure? ")){
                 if(this.newOwner !== ""){
-                this.store.commit("setPlayerOwnerPrivKey", this.newOwner);
+                    if(this.$store.state.network === "test"){
+                        this.store.commit("setPlayerOwnerPrivKey", this.newOwner);
+                    }else{
+                       this.store.commit("setPlayerOwnerPrivKey_live", this.newOwner); 
+                    }
                 }
                 if(this.newPurse !== ""){
-                    this.store.commit("setPlayerPursePrivKey", this.newPurse);
+                    if(this.$store.state.network === "test"){
+                        this.store.commit("setPlayerPursePrivKey", this.newPurse);
+                    }else{
+                       this.store.commit("setPlayerPursePrivKey_live", this.newOwner); 
+                    }
+                    
                 }
             } else {
                 //
@@ -248,28 +279,82 @@ export default {
             
         }, 
         randomKeys(){
-            const run = new Run({network: "test"})
+            let run;
+             if (this.$store.state.network === "test"){
+                 run = new Run({network: "test"})
+             }else{
+                 run = new Run({})
+             }
             this.newOwner = run.owner.privkey;
             this.newPurse = run.purse.privkey;
 
         },
         generateRedirect(){
           const redirectionLoginUrl =  this.handCashConnect.getRedirectionUrl();
-          //const account = this.handCashConnect.getAccountFromAuthToken(token);
           console.log({redirectionLoginUrl})
           return redirectionLoginUrl;
-          //console.log({account})
         }
     }, 
     computed:{
         balanceInDuros(){
             return this.purseBalance / 500;
+        },
+        isLive(){
+            return this.$store.state.network === "live"
+        },
+        hasHandcashToken(){
+            return this.$store.state.handcash_client_token !== ""
         }
     },
     ...mapState(["gameLocation", "gameTitle", "gameObject", "userAnswers", "playerOwnerPrivKey", "playerPursePrivKey"])
 }
 </script>
 
-<style lang="scss" scoped>
-
+<style >
+#connectButton{
+	-webkit-user-select: none; /* Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+/Edge */
+	user-select: none; /* Standard */
+	font-family: 'Poppins', sans-serif;
+	box-shadow: 0px 1px 3px hsla(0, 0%, 0%, .15);
+	background-image: linear-gradient(#38CB7C, #1CB462);
+	border-radius: 8px;
+	display:inline-block;
+	text-align: center;
+	cursor:pointer;
+	color:#ffffff;
+	font-size:16px;
+	font-weight:500;
+	padding:16px 24px;
+	text-decoration:none;
+	transition: 0.3s;
+	width: 100%;
+	max-width: 320px;
+	vertical-align: middle;
+	letter-spacing: 0.5px;
+}
+#connectButton:before {
+	background: url(https://handcash.io/resources/handcash_white_icon.svg) no-repeat scroll center center / 100% auto rgba(0, 0, 0, 0);
+    content: "";
+    display: inline-block;
+    color: #fff;
+    height: 20px;
+    margin-right: 12px;
+    margin-bottom: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 20px;
+}
+#connectButton:hover {
+	background-image: linear-gradient(#31C475, #16B15D);
+	top:1px;
+	box-shadow: 0px 3px 6px hsla(0, 0%, 0%, .15);
+}
+#connectButton:active {
+	background-image: linear-gradient(#38CB7C, #1CB462);
+	position:relative;
+	top:1px;
+	box-shadow: 0px 0px 0px hsla(0, 0%, 0%, .15);
+}
 </style>

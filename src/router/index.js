@@ -1,17 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-import GameTest from '../views/GameTest.vue';
 import PlayGame from '../views/PlayGame.vue';
 //import FAQ from '../views/FAQ.vue';
 import Profile from '../views/Profile.vue';
 import NewGame from '../views/NewGame.vue';
-import GameList from '../views/GameList.vue';
-//import ThemeTest from '../views/ThemeTest.vue';
 import HowItWorks from "../views/HowItWorks.vue";
 import MyAnswers from "../views/MyAnswers.vue";
 import WonGame from "../views/WonGame.vue";
+import CurrentGames from "../views/CurrentGames.vue";
 import Success from "../views/login/Success.vue";
-
+import CreateAccounts from "./../views/admin/CreateAccounts.vue"
+import CreateGame from "./../views/admin/CreateGame.vue"
+import CreateGameList from "./../views/admin/CreateGameList.vue"
+import CreateAnswers from "./../views/admin/CreateAnswers.vue"
+import GameList from '../views/admin/GameList.vue';
 const routes = [
   {
     path: '/',
@@ -22,11 +24,6 @@ const routes = [
     path: '/login/success',
     name: 'Success',
     component: Success
-  },
-  {
-    path: '/game-test',
-    name: 'Game Test',
-    component: GameTest
   },
   {
     path: '/new-game',
@@ -43,12 +40,6 @@ const routes = [
     name: 'Play Game',
     component: PlayGame
   },
-  
-  {
-    path: '/game-list',
-    name: 'Game List',
-    component: GameList
-  },
   {
     path: '/profile',
     name: 'Profile',
@@ -60,9 +51,9 @@ const routes = [
     component: MyAnswers
   },
   {
-    path: '/my-answers',
-    name: 'My Answers',
-    component: MyAnswers
+    path: '/current-games',
+    name: 'Current Games',
+    component: CurrentGames
   },
   {
     path: '/game-won',
@@ -74,11 +65,31 @@ const routes = [
     name: 'How It Works',
     component: HowItWorks
   },
-  // {
-  //   path: '/theme',
-  //   name: 'theme',
-  //   component: ThemeTest
-  // },
+  {
+    path: '/admin/create-accounts',
+    name: 'Create Accounts',
+    component: CreateAccounts
+  },
+  {
+    path: '/admin/create-game',
+    name: 'Create Game',
+    component: CreateGame
+  },
+  {
+    path: '/admin/create-game-list',
+    name: 'Create Game List',
+    component: CreateGameList
+  },
+  {
+    path: '/admin/create-answers',
+    name: 'Create Answers',
+    component: CreateAnswers
+  },
+  {
+    path: '/admin/game-list',
+    name: 'Game List',
+    component: GameList
+  },
   {
     path: '/about',
     name: 'About',

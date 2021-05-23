@@ -22,8 +22,10 @@ export default {
     const enabled = ref(false)
     const store = useStore()
     console.log(store.state.network);
-    if(store.state.network === "live"){
-        enabled.value = true;
+    if(store.state.network === "test"){
+        enabled.value = false;
+    } else {
+      enabled.value = true;
     }
     return {
       enabled,
@@ -35,6 +37,7 @@ export default {
           let val = !this.enabled ? "test": "live";
           console.log("setting network value:", val);
           this.store.commit("setNetwork", val)
+          this.$router.go()
       }
       //...mapState(["network"])
   },

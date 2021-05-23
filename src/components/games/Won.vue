@@ -24,7 +24,7 @@ import { reactive, toRefs } from 'vue'
 import OneColBackground from "./../shared/sections/OneColBackground.vue"
 import { useStore } from 'vuex'
 import {useRouter } from "vue-router"
-import Run from "run-sdk"
+import RunStore from "./../../store/RunStore.js"
 import {HomeIcon} from "@heroicons/vue/outline"
 
 export default {
@@ -35,7 +35,7 @@ export default {
         if(router.currentRoute.value.query.id){
             store.commit("setGameLocation", router.currentRoute.value.query.id);
         }
-        run = new Run({network: "test", purse: store.state.playerPursePrivKey, owner: store.state.playerOwnerPrivKey, trust: "*"})
+        run = RunStore.useRun(store)
         let game = await run.load(store.state.gameLocation);
         await game.sync();
         const state = reactive({

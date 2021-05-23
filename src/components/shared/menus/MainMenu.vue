@@ -3,9 +3,10 @@
       <Popover class="relative bg-white">
         <div class="flex justify-between items-center max-w-7xl mx-auto px-4 py-6 sm:px-6 md:justify-start md:space-x-10 lg:px-8">
           <div class="flex justify-start lg:w-0 lg:flex-1">
-            <a href="#">
-              <span class="sr-only">Workflow</span>
-              <img class="h-8 w-auto sm:h-10" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="" />
+            <a href="/" class="text-3xl">
+              <!-- <span class="sr-only">Workflow</span>
+              <img class="h-8 w-auto sm:h-10" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="" /> -->
+              <img class='h-20 w-20' src="@/assets/media/powlogo.jpg"/>
             </a>
           </div>
           <div class="-mr-2 -my-2 md:hidden">
@@ -136,7 +137,7 @@ const categories = [
   {
     name: 'All Games',
     description: 'All the games available for play.',
-    href: '/game-list',
+    href: '/current-games',
     icon: CollectionIcon,
   },
 //   {

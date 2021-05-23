@@ -10,7 +10,7 @@
               </div>
             </div>
             <div class="mt-12 lg:m-0 lg:col-span-2 lg:pl-8">
-              <div class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:px-0 lg:py-20 lg:max-w-none">
+              <div class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:px-0 lg:py-12 lg:max-w-none">
                 <blockquote>
                   <div>
                     <svg class="h-12 w-12 text-white opacity-25" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">

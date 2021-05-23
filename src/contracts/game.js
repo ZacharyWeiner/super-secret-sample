@@ -6,17 +6,18 @@ import Run from 'run-sdk';
 // })
 //ZasteGame.metadata = { emoji, image }
 class ZasteGame extends Run.Jig {
-    init(jsonObject, satoshisForPlay, winningHash, royalty_accounts = {}){
+    init(jsonObject, satoshisForPlay, winningHash, categories, author, illustrator){
         this.satoshisForPlay = satoshisForPlay;
         this.isWon = false;
         this.pay_address = "n4GJ33kc5QTW6V5fqhgeMHDQsVzjK21ckd";
-        this.author = royalty_accounts.author;
-        this.illustrator = royalty_accounts.illustrator;
+        this.author = author;
+        this.illustrator = illustrator;
         this.details = jsonObject;
-        this.satoshis = 10000;
+        this.satoshis = 100000;  
         this.plays = 0;
         this.hashtype = 1;
         this.winningHash = winningHash
+        this.categories = categories
     }
     incrementPlays(){
         this.plays = this.plays + 1; 
@@ -35,6 +36,9 @@ class ZasteGame extends Run.Jig {
     }
     setPayAddress(pa){
         this.pay_address = pa;
+    }
+    withdraw(){
+        this.satoshis = 0;
     }
 }
 

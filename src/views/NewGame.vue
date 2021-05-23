@@ -269,10 +269,12 @@
 
 <script>
 import { reactive, toRefs } from 'vue'
-import Run from "run-sdk"
+import {useStore} from "vuex"
 import SHA256 from "crypto-js/sha256"
 import hmacSHA512 from "crypto-js/hmac-sha512"
 import Base64 from "crypto-js/enc-base64"
+import RunStore from "./../store/RunStore.js"
+//import ZasteGame from "./../contracts/game.js"
 // import NewQuestion from './../components/games/form/NewQuestion.vue'
 // Game Owner Details 
 // Private Key: cTQPGSZiCXQD3UmrF4rKE6Gub3tmjYYvrjspU7BhXCYbg5f2r7AW GameTest.vue:53
@@ -281,7 +283,8 @@ import Base64 from "crypto-js/enc-base64"
 
 export default {
     setup () {
-        const run = new Run({network: "test", purse: "cQdpg2oTVvbeb47GzRxqn467RmJNp8rJzfoPMfkSBRyzqEdbJcSz", owner: 'cTQPGSZiCXQD3UmrF4rKE6Gub3tmjYYvrjspU7BhXCYbg5f2r7AW', trust: "*"})
+        const store = useStore();
+        const run = RunStore.useRun(store)
         let game = null;
         const state = reactive({
             // base_name: "b",
@@ -387,14 +390,17 @@ export default {
             console.log(gameDetails);
             this.gameDetails = gameDetails;
             let _winningHash = await this.getWinningHash();
-            let ZasteGame = await this.run.load(this.$store.state.gameCodeLocation);
-            const g = new ZasteGame(gameDetails, 12500, _winningHash.hash);
+            let l = this.$store.state.gameCodeLocation;
+            console.log({l});
+            let ZasteGame = await this.run.load(l);
+            //await ZasteGame.sync()
+            const g = new ZasteGame(gameDetails, 12500, _winningHash.hash, ["suggested"], this.run.purse.address, "");
             await g.sync();
             console.log("New Game Location:", g.location);
             this.gameId = g.location;
             alert(g.location);
             this.game = g;
-            const gameListClassOrigin = '3abf31ab5fe29789ea0c14737065787760f31779561ec7edd0b3d018a15fc73d_o1'
+            const gameListClassOrigin = this.$store.state.gameListCodeLocation
             const gameList = this.run.inventory.jigs.find((jig)=> jig.constructor.origin === gameListClassOrigin)
             gameList.addGame(g.location);
             await gameList.sync();

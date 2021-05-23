@@ -62,20 +62,13 @@
 <script>
 import { ref, reactive, toRefs } from 'vue'
 import {useStore} from "vuex"
-import Run from "run-sdk"
-import GameListBasic from "./../components/games/GameListBasic.vue"
+import RunStore from "../../store/RunStore.js"
+import GameListBasic from "./../../components/games/GameListBasic.vue"
 export default {
     async setup () {
         const store = useStore();
         store.commit("setLoading", true);
-        let run;
-        if(store.state.playerOwnerPrivKey !== "" && store.state.playerPursePrivKey !== ""){
-            run = new Run({network: "test", purse: store.state.playerPursePrivKey, owner: store.state.playerOwnerPrivKey, trust: "*"})
-        } else {
-            run =  new Run({network: "test", purse: "cQdpg2oTVvbeb47GzRxqn467RmJNp8rJzfoPMfkSBRyzqEdbJcSz", owner: "cQ6T6gHBeRfYXNQmqQW81UgvK1umM6zoRkgZGCpGqtzceyTpVMr8", trust: "*"})
-            store.commit("setPlayerOwnerPrivKey", run.owner.privkey);
-            store.commit("setPlayerPursePrivKey", run.purse.privkey);
-        }
+        let run = RunStore.useRun(store)
         let games = ref([]);
         const gameList = ref([])
        

@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
-import Run from "run-sdk"
+// import Run from "run-sdk"
+import RunStore from "./RunStore.js"
 import VuexPersistence from 'vuex-persist'
 const vuexLocal = new VuexPersistence({
   key: "sto0pid-games",
@@ -8,14 +9,24 @@ const vuexLocal = new VuexPersistence({
 
 export default createStore({
   state: {
-    gameListLocation: "3abf31ab5fe29789ea0c14737065787760f31779561ec7edd0b3d018a15fc73d_o2",
-    gameLocation: "0f99a65c223157e189ea50c20de00b982b3b93c914ae6d89771dd48e11f17d99_o2",
-    gameCodeLocation: "86950a0dd32d97c4642dd78b5429192b6eae702e6dccb344e0a7a8292d872013_o1",
-    answerCodeLocation: "a7b38a304f927eb90b11ffd1eecbba7e49f38fef0a5e5a58a95263a7daa7b8e3_o1",
+    gameListLocation_test: "3abf31ab5fe29789ea0c14737065787760f31779561ec7edd0b3d018a15fc73d_o1",
+    gameListLocation_live: "",
+    gameListLocation: "",
+    gameLocation_test: "0f99a65c223157e189ea50c20de00b982b3b93c914ae6d89771dd48e11f17d99_o2",
+    gameLocation_live: "",
+    gameLocation: "",
+    gameCodeLocation_test: "f5d2340786dbdc9a7ca25852fa1cf2b08137163a5bd4f22549727b84d94e39fb_o1",
+    gameCodeLocation_live: "",
+    gameCodeLocation: "",
+    answerCodeLocation_test: "a7b38a304f927eb90b11ffd1eecbba7e49f38fef0a5e5a58a95263a7daa7b8e3_o1",
+    answerCodeLocation_live: "",
+    answerCodeLocation: "",
     gameTitle: "",
     gameObject: null,
     questionIndex: 0,
     userAnswers: [],
+    playerPursePrivKey_live: "",
+    playerOwnerPrivKey_live: "",
     playerPursePrivKey: "",
     playerOwnerPrivKey: "",
     playerSeed: "",
@@ -27,7 +38,6 @@ export default createStore({
   },
   mutations: {
     setLoading(state, _loading){
-      console.log("Committing loading", _loading)
       state.loading = _loading
     },
     setLoadingText(state, text){
@@ -45,6 +55,16 @@ export default createStore({
     setGameLocation(state, location){
       state.gameLocation = location;
     },
+    setGameListLocation(state, location){
+      state.gameListLocation = location;
+    },
+    setGameCodeLocation(state, location){
+      state.gameCodeLocation = location;
+      console.log("set game code location:", location)
+    },
+    setAnswerCodeLocation(state, location){
+      state.answerCodeLocation = location;
+    },
     setGameTitle(state, title){
       state.gameTitle = title;
     },
@@ -57,6 +77,12 @@ export default createStore({
     },
     setPlayerPursePrivKey(state, key){
       state.playerPursePrivKey = key;
+    },
+    setPlayerOwnerPrivKey_live(state, key){
+      state.playerOwnerPrivKey_live = key;
+    },
+    setPlayerPursePrivKey_live(state, key){
+      state.playerPursePrivKey_live = key;
     },
     setQuestionIndex(state, index){
       state.questionIndex = index;
@@ -73,7 +99,7 @@ export default createStore({
   },
   actions: {
     async updateBalance({commit, state}){
-      const run = new Run({network: "test", purse: state.playerPursePrivKey, owner: state.playerOwnerPrivKey, trust: "*"})
+      const run = RunStore.useRun(this)
       let g = await run.load(state.gameLocation);
       await g.sync();
       commit("setGameObject", g);

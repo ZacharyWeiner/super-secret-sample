@@ -66,7 +66,7 @@
               </li> -->
             </ul>
             <a @click="playClick" class="w-full bg-white border border-transparent rounded-md py-4 px-8 flex items-center justify-center text-lg leading-6 font-medium text-cyan-700 hover:bg-cyan-50 md:px-10">
-              Play for Ð25
+              Create Answers for Ð25
             </a>
             <a @click="resetGame" class="block text-center text-base font-medium text-cyan-100 hover:text-white">
               reset your answer

@@ -34,6 +34,7 @@
                         <img class="h-16 w-16 rounded-full" :src="game.details.question_1.imgUrl" alt="" />
                         <div class="ml-3">
                             <p class="text-md font-medium text-gray-900">{{ game.details.title}}</p>
+                            <p class="text-xs font-medium text-gray-900">{{ game.location}}</p>
                             <button class="inline-flex items-center m-1 px-4 py-2 text-sm border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="gameDetails(game.location)"> 
                                 <EyeIcon class='h-4 w-4 m-2' />
                                 view details 
