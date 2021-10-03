@@ -9,6 +9,9 @@ const vuexLocal = new VuexPersistence({
 
 export default createStore({
   state: {
+    gameListCodeLocation_test: "3abf31ab5fe29789ea0c14737065787760f31779561ec7edd0b3d018a15fc73d_o1",
+    gameListCodeLocation_live: "",
+    gameListCodeLocation: "",
     gameListLocation_test: "3abf31ab5fe29789ea0c14737065787760f31779561ec7edd0b3d018a15fc73d_o1",
     gameListLocation_live: "",
     gameListLocation: "",
@@ -33,6 +36,7 @@ export default createStore({
     loadingText: "",
     currentUserAnswer: "",
     handcash_client_token:"",
+    handcash_app_id:"",
     network: "test",
     loading: false
   },
@@ -57,6 +61,11 @@ export default createStore({
     },
     setGameListLocation(state, location){
       state.gameListLocation = location;
+      console.log("Set gamelistlocation:", location)
+    },
+    setGameListCodeLocation(state, location){
+      state.gameListCodeLocation = location;
+      console.log("Set gamelistCodelocation:", location)
     },
     setGameCodeLocation(state, location){
       state.gameCodeLocation = location;
@@ -95,6 +104,9 @@ export default createStore({
     },
     clearUserAnswers(state){
       state.userAnswers = [];
+    },
+    setHandcashAppID(state, id){
+      state.handcash_app_id = id;
     }
   },
   actions: {

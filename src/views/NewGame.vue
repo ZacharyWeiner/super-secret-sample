@@ -42,6 +42,24 @@
                 </div>
             </div>
         </div>
+        <div class="title bg-white w-full rounded shadow p-2 m-2">
+            <!-- <label for="gameTitle" class="text-xl text-gray-800 font-extrabold"> Give The Game A Cover Photo</label> -->
+            
+            <div class="flex grid grid-cols-2">
+                <div>
+                    <div class='m-2 p-2'>
+                    <label for="win_text" class="block text-sm font-medium text-indigo-700">Win Text</label>
+                    <input v-model="winText" type="text" name="win_text" id="win_text" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    </div>   
+                </div>
+                <div>
+                    <div class='m-2 p-2'>
+                    <label for="first_name" class="block text-sm font-medium text-indigo-700">Lose Text</label>
+                    <input v-model="loseText" type="text" name="lose_text" id="lose_text" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    </div>    
+                </div>
+            </div>
+        </div>
         <div class=" bg-white rounded shadow m-2">
             <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
                 <span class="block text-indigo-600 p-4 m-4 ">Question 1 <span class="block text-gray-800 text-sm ">Add a question, image and answers </span></span>
@@ -318,8 +336,8 @@ export default {
             title: "Heavy that Lies the Crown",
             description: "This is a super cool description",
             backstory:"The backstory should set the stage for the questions to come.",
-            win_text: " You've defeted this shitfuck Grey Bones (now that youve won hes no longer a lord)",
-            loss_text: " You've been defeted in battle",
+            winText: " You've defeted this shitfuck Grey Bones (now that youve won hes no longer a lord)",
+            loseText: " You've been defeted in battle",
             gameImgUrl: "https://lh4.googleusercontent.com/W_zCAiQuxAWWZWeNvIi2OJbAaC9hqQlUw3xqRqmU6f0Vvf1pxsyD_RJDweo5_ALNeCcnedyvFLysKfu80p2AzY0eC8wOC6Qjzn224iFh",
             question_1_text: "Word has come that the evil army lead by Lord Grey Bones, approaches your kingdom. As the wise and noble ruler, you decide your first move.. ",
             question_1_answers:["Wake your generals from their slumber","Sound for the naval fleet","Consult the grand oracle for wisdom","Think nothing of it, as your kingdom is well fortified","Prepare your kingdom for a grand feast before the war to come"],
@@ -376,6 +394,8 @@ export default {
             gameDetails['backstory'] = this.backstory;
             gameDetails['description'] = this.description;
             gameDetails['gameImgUrl'] = this.gameImgUrl;
+            gameDetails['winText'] = this.winText;
+            gameDetails['loseText'] = this.loseText;
             let question = {questionText: this.question_1_text, answers: this.question_1_answers, imgUrl: this.q1ImageUrl}
             gameDetails["question_1"] = question;
             let question2 = {questionText: this.question_2_text, answers: this.question_2_answers, imgUrl: this.q2ImageUrl}
@@ -400,8 +420,9 @@ export default {
             this.gameId = g.location;
             alert(g.location);
             this.game = g;
-            const gameListClassOrigin = this.$store.state.gameListCodeLocation
-            const gameList = this.run.inventory.jigs.find((jig)=> jig.constructor.origin === gameListClassOrigin)
+            const gameListLocation = this.$store.state.gameListLocation
+            const gameList = await this.run.load(gameListLocation)
+            await gameList.sync();
             gameList.addGame(g.location);
             await gameList.sync();
             console.log({gameList})

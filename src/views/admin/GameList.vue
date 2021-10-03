@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { ref, reactive, toRefs } from 'vue'
+import { ref, reactive, toRefs, onMounted } from 'vue'
 import {useStore} from "vuex"
 import RunStore from "../../store/RunStore.js"
 import GameListBasic from "./../../components/games/GameListBasic.vue"
@@ -70,7 +70,18 @@ export default {
         store.commit("setLoading", true);
         let run = RunStore.useRun(store)
         let games = ref([]);
-        const gameList = ref([])
+        //const gameList = ref([])
+
+        const loadList = async(_run, _store) => {
+            _run.activate()
+            console.log("Run loaded with purse address:", _run.purse.address);
+            let lc = _store.state.gameListLocation
+            console.log(lc)
+            //let gameList ;
+            await _run.load(lc)
+            console.log("Completed Load")
+            
+        }
        
         const state = reactive({
             count: 0,
@@ -79,37 +90,52 @@ export default {
             toAdd: "",
             toRemove: "",
         })
+        onMounted(async()=>{await loadList(run, store)})
         
         return {
             ...toRefs(state),
             run,
-            gameList,
+            //gameList,
             games,
-            store
+            store,
+            loadList
         }
     },
     async mounted(){
-        console.log("Run loaded with purse address:", this.run.purse.address);
-        const gameList = await  this.run.load(this.$store.state.gameListLocation);
-        console.log(gameList);
-        await gameList.sync();
-        console.log(gameList.gameList);
-        this.list = gameList.gameList;
-        gameList.gameList.forEach(async (g) => {
-            let hydrated = await this.run.load(g);
-            this.games.push(hydrated);
-            if(this.games.length === gameList.gameList.length){
-                this.$store.commit("setLoading", false);
-            }
+        // console.log("Run loaded with purse address:", this.run.purse.address);
+        // let _run = RunStore.useRun(this.$store)
+        // _run.activate()
+        // let lc = this.$store.state.gameListLocation
+        // let gameList;
+        // try{
+        //  gameList  = await  _run.load(lc);
+        // }catch(err){console.log({err})}
+        // console.log(gameList);
+        // await gameList.sync();
+        // console.log(gameList.gameList);
+        // this.list = gameList.gameList;
+        // console.log(gameList.gameList.length)
+        // if(gameList.gameList.length == 0){
+        //     this.$store.commit("setLoading", false);
+        //     return
+        // }
+        // gameList.gameList.forEach(async (g) => {
+        //     let hydrated = await this.run.load(g);
+        //     this.games.push(hydrated);
+        //     if(this.games.length === gameList.gameList.length){
+        //         this.$store.commit("setLoading", false);
+        //     }
 
-        })
+        // })
     },
     methods:{
         
         
         async addToList(){
-            this.gameList.addgame(this.toAdd);
-            this.gameList.sync();
+            let gl = await this.run.load(this.$store.state.gameListLocation)
+            await gl.sync()
+            gl.addGame(this.toAdd);
+            await gl.sync();
         },
         async removeFromList(){
             this.gameList.removeGame(this.toRemove);

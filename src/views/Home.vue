@@ -10,7 +10,7 @@
        <p class="max-w-xl mt-5 mx-auto text-xl text-white">Each game is a unique journey. </p>
         <p class="max-w-xl mt-5 mx-auto text-xl text-white">There are many answer combos, only one unlocks the game.</p>
       <div class="mt-12 gap-x-6 gap-y-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-16">
-        <GameCardList :games="games.slice(1, 5)" />
+        <GameCardList :games="games" />
       </div>
     </div>
   </div>
@@ -27,14 +27,6 @@
     </div>
   </div>
   <NFT />
-
-
-
-
-
-
-
-  
 </div>
 </template>
 
@@ -44,7 +36,7 @@
 <script>
 // @ is an alias to /src
 //import HelloWorld from '@/components/HelloWorld.vue'
-import { ref, reactive, toRefs } from 'vue'
+import { ref, reactive, toRefs, onMounted } from 'vue'
 //import Run from 'run-sdk'
 import {useStore} from 'vuex';
 import Hero from "./../components/home/Hero.vue"
@@ -69,65 +61,83 @@ export default {
     store.dispatch("resetGame");
     let run = RunStore.useRun(store);
     const games = ref([]);
+    let locationList = [];
     const state = reactive({
-        gameList: []
+        count: 0
         
-    });
-    console.log(state);
+    })
+    const syncGame = async (_run, _location) => {
+      _run.activate()
+      let g = await _run.load(_location)
+      console.log("Loaded Game: ", g)
+      try{
+        await g.sync()
+        games.value.push(g);
+      }catch (err){
+        console.log({err})
+      }
+    }
+    const syncGames = async (_run) => {
+      let stop = locationList.length > 8 ? 8 : locationList.length
+      let iterations = 0;
+      while(iterations < stop){
+        let _gL = locationList[iterations]
+        console.log("syncGames - iteration:", iterations, "Location: ", _gL)
+        iterations = iterations + 1; 
+        await syncGame(_run, _gL)
+      }
+    }
+    const hydrateGames = async (_run, _store) =>{
+      _run.activate()
+      console.log("Awaiting Load of Game List:", _store.state.gameListLocation)
+      let _listObj = await _run.load(_store.state.gameListLocation); 
+      console.log("Awaitng Sync of Game List:", _store.state.gameListLocation)
+      await _listObj.sync(); 
+      console.log("Sync of Game List:", _store.state.gameListLocation, "Complete")
+      let _gameList = _listObj.gameList
+      console.log(_gameList.length)
+      locationList = []
+      _gameList.forEach(_location => {
+        console.log({_location})
+        locationList.push(_location)
+      });
+      syncGames(_run);
+      _store.commit("setLoading", false);
+    } 
+
+    onMounted(async ()=> await hydrateGames(run, store))
     return {
       ...toRefs(state),
       games,
-      run
+      run,
+      hydrateGames,
+      syncGame
     }
   },
   methods:{
-    innards() {
-      // var classobj = Array;
-        if(this.jigs.length > 0){
-         console.log(Object.getOwnPropertyNames(this.jigs[0]));
-        var obj = this.jigs[0];
-         var result = [];
-          for (var id in obj) {
-            try {
-              if (typeof(obj[id]) == "function") {
-                result.push(id + ": " + obj[id].toString());
-              }
-            } catch (err) {
-              result.push(id + ": inaccessible");
-            }
-          }
-          console.log(result);
-        }
-        return ""
-      },
-      async hydrateGames(){
-        try{
-          let _run = RunStore.useRun(this.$store);
-          _run.activate();
-          console.log("Trying to load game list:", this.$store.state.gameListLocation);
-        const gameList =  await _run.load(this.$store.state.gameListLocation);
-        await gameList.sync();
-        this.gameList = gameList.gameList;
-        console.log(gameList);
-        //let _games = [];
-        await this.gameList.forEach(async (g) => {
-          let ga = await _run.load(g);
-          await ga.sync();
-          this.games.push(ga);
-          console.log(ga)
-        })
-        //this.games = _games;
-        this.$store.commit("setLoading", false);
-        }
-        catch(err){
-          this.$store.commit("setLoading", false);
-          console.log(err);
-        }
-    },
-  },
-  async mounted(){
-    await this.hydrateGames();
-    
+    //   async hydrateGames(){
+    //     try{
+    //       let _run = RunStore.useRun(this.$store);
+    //       _run.activate();
+    //       console.log("Trying to load game list:", this.$store.state.gameListLocation);
+    //     const gameList =  await _run.load(this.$store.state.gameListLocation);
+    //     await gameList.sync();
+    //     this.gameList = gameList.gameList;
+    //     console.log(gameList);
+    //     await this.gameList.forEach(async (g) => {
+    //       let ga = await _run.load(g);
+    //       await ga.sync();
+    //       this.games.push(ga);
+    //       console.log(ga)
+    //     })
+    //     //this.games = _games;
+    //     this.$store.commit("setLoading", false);
+    //     }
+    //     catch(err){
+    //       this.$store.commit("setLoading", false);
+    //       console.log(err);
+    //     }
+    // },
   },
   components: {
     Hero,

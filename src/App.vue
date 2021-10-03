@@ -14,10 +14,10 @@
             <router-link to="/play-game" class="no-underline text-blue-dark text-md flex-1 text-center sm:ml-4">Play </router-link> |
             <router-link to="/profile" class="no-underline text-blue-dark text-md flex-1 text-center sm:ml-4">Wallet</router-link> 
           </div> -->
-          {{ $browserDetect }}
-          <div v-if="!isSafari">
+          <!-- {{ $browserDetect }}
+          <div v-if="!isSafari"> -->
             <router-view/>
-          </div>
+          <!-- </div>
           <div v-else>
             <div class="lg:text-center">
               <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">We Apologize</h2>
@@ -28,7 +28,7 @@
                 Please Try Chrome or Firefox. 
               </p>
             </div>
-          </div>
+          </div> -->
           <Footer />
         </div>
       </template>

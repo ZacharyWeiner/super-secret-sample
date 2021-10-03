@@ -19,7 +19,13 @@ export default {
         console.log("Current Route:", router.currentRoute)
         console.log(router.currentRoute.value.query.authToken)
         store.commit("setHandcashClientToken", router.currentRoute.value.query.authToken);
-        const handCashConnect = new HandCashConnect('60a4315c49a57e0ba0aa357a');
+        let handCashConnect = null;
+        if(store.state.handcash_app_id !== ""){
+            handCashConnect = new HandCashConnect(store.state.handcash_app_id);
+        }else{
+             handCashConnect = new HandCashConnect('60a4315c49a57e0ba0aa357a');
+        }
+        
         const account = handCashConnect.getAccountFromAuthToken(store.state.handcash_client_token);
         console.log("Wallet:", account.wallet)
         const { publicProfile } = await account.profile.getCurrentProfile();

@@ -14,11 +14,17 @@ import CreateGame from "./../views/admin/CreateGame.vue"
 import CreateGameList from "./../views/admin/CreateGameList.vue"
 import CreateAnswers from "./../views/admin/CreateAnswers.vue"
 import GameList from '../views/admin/GameList.vue';
+import PewTest from "../views/PewTest.vue"
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/pew-test',
+    name: 'Pew Test',
+    component: PewTest
   },
   {
     path: '/login/success',
