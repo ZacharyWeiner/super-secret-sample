@@ -1,6 +1,5 @@
 <template>
 <div> 
-
     <div class="flex w-full grid  p-2 m-2">
         <div class="p-2 m-2">
             <Listbox as="div" v-model="selectedFace">
@@ -258,6 +257,19 @@
     <div class="w-full">
         <div class="text-4xl"> Total Rarity: {{totalRarity}} </div>
     </div>
+    <div class="w-full">
+        <div class="grid grid-cols-3 items-center">
+            <div class="col-span-1"></div>
+            <div class="col-span-1">
+                Applaud the Score! 
+                
+            </div>
+            <div class='col-span-1' style="margin-top:-115px; margin-left:-144px"> 
+                <clappy-button touserid="278" ></clappy-button>
+            </div>
+        </div>
+    </div>
+        
 </div>
 </template>
 
@@ -645,6 +657,9 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
+#clappy-button-wrapper{
+  height: 30px;
+  width:30px;
+}
 </style>
