@@ -271,15 +271,43 @@
         </div>
     </div>
     <div class='w-full p-2 m-2'>
-        Send Me BSV / TSC / ETC...: 
+        Send Me BSV / TSC / ETC...: <span class='bold'>1NVZHRegc5nYXBthaZ51FfX5MYY1D8m4er </span>
     </div>
       <div class='w-full pb-2'>
-       1NVZHRegc5nYXBthaZ51FfX5MYY1D8m4er
+       Send Me NFTs: ZackWins@relayx.io
         
     </div>
-     <div class='w-full p-2 m-2'>
-        Send Me NFTs: ZackWins@relayx.io
+     <div class='w-full p-2 m-2 flex' >
+         <div class="flex flex-col-reverse flex-grow">
+            <div> 10 percentile = 88.3959259259 </div>
+            <div> 20 percentile = 89.5555555556 </div>
+            <div> 30 percentile = 90.5655555556 </div>
+            <div> 40 percentile = 91.4333333333 </div>
+            <div> 50 percentile = 92.1962962963 </div>
+            <div> 60 percentile = 93.7540104653 </div>
+            <div> 70 percentile = 96.3939063669 </div>
+            <div> 80 percentile = 98.0198875076 </div>
+            <div> 90 percentile = 99.114092422 </div>
+            <div> 95 percentile = 99.550795326961435 </div>
+            <div> 99 percentile = 99.78689115635629 </div>
+         </div>
+         <!-- <div class="flex flex-grow"></div> -->
+          <!-- <div class="flex flex-col-reverse">
+            <div> 10 percentile = 88.3959259259 </div>
+            <div> 20 percentile = 89.5555555556 </div>
+            <div> 30 percentile = 90.5655555556 </div>
+            <div> 40 percentile = 91.4333333333 </div>
+            <div> 50 percentile = 92.1962962963 </div>
+            <div> 60 percentile = 93.7540104653 </div>
+            <div> 70 percentile = 96.3939063669 </div>
+            <div> 80 percentile = 98.0198875076 </div>
+            <div> 90 percentile = 99.114092422 </div>
+            <div> 95 percentile = 99.550795326961435 </div>
+            <div> 99 percentile = 99.78689115635629 </div>
+         </div> -->
     </div>
+
+  
         
 </div>
 </template>
