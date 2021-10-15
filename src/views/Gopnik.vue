@@ -314,7 +314,14 @@
             <div> 99 percentile = 99.78689115635629 </div>
          </div> -->
     </div>
-
+    <div class='w-full flex'>
+        <div class='flex-grow'></div>
+        <div class='flex-grow'>
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScRroxTRMWORyknNnya4Qgj86UK0mdXwJxK0_Tkmxqc4z-bRg/viewform?embedded=true" width="640" height="1893" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+        </div>
+        <div class='flex-grow'></div>
+        
+    </div>
   
         
 </div>
