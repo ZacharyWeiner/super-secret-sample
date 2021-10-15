@@ -741,6 +741,19 @@ export default {
                     _description = _description +  "+1 Matching Outfit"
                 }
             })
+            console.log(this.selectedHead.name);
+            if(this.selectedHead.name &&  (this.selectedHead.name.includes('Slav') || this.selectedHead.name ==='Beanie')){
+                console.log("Black hat")
+                if(this.selectedUpperbody.name && this.selectedUpperbody.name.includes('Black')){
+                    console.log("Black hat & top")
+                    _score = _score +1; 
+                    _description = _description +  "+1 the Hat To Match"
+                    if(this.selectedPants.name && this.selectedPants.name.includes('Black')){
+                         _score = _score +1; 
+                        _description = _description +  "+1 Black on Black on Black"
+                    }
+                }
+            }
             return {score: _score, description: _description}; 
         },
         holding(){
