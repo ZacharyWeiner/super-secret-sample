@@ -1,5 +1,8 @@
 <template>
 <div> 
+     <div class="flex w-full grid  p-2 m-2">
+        <div class='text-4xl text-indigo-700'>Tell Me Bout Your Gopnik </div>
+     </div>
     <div class="flex w-full grid  p-2 m-2">
         <div class="p-2 m-2">
             <Listbox as="div" v-model="selectedFace">
@@ -33,7 +36,7 @@
             </Listbox>    
         </div>
     </div>
-    <div class="flex w-full grid grid-cols-3 p-2 m-2">
+    <div class=" w-full md:flex md:grid grid-cols-3 p-2 m-2">
         <div class="col-span-1 p-2 m-2">
             <Listbox as="div" v-model="selectedBackground">
                 <ListboxLabel class="block text-sm font-medium text-gray-700">
@@ -128,8 +131,8 @@
             </Listbox> 
         </div>
     </div>
-     <div class="flex w-full grid grid-cols-4 p-2 m-2">
-         <div class="col-span-1 p-2 m-2">
+     <div class="w-full md:flex md:grid md:grid-cols-4 p-2 m-2 shadow-xl">
+         <div class=" p-2 m-2">
              <Listbox as="div" v-model="selectedHands">
                 <ListboxLabel class="block text-sm font-medium text-gray-700">
                 Hands: {{selectedHands.rarity}}
@@ -254,10 +257,10 @@
             </Listbox> 
          </div>
      </div>
-    <div class="w-full flex mb-4">
-        <div class="text-4xl flex-grow"> UNIQ Score: <br/> <span class='text-2xl'>{{totalRarity}} </span> </div>
-        <div class="text-4xl flex-grow"> Cool Score: <br/> <span class='text-2xl'>{{coolScore.score}} </span> </div>
-        <div class="text-4xl flex-grow"> Avg Rarez: <br/> <span class='text-2xl'>{{averageRarity}} </span> </div>
+    <div class="w-full md:flex mb-4 shadow-xl ">
+        <div class="text-3xl flex-grow text-gray-700 p-1 m-1 "> UNIQ Score: <br/> <span class='text-4xl text-indigo-700'>{{totalRarity}} </span> </div>
+        <div class="text-3xl flex-grow p-1 m-1 "> Dopeness Score: <br/> <span class='text-4xl text-indigo-700'>{{coolScore.score}} </span> </div>
+        <div class="text-3xl flex-grow p-1 m-1 "> Avg Rarez: <br/> <span class='text-4xl text-indigo-700'>{{averageRarity}} </span> </div>
     </div>
 
     <div class="w-full">
