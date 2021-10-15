@@ -254,20 +254,31 @@
             </Listbox> 
          </div>
      </div>
-    <div class="w-full">
-        <div class="text-4xl"> Total Rarity: {{totalRarity}} </div>
+    <div class="w-full flex mb-4">
+        <div class="text-4xl flex-grow"> UNIQ Score: {{totalRarity}} </div>
+        <div class="text-4xl flex-grow"> Avg Rarez: {{averageRarity}} </div>
     </div>
     <div class="w-full">
         <div class="grid grid-cols-3 items-center">
             <div class="col-span-1"></div>
             <div class="col-span-1">
-                Applaud the Score! 
+                Tips Me Plz<i calss="fa fa-right-arrow"></i>
                 
             </div>
             <div class='col-span-1' style="margin-top:-115px; margin-left:-144px"> 
                 <clappy-button touserid="278" ></clappy-button>
             </div>
         </div>
+    </div>
+    <div class='w-full p-2 m-2'>
+        Send Me BSV / TSC / ETC...: 
+    </div>
+      <div class='w-full pb-2'>
+       1NVZHRegc5nYXBthaZ51FfX5MYY1D8m4er
+        
+    </div>
+     <div class='w-full p-2 m-2'>
+        Send Me NFTs: ZackWins@relayx.io
     </div>
         
 </div>
@@ -652,6 +663,9 @@ export default {
     computed: {
         totalRarity(){
             return (100 - (( this.selectedBackground.rarity * this.selectedPants.rarity  * this.selectedUpperbody.rarity * this.selectedHands.rarity * this.selectedFace.rarity * this.selectedFaceElm.rarity * this.selectedHead.rarity * this.selectedGlasses.rarity) * 10000000000))
+        },
+        averageRarity(){
+            return 100 - (100 * ((this.selectedBackground.rarity + this.selectedPants.rarity  + this.selectedUpperbody.rarity + this.selectedHands.rarity + this.selectedFace.rarity + this.selectedFaceElm.rarity + this.selectedHead.rarity + this.selectedGlasses.rarity) / 9));
         }
     }
 }
