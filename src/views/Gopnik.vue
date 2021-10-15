@@ -255,9 +255,11 @@
          </div>
      </div>
     <div class="w-full flex mb-4">
-        <div class="text-4xl flex-grow"> UNIQ Score: {{totalRarity}} </div>
-        <div class="text-4xl flex-grow"> Avg Rarez: {{averageRarity}} </div>
+        <div class="text-4xl flex-grow"> UNIQ Score: <br/> <span class='text-2xl'>{{totalRarity}} </span> </div>
+        <div class="text-4xl flex-grow"> Cool Score: <br/> <span class='text-2xl'>{{coolScore.score}} </span> </div>
+        <div class="text-4xl flex-grow"> Avg Rarez: <br/> <span class='text-2xl'>{{averageRarity}} </span> </div>
     </div>
+
     <div class="w-full">
         <div class="grid grid-cols-3 items-center">
             <div class="col-span-1"></div>
@@ -270,15 +272,18 @@
             </div>
         </div>
     </div>
-    <div class='w-full p-2 m-2'>
+        <div> {{coolScore.description}}</div>
+    <div class='w-full p-2 m-2 pt-6'>
         Send Me BSV / TSC / ETC...: <span class='bold'>1NVZHRegc5nYXBthaZ51FfX5MYY1D8m4er </span>
     </div>
       <div class='w-full pb-2'>
        Send Me NFTs: ZackWins@relayx.io
         
     </div>
-     <div class='w-full p-2 m-2 flex' >
+     <div class='w-full p-2 m-2 ' >
+          <div class="text-3xl undeline pb-4"> The Secret Legend </div>
          <div class="flex flex-col-reverse flex-grow">
+            
             <div> 10 percentile = 88.3959259259 </div>
             <div> 20 percentile = 89.5555555556 </div>
             <div> 30 percentile = 90.5655555556 </div>
@@ -694,6 +699,57 @@ export default {
         },
         averageRarity(){
             return 100 - (100 * ((this.selectedBackground.rarity + this.selectedPants.rarity  + this.selectedUpperbody.rarity + this.selectedHands.rarity + this.selectedFace.rarity + this.selectedFaceElm.rarity + this.selectedHead.rarity + this.selectedGlasses.rarity) / 9));
+        },
+        coolScore(){
+            let _totalCool = {}
+            let _description = ""
+            let result = this.isMatching()
+            _totalCool.score = result.score; 
+            _description = _description + result.description;
+            
+            result = this.holding()
+            _totalCool.score = _totalCool.score + result.score;
+            _description = _description + result.description;
+
+            result = this.glasses()
+            _totalCool.score = _totalCool.score + result.score;
+            _description = _description + result.description;
+
+            _totalCool.description = _description;
+            console.log(_description)
+            return _totalCool
+        },
+    },
+    methods:{
+        isMatching(){
+            let _score = 0; 
+            let _description = ""
+            let _pantsArr = this.selectedPants ? this.selectedPants.name.split(' ') : [];
+            _pantsArr.forEach((w)=> {
+                if(this.selectedUpperbody.name && this.selectedUpperbody.name.includes(w)){
+                    _score = _score +1; 
+                    _description = _description +  "+1 Matching Outfit"
+                }
+            })
+            return {score: _score, description: _description}; 
+        },
+        holding(){
+             let _score = 0; 
+            let _description = ""
+            if(this.selectedHands.name && this.selectedHands.name.includes('AK')){
+                _score = _score + 1;
+                _description = _description = " +1 Has AK" 
+            }
+            return {score: _score, description: _description};
+        },
+        glasses(){
+             let _score = 0; 
+            let _description = ""
+            if(this.selectedGlasses.name && this.selectedGlasses.name.includes('Dolge')){
+                _score = _score + 1;
+                _description = _description = " +1 Has Dolge" 
+            }
+            return {score: _score, description: _description};
         }
     }
 }
