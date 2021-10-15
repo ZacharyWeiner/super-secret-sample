@@ -292,12 +292,7 @@ import SHA256 from "crypto-js/sha256"
 import hmacSHA512 from "crypto-js/hmac-sha512"
 import Base64 from "crypto-js/enc-base64"
 import RunStore from "./../store/RunStore.js"
-//import ZasteGame from "./../contracts/game.js"
-// import NewQuestion from './../components/games/form/NewQuestion.vue'
-// Game Owner Details 
-// Private Key: cTQPGSZiCXQD3UmrF4rKE6Gub3tmjYYvrjspU7BhXCYbg5f2r7AW GameTest.vue:53
-// Public Key: 02c08977652fb7b018598bbdcf7c760390d742befbf6b66f00aaae8dff7f6945ea GameTest.vue:54
-// Adddress: n4GJ33kc5QTW6V5fqhgeMHDQsVzjK21ckd
+
 
 export default {
     setup () {
@@ -333,7 +328,7 @@ export default {
             // q5ImageUrl: "",
             gameId: "",
 
-            title: "Heavy that Lies the Crown",
+            title: "Heavy that Lies the Crown 222",
             description: "This is a super cool description",
             backstory:"The backstory should set the stage for the questions to come.",
             winText: " You've defeted this shitfuck Grey Bones (now that youve won hes no longer a lord)",
@@ -388,7 +383,7 @@ export default {
             this.q5AnswerText = ""
         },
          async createGame(){
-            
+            await this.run.sync();
             await this.run.inventory.sync();
             let gameDetails = {title: this.title}; 
             gameDetails['backstory'] = this.backstory;
@@ -416,6 +411,7 @@ export default {
             //await ZasteGame.sync()
             const g = new ZasteGame(gameDetails, 12500, _winningHash.hash, ["suggested"], this.run.purse.address, "");
             await g.sync();
+            await this.run.sync();
             console.log("New Game Location:", g.location);
             this.gameId = g.location;
             alert(g.location);
@@ -423,8 +419,10 @@ export default {
             const gameListLocation = this.$store.state.gameListLocation
             const gameList = await this.run.load(gameListLocation)
             await gameList.sync();
+            console.log("Game List:", gameList)
             gameList.addGame(g.location);
             await gameList.sync();
+            await this.run.sync();
             console.log({gameList})
             await this.createAnswers();
             

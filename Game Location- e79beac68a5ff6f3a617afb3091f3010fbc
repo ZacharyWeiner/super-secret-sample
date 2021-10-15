@@ -27,3 +27,63 @@ dLJPs5aheD0vV2UhkuxzVNeqgtpwNt5gvSXPwJF+4Mja9/eASZYZWKHExxZvDbzM2zz0jaB4W9MLbF75
 
 
 shrug 
+
+
+
+
+6a1c79d3753fa9a96c7610df7987e3a7d739959074a2b9a348162cc39a2d2e18_o1
+0: "Wake your generals from their slumber"
+​​
+1: "Hide half of all food supplies for later battles"
+​​
+2: "Send word to attack on all fronts with full force"
+​​
+3: "Call for archers to use fire arrows"
+​​
+4: "Pray to the many gods for help"
+NewGame.vue:449
+Object { toHash: "Wake your generals from their slumberHide half of all food supplies for later battlesSend word to attack on all fronts with full forceCall for archers to use fire arrowsPray to the many gods for help" }
+NewGame.vue:450
+Object { ht: 0, hash: "9IorLww6cGobASE2a87VVdmh4Yoq20Wcte7rE7CDAglPBJh6yC8gipHtN27lwNzSNboCl/1LtpxcbWyfdcEONQ==" }
+NewGame.vue:453
+Object { l: "f5d2340786dbdc9a7ca25852fa1cf2b08137163a5bd4f22549727b84d94e39fb_o1" }
+
+
+
+
+
+Object { title: "Heavy that Lies the Crown 333", backstory: "The backstory should set the stage for the questions to come.", description: "This is a super cool description", gameImgUrl: "https://lh4.googleusercontent.com/W_zCAiQuxAWWZWeNvIi2OJbAaC…vf1pxsyD_RJDweo5_ALNeCcnedyvFLysKfu80p2AzY0eC8wOC6Qjzn224iFh", winText: " You've defeted this shitfuck Grey Bones (now that youve won hes no longer a lord)", loseText: " You've been defeted in battle", question_1: {…}, question_2: {…}, question_3: {…}, question_4: {…}, … }
+NewGame.vue:405
+3 NewGame.vue:457
+4 2 NewGame.vue:457
+3 NewGame.vue:457
+2 NewGame.vue:457
+Object { ht: 0 }
+NewGame.vue:445
+Object { winningAnswers: (5) […] }
+​
+winningAnswers: Array(5) [ "Think nothing of it, as your kingdom is well fortified", "We have plenty of food for the coming winter", "Prepare a trap for the enemy by hiding your forces to appear defenseless", … ]
+​​
+0: "Think nothing of it, as your kingdom is well fortified"
+​​
+1: "We have plenty of food for the coming winter"
+​​
+2: "Prepare a trap for the enemy by hiding your forces to appear defenseless"
+​​
+3: "Task a horseman with delivering a plea to your allies for assistance"
+​​
+4: "Ready your horse to join the battle"
+​​
+length: 5
+​​
+<prototype>: Array []
+​
+<prototype>: Object { … }
+NewGame.vue:447
+Object { toHash: "Think nothing of it, as your kingdom is well fortifiedWe have plenty of food for the coming winterPrepare a trap for the enemy by hiding your forces to appear defenselessTask a horseman with delivering a plea to your allies for assistanceReady your horse to join the battle" }
+NewGame.vue:448
+Object { ht: 0, hash: "/sRtWgS1ZopkPk+8B00sQ2uKspwRNfhxHR6EAPi4S8y5GbkYH/kKc8Un8QXVfU+62e2TJsI1fj+cv/JdZL8Qjw==" }
+NewGame.vue:451
+Object { l: "88b4cf8d3fc2cc8d8df7ac32d3c8df63c36b471bd8f7a642b224a7fe981e9bdd_o1" }
+NewGame.vue:409
+New Game Location: 6593407dc3c1faba29293174c8048d04c64252bef6bc4705df74d23fb2def181_o1

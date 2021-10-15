@@ -15,11 +15,17 @@ import CreateGameList from "./../views/admin/CreateGameList.vue"
 import CreateAnswers from "./../views/admin/CreateAnswers.vue"
 import GameList from '../views/admin/GameList.vue';
 import PewTest from "../views/PewTest.vue"
+import Gopnik from "../views/Gopnik.vue"
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/gopnik',
+    name: 'Gopnik',
+    component: Gopnik
   },
   {
     path: '/pew-test',

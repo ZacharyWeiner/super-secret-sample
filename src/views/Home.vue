@@ -34,8 +34,6 @@
 
 
 <script>
-// @ is an alias to /src
-//import HelloWorld from '@/components/HelloWorld.vue'
 import { ref, reactive, toRefs, onMounted } from 'vue'
 //import Run from 'run-sdk'
 import {useStore} from 'vuex';
@@ -46,11 +44,6 @@ import Steps from './../components/shared/Steps.vue';
 import RunStore from "./../store/RunStore.js"
 //import {ref} from 'vue';
 
-// class SimpleStore extends Run.Jig {
-//   set(value) {
-//     this.value = value
-//   }
-// }
 
 
 
@@ -115,29 +108,7 @@ export default {
     }
   },
   methods:{
-    //   async hydrateGames(){
-    //     try{
-    //       let _run = RunStore.useRun(this.$store);
-    //       _run.activate();
-    //       console.log("Trying to load game list:", this.$store.state.gameListLocation);
-    //     const gameList =  await _run.load(this.$store.state.gameListLocation);
-    //     await gameList.sync();
-    //     this.gameList = gameList.gameList;
-    //     console.log(gameList);
-    //     await this.gameList.forEach(async (g) => {
-    //       let ga = await _run.load(g);
-    //       await ga.sync();
-    //       this.games.push(ga);
-    //       console.log(ga)
-    //     })
-    //     //this.games = _games;
-    //     this.$store.commit("setLoading", false);
-    //     }
-    //     catch(err){
-    //       this.$store.commit("setLoading", false);
-    //       console.log(err);
-    //     }
-    // },
+
   },
   components: {
     Hero,

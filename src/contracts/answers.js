@@ -1,7 +1,7 @@
 import Run from "run-sdk"
 class Answers extends Run.Jig{
     init(gameId, answers, sats, winAddress){
-        this.owner = "n4GJ33kc5QTW6V5fqhgeMHDQsVzjK21ckd";
+        this.owner = "mnjw8DT8BDvFYL3cy2tspeKjWrBdz6DgXH";
         this.answers = answers;
         this.gameId = gameId;
         

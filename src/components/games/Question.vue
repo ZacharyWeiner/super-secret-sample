@@ -49,49 +49,53 @@ export default {
     computed:{
         questionText(){
             let text = "";
-            switch(this.$store.state.questionIndex){
-                case 0:
-                    text =  this.gameObject.details.question_1.questionText;
-                    break;
-                case 1:
-                    text =  this.gameObject.details.question_2.questionText;
-                    break;
-                case 2:
-                    text =  this.gameObject.details.question_3.questionText;
-                    break;
-                case 3:
-                    text =  this.gameObject.details.question_4.questionText;
-                    break;
-                case 4:
-                    text =  this.gameObject.details.question_5.questionText;
-                    break;
-                default: 
-                    text = ""
-                    break;
+            if(this.gameObject !==  null){
+                switch(this.$store.state.questionIndex){
+                    case 0:
+                        text =  this.gameObject.details.question_1.questionText;
+                        break;
+                    case 1:
+                        text =  this.gameObject.details.question_2.questionText;
+                        break;
+                    case 2:
+                        text =  this.gameObject.details.question_3.questionText;
+                        break;
+                    case 3:
+                        text =  this.gameObject.details.question_4.questionText;
+                        break;
+                    case 4:
+                        text =  this.gameObject.details.question_5.questionText;
+                        break;
+                    default: 
+                        text = ""
+                        break;
+                }
             }
             return text;
         },
         questionImage(){
             let text = "";
-            switch(this.$store.state.questionIndex){
-                case 0:
-                    text =  this.gameObject.details.question_1.imgUrl;
-                    break;
-                case 1:
-                    text =  this.gameObject.details.question_2.imgUrl;
-                    break;
-                case 2:
-                    text =  this.gameObject.details.question_3.imgUrl;
-                    break;
-                case 3:
-                    text =  this.gameObject.details.question_4.imgUrl;
-                    break;
-                case 4:
-                    text =  this.gameObject.details.question_5.imgUrl;
-                    break;
-                default: 
-                    text = ""
-                    break;
+            if(this.gameObject !==  null){
+                switch(this.$store.state.questionIndex){
+                    case 0:
+                        text =  this.gameObject.details.question_1.imgUrl;
+                        break;
+                    case 1:
+                        text =  this.gameObject.details.question_2.imgUrl;
+                        break;
+                    case 2:
+                        text =  this.gameObject.details.question_3.imgUrl;
+                        break;
+                    case 3:
+                        text =  this.gameObject.details.question_4.imgUrl;
+                        break;
+                    case 4:
+                        text =  this.gameObject.details.question_5.imgUrl;
+                        break;
+                    default: 
+                        text = ""
+                        break;
+                }
             }
             return text;
         },

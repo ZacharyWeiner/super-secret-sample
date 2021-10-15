@@ -96,7 +96,8 @@ export default {
         let run = RunStore.useRun(store);
         let game = ref(null);
         let router = useRouter();
-        console.log("Current Route:", router.currentRoute.value.params.id)
+        const isLocal = true;
+        console.log("Current Route:", router.currentRoute.value.query.id)
         if(router.currentRoute.value.query.id){
             store.commit("setGameLocation", router.currentRoute.value.query.id);
         }
@@ -116,7 +117,8 @@ export default {
         return {
             ...toRefs(state),
             run,
-            game
+            game,
+            isLocal,
         }
     },
     async mounted(){
@@ -187,10 +189,13 @@ export default {
             this.$store.dispatch("updateBalance");
         },
         async postLocation(location){
-            
+            let _url = "";
+            console.log("Answers Location:", location);
+            console.log("Game Location:", this.$store.state.gameObject.location);
+            if(this.isLocal){_url = 'http://localhost:3000/check-win-test'}else {_url = 'https://rocky-depths-28908.herokuapp.com/check-win-test'}
             let response = await axios({
                 method: 'POST',
-                url: `https://rocky-depths-28908.herokuapp.com/check-win-test`,
+                url: _url,
                 params: {
                 "location": location,
                 "gameId": this.$store.state.gameObject.location
@@ -262,25 +267,27 @@ export default {
         },
         questionImage(){
             let text = "";
-            switch(this.$store.state.questionIndex){
-                case 0:
-                    text =  this.gameObject.details.question_1.imgUrl;
-                    break;
-                case 1:
-                    text =  this.gameObject.details.question_2.imgUrl;
-                    break;
-                case 2:
-                    text =  this.gameObject.details.question_3.imgUrl;
-                    break;
-                case 3:
-                    text =  this.gameObject.details.question_4.imgUrl;
-                    break;
-                case 5:
-                    text =  this.gameObject.details.question_5.imgUrl;
-                    break;
-                default: 
-                    text = ""
-                    break;
+            if(this.gameObject !== null){
+                switch(this.$store.state.questionIndex){
+                    case 0:
+                        text =  this.gameObject.details.question_1.imgUrl;
+                        break;
+                    case 1:
+                        text =  this.gameObject.details.question_2.imgUrl;
+                        break;
+                    case 2:
+                        text =  this.gameObject.details.question_3.imgUrl;
+                        break;
+                    case 3:
+                        text =  this.gameObject.details.question_4.imgUrl;
+                        break;
+                    case 5:
+                        text =  this.gameObject.details.question_5.imgUrl;
+                        break;
+                    default: 
+                        text = ""
+                        break;
+                }
             }
             return text;
         },

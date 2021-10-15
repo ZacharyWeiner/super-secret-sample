@@ -9,7 +9,7 @@ class ZasteGame extends Run.Jig {
     init(jsonObject, satoshisForPlay, winningHash, categories, author, illustrator){
         this.satoshisForPlay = satoshisForPlay;
         this.isWon = false;
-        this.pay_address = "n4GJ33kc5QTW6V5fqhgeMHDQsVzjK21ckd";
+        this.pay_address = "mnjw8DT8BDvFYL3cy2tspeKjWrBdz6DgXH";
         this.author = author;
         this.illustrator = illustrator;
         this.details = jsonObject;

@@ -67,17 +67,29 @@
            {{outputReport}}
        </div>
    </div>
+   <button @click='doOtherStuff'> Do Other Stuff </button>
 </template>
 
 <script>
 import { reactive, toRefs, ref } from 'vue'
 import {useStore} from "vuex"
+import Run from 'run-sdk';
 const {HandCashConnect} = require('@handcash/handcash-connect');
 
 
+export class Tip extends Run.Jig {
+  init(message, pubkey, amount) {
+    this.message = message
+    this.owner = pubkey
+    this.satoshis = amount
+  }
 
+  withdraw() {
+    this.satoshis = 0
+  }
+}
 export default {
-    setup () {
+    async setup () {
         let store = useStore()
         let accountList = ref([]);
         let stagedTransactions = ref([]);
@@ -114,6 +126,22 @@ export default {
         }
     },
     methods:{
+       async doOtherStuff(){
+            // let run = new Run({trust:"*", network: 'test', purse:'cQdpg2oTVvbeb47GzRxqn467RmJNp8rJzfoPMfkSBRyzqEdbJcSz', owner:'cT3wEerRrpkheyFogv6xHXeV7tCGLwRPKWXrm6o6bCuxw1tSCMzB'})
+
+            // //let tip = new Tip('I like your videos', 'mhcASxbdkyeP3HFmiVCd7GKGfqsM4Zt1Eq', 100000)
+            // run.activate();
+            // await run.inventory.sync();
+            // console.log(run.inventory.jigs.length);
+            // // console.log(await tip.sync());
+            // // console.log(tip);
+
+            let run = new Run({trust:"*", network: 'test', purse:'cQdpg2oTVvbeb47GzRxqn467RmJNp8rJzfoPMfkSBRyzqEdbJcSz', owner:'cSnmUm9MbvrSSHsY6pExpHrzfgELN38RiAkEiGWW3DBcMjda7dQH'})
+            console.log(run.owner.address)
+            await run.sync();
+            await run.inventory.sync()
+            console.log(run.inventory.jigs.length);
+        },
         generateRedirect(){
           const redirectionLoginUrl =  this.handCashConnect.getRedirectionUrl();
           console.log({redirectionLoginUrl})
@@ -182,7 +210,7 @@ export default {
             accountsArray.forEach(a => {
                 let handle = a.replace(",", "").trim();
                 if(handle.length > 0){
-                    txArray.push({ destination: handle, currencyCode: 'DUR', sendAmount: 1 },)
+                    txArray.push({ destination: handle, currencyCode: 'DUR', sendAmount: 5 },)
                 }
             })
             console.log(txArray)
@@ -217,10 +245,11 @@ export default {
         async sendMultiMessage(){
             const account = await this.handCashConnect.getAccountFromAuthToken(this.$store.state.handcash_client_token);
             let _txs = [];
+            //let durosSent = 0;
             while(this.stagedTransactions.length > 0){
                  _txs.push(this.stagedTransactions.pop())
                  let paymentParameters = {
-                    description: "Tag us on Twitter.",
+                    description: "To Follow Us",
                     appAction: "Party",
                     payments: _txs
                 };
@@ -229,17 +258,28 @@ export default {
                 this.outputReport = this.outputReport + " " + paymentResult.participants[0].alias;
                 await this.sleep(1000)
 
+                //  _txs.push(this.stagedTransactions.pop())
+                //  paymentParameters = {
+                //     description: "Buy The Fuk Shorts",
+                //     appAction: "Party",
+                //     payments: _txs
+                // };
+                // paymentResult = await account.wallet.pay(paymentParameters);
+                // console.log(paymentResult);
+                // this.outputReport = this.outputReport + " " + paymentResult.participants[0].alias;
+                // await this.sleep(1000)
+
+                // paymentParameters = {
+                //     description: "To Follow Us",
+                //     appAction: "Party",
+                //     payments: _txs
+                // };
+                // paymentResult = await account.wallet.pay(paymentParameters);
+                // console.log(paymentResult);
+                // this.outputReport = this.outputReport + " " + paymentResult.participants[0].alias;
+                // await this.sleep(1000);      
                 paymentParameters = {
-                    description: "How fast can we go?",
-                    appAction: "Party",
-                    payments: _txs
-                };
-                paymentResult = await account.wallet.pay(paymentParameters);
-                console.log(paymentResult);
-                this.outputReport = this.outputReport + " " + paymentResult.participants[0].alias;
-                await this.sleep(1000);      
-                paymentParameters = {
-                    description: "🥳 🎉Party🥳 🎉",
+                    description: "Tell your Friends ",
                     appAction: "Party",
                     payments: _txs
                 };
@@ -249,7 +289,7 @@ export default {
                 await this.sleep(1000);
 
                 paymentParameters = {
-                    description: "This is a speed",
+                    description: "This is a PewParty",
                     appAction: "Party",
                     payments: _txs
                 };
