@@ -53,9 +53,10 @@
                 <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
                     <ListboxOptions class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
                     <ListboxOption as="template" v-for="background in backgrounds" :key="background.name" :value="background" v-slot="{ active, selectedBackground }">
-                        <li :class="[active ? 'text-white bg-indigo-600' : 'text-gray-900', 'cursor-default select-none relative py-2 pl-3 pr-9']">
-                        <span :class="[selectedBackground ? 'font-semibold' : 'font-normal', 'block truncate']">
-                            {{ background.name }}
+                        <li :class="[active ? 'text-white bg-indigo-600' : 'text-gray-900', 'cursor-default select-none relative py-2 pl-3 pr-9 items-center jusitify-center']">
+                         <img class='max-h-12 max-w-12' :src="background.img" />
+                        <span :class="[selectedBackground ? 'font-semibold' : 'font-normal', 'block truncate -mt-4']">
+                           {{ background.name }}
                         </span>
 
                         <span v-if="selectedBackground" :class="[active ? 'text-white' : 'text-indigo-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
@@ -85,6 +86,8 @@
                     <ListboxOptions class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
                     <ListboxOption as="template" v-for="pant in pants" :key="pant.name" :value="pant" v-slot="{ active, selectedPants }">
                         <li :class="[active ? 'text-white bg-indigo-600' : 'text-gray-900', 'cursor-default select-none relative py-2 pl-3 pr-9']">
+                            <div > </div>
+                        <img class='h-32 pl-16' :src="pant.img" />
                         <span :class="[selectedPants ? 'font-semibold' : 'font-normal', 'block truncate']">
                             {{ pant.name }}
                         </span>
@@ -180,6 +183,7 @@
                     <ListboxOptions class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
                     <ListboxOption as="template" v-for="elm in face_elements" :key="elm.name" :value="elm" v-slot="{ active, selectedFaceElm }">
                         <li :class="[active ? 'text-white bg-indigo-600' : 'text-gray-900', 'cursor-default select-none relative py-2 pl-3 pr-9']">
+                        <img class='h-12 pl-16' :src="elm.img" />
                         <span :class="[selectedFaceElm ? 'font-semibold' : 'font-normal', 'block truncate']">
                             {{ elm.name }}
                         </span>
@@ -242,6 +246,7 @@
                     <ListboxOptions class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
                     <ListboxOption as="template" v-for="glasses in sunglasses" :key="glasses.name" :value="glasses" v-slot="{ active, selectedGlasses }">
                         <li :class="[active ? 'text-white bg-indigo-600' : 'text-gray-900', 'cursor-default select-none relative py-2 pl-3 pr-9']">
+                        <img class='h-24' :src="glasses.img">
                         <span :class="[selectedGlasses ? 'font-semibold' : 'font-normal', 'block truncate']">
                             {{ glasses.name }}
                         </span>
@@ -331,45 +336,98 @@
 import { reactive, ref, toRefs } from 'vue'
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import { CheckIcon, SelectorIcon } from '@heroicons/vue/solid'
+import RedBackground from './../assets/gopniks/Background/Red.png'
+import PurpleBackground from './../assets/gopniks/Background/Purple.png'
+import BlueBackground from './../assets/gopniks/Background/Blue.png'
+import YellowBackground from './../assets/gopniks/Background/Yellow.png'
+import GreenBackground from './../assets/gopniks/Background/Green.png'
+import RadioActiveBackground from './../assets/gopniks/Background/Radioactive.png'
+import RadioActivePinkBackground from './../assets/gopniks/Background/RadioactivePink.png'
+import HoundstoothPants from './../assets/gopniks/Pants/Houndstooth40.png'
+import BirdsPants from './../assets/gopniks/Pants/Birds40.png'
+import BlackPants from './../assets/gopniks/Pants/Black100.png'
+import BlackCubePants from './../assets/gopniks/Pants/BlackCube60.png'
+import BlackDottedPants from './../assets/gopniks/Pants/BlackDotted60.png'
+import BriefPants from './../assets/gopniks/Pants/Briefs10.png'
+import FishPants from './../assets/gopniks/Pants/Fish40.png'
+import FlamesPants from './../assets/gopniks/Pants/Flames40.png'
+import GreenPants from './../assets/gopniks/Pants/Green100.png'
+import GreenCubePants from './../assets/gopniks/Pants/GreenCube60.png'
+import GreenDottedPants from './../assets/gopniks/Pants/GreenDotted60.png'
+import JaguarPants from './../assets/gopniks/Pants/Jaguar40.png'
+import OrangePants from './../assets/gopniks/Pants/Orange100.png'
+import OrangeCubePants from './../assets/gopniks/Pants/OrangeCube60.png'
+import OrangeDottedPants from './../assets/gopniks/Pants/OrangeDotted60.png'
+import PinkPants from './../assets/gopniks/Pants/Pink100.png'
+import PinkCubePants from './../assets/gopniks/Pants/PinkCube60.png'
+import PinkDottedPants from './../assets/gopniks/Pants/PinkDotted60.png'
+import RedPants from './../assets/gopniks/Pants/Red100.png'
+import RedCubePants from './../assets/gopniks/Pants/RedCube60.png'
+import RedDottedPants from './../assets/gopniks/Pants/RedDotted60.png'
+import BluePants from './../assets/gopniks/Pants/Blue100.png'
+import BlueCubePants from './../assets/gopniks/Pants/BlueCube60.png'
+import BlueDottedPants from './../assets/gopniks/Pants/BlueDotted60.png'
+import YellowPants from './../assets/gopniks/Pants/Yellow100.png'
+import YellowCubePants from './../assets/gopniks/Pants/YellowCube60.png'
+import YellowDottedPants from './../assets/gopniks/Pants/YellowDotted60.png'
+import ZebraPants from './../assets/gopniks/Pants/Zebra40.png'
+import SpecialPants from './../assets/gopniks/Pants/Special40.png'
+import ThirdEye from './../assets/gopniks/FaceElement/3rdEye10.png'
+import Tattoo from './../assets/gopniks/FaceElement/Tattoo.png'
+import Scar from './../assets/gopniks/FaceElement/Scar.png'
+import Kiss from './../assets/gopniks/FaceElement/Kiss.png'
+import Bandage from './../assets/gopniks/FaceElement/Bandage.png'
+import Mole from './../assets/gopniks/FaceElement/Mole.png'
+import Aviators from './../assets/gopniks/Sunglasses/Aviators.png'
+import Cyclop from './../assets/gopniks/Sunglasses/Cyclop.png'
+import Dolge from './../assets/gopniks/Sunglasses/Dolge.png'
+import Viper from './../assets/gopniks/Sunglasses/Viper.png'
+
+//src="@/assets/media/powlogo.jpg"
 let backgrounds = [
-    {'name':'Red', 'rarity': 0.18666666666666668},
-    {'name': 'Purple', 'rarity': 0.19},
-    {'name': 'Blue', 'rarity': 0.197},
-    {'name': 'Yellow', 'rarity': 0.20133333333333333},
-    {'name': 'Green', 'rarity': 0.185},
-    {'name': 'Radioactive', 'rarity': 0.021333333333333333},
-    {'name': 'Radioactive Pink', 'rarity': 0.01866666666666667},
+    {'name':'Red', 'rarity': 0.18666666666666668, img: RedBackground},
+    {'name': 'Purple', 'rarity': 0.19, img: PurpleBackground},
+    {'name': 'Blue', 'rarity': 0.197, img: BlueBackground},
+    {'name': 'Yellow', 'rarity': 0.20133333333333333, img: YellowBackground},
+    {'name': 'Green', 'rarity': 0.185, img: GreenBackground},
+    {'name': 'Radioactive', 'rarity': 0.021333333333333333, img: RadioActiveBackground},
+    {'name': 'Radioactive Pink', 'rarity': 0.01866666666666667, img: RadioActivePinkBackground},
     ]
 let pants = [
-    {'name': 'Houndstooth', 'rarity': 0.023666666666666667},
-    {'name': 'Black Dotted', 'rarity': 0.035666666666666664},
-    {'name': 'Red Dotted', 'rarity': 0.031},
-    {'name': 'Yellow', 'rarity': 0.05566666666666667},
-    {'name': 'Orange', 'rarity': 0.058999999999999995},
-    {'name': 'Pink Dotted', 'rarity': 0.027666666666666666},
-    {'name': 'Flames', 'rarity': 0.02433333333333333},
-    {'name': 'Red Cube', 'rarity': 0.03266666666666666},
-    {'name': 'Black Cube', 'rarity': 0.03733333333333334},
-    {'name':'Blue Dotted', 'rarity':  0.028666666666666667},
-    {'name':'Yellow Cube', 'rarity':  0.03166666666666667},
-    {'name':'Green Cube', 'rarity':  0.032},
-    {'name':'Yellow Dotted', 'rarity':  0.027333333333333334},
-    {'name':'Zebra', 'rarity':  0.022333333333333334},
-    {'name':'Green', 'rarity':  0.053},
-    {'name':'Jaguar', 'rarity':  0.020666666666666664},
-    {'name':'Black', 'rarity':  0.05566666666666667},
-    {'name':'Orange Dotted', 'rarity':  0.03166666666666667},
-    {'name':'Blue', 'rarity':  0.05933333333333334},
-    {'name':'Special', 'rarity':  0.021333333333333333},
-    {'name':'Pink', 'rarity':  0.06166666666666667},
-    {'name': 'Birds', 'rarity': 0.02},
-    {'name': 'Pink Cube', 'rarity': 0.034000000000000004},
-    {'name': 'Red', 'rarity': 0.05766666666666667},
-    {'name': 'Green Dotted', 'rarity': 0.029000000000000004},
-    {'name': 'Blue Cube', 'rarity': 0.035666666666666664},
-    {'name': 'Fish', 'rarity': 0.023333333333333335},
-    {'name': 'Orange Cube', 'rarity': 0.023333333333333335},
-    {'name': 'Briefs', 'rarity': 0.0046666666666666673},
+    {'name':'Black', 'rarity':  0.05566666666666667, img: BlackPants},
+    {'name': 'Black Dotted', 'rarity': 0.035666666666666664, img: BlackDottedPants},
+    {'name': 'Black Cube', 'rarity': 0.03733333333333334, img: BlackCubePants},
+    {'name': 'Houndstooth', 'rarity': 0.023666666666666667, img: HoundstoothPants},
+    {'name': 'Birds', 'rarity': 0.02, img: BirdsPants},
+    {'name': 'Briefs', 'rarity': 0.0046666666666666673, img: BriefPants},
+    {'name': 'Fish', 'rarity': 0.023333333333333335, img: FishPants},
+    {'name': 'Flames', 'rarity': 0.02433333333333333, img: FlamesPants},
+    {'name':'Green', 'rarity':  0.053, img: GreenPants},
+    {'name':'Green Cube', 'rarity':  0.032, img: GreenCubePants},
+    {'name': 'Green Dotted', 'rarity': 0.029000000000000004, img: GreenDottedPants},
+    {'name':'Jaguar', 'rarity':  0.020666666666666664, img: JaguarPants},
+    {'name': 'Orange', 'rarity': 0.058999999999999995, img: OrangePants},
+    {'name':'Orange Dotted', 'rarity':  0.03166666666666667, img: OrangeDottedPants},
+    {'name': 'Orange Cube', 'rarity': 0.023333333333333335, img: OrangeCubePants},    
+    {'name':'Pink', 'rarity':  0.06166666666666667, img: PinkPants},
+    {'name': 'Pink Cube', 'rarity': 0.034000000000000004, img: PinkCubePants},
+    {'name': 'Pink Dotted', 'rarity': 0.027666666666666666, img: PinkDottedPants},
+    {'name': 'Red Dotted', 'rarity': 0.031, img: RedDottedPants},
+    {'name': 'Red Cube', 'rarity': 0.03266666666666666, img: RedCubePants},
+    {'name': 'Red', 'rarity': 0.05766666666666667, img: RedPants},
+    {'name':'Blue Dotted', 'rarity':  0.028666666666666667, img: BlueDottedPants},
+    {'name':'Blue', 'rarity':  0.05933333333333334, img: BluePants},
+    {'name': 'Blue Cube', 'rarity': 0.035666666666666664, img: BlueCubePants},
+    {'name': 'Yellow', 'rarity': 0.05566666666666667, img: YellowPants},
+    {'name':'Yellow Cube', 'rarity':  0.03166666666666667, img: YellowCubePants},
+    {'name':'Yellow Dotted', 'rarity':  0.027333333333333334, img: YellowDottedPants},
+    {'name':'Zebra', 'rarity':  0.022333333333333334, img: ZebraPants},
+    {'name':'Special', 'rarity':  0.021333333333333333, img: SpecialPants},
+    
+    
+    
+    
+    
 ]
 
 let upperbody = [
@@ -627,13 +685,13 @@ let faces = [
     ]
 
 let face_elements = [
-    {'name':'Kiss', 'rarity': 0.159},
-{'name':'Bandage', 'rarity': 0.15633333333333333},
+    {'name':'Kiss', 'rarity': 0.159, img: Kiss},
+{'name':'Bandage', 'rarity': 0.15633333333333333, img: Bandage},
 {'name':'None', 'rarity': 0.27266666666666666},
-{'name':'Scar', 'rarity': 0.11799999999999999},
-{'name':'Mole', 'rarity': 0.108},
-{'name':'Tattoo', 'rarity': 0.157},
-{'name':'3rd Eye', 'rarity': 0.028666666666666667},
+{'name':'Scar', 'rarity': 0.11799999999999999, img: Scar},
+{'name':'Mole', 'rarity': 0.108, img: Mole},
+{'name':'Tattoo', 'rarity': 0.157, img: Tattoo},
+{'name':'3rd Eye', 'rarity': 0.028666666666666667, img: ThirdEye},
 ]
 
 let heads = [
@@ -654,11 +712,11 @@ let heads = [
 ]
 
 let sunglasses = [
-    {'name': 'None', 'rarity': 0.391},
-{'name': 'Cyclop Sunglasses', 'rarity': 0.14666666666666666},
-{'name': 'Viper Sunglasses', 'rarity': 0.15533333333333331},
-{'name': 'Aviator Sunglasses', 'rarity': 0.168},
-{'name': 'Dolge&Gopnikz', 'rarity': 0.13900000000000002},
+    {'name': 'None', 'rarity': 0.391, im: ""}, 
+    {'name': 'Cyclop Sunglasses', 'rarity': 0.14666666666666666, img: Cyclop},
+    {'name': 'Viper Sunglasses', 'rarity': 0.15533333333333331, img: Viper},
+    {'name': 'Aviator Sunglasses', 'rarity': 0.168, img: Aviators},
+    {'name': 'Dolge&Gopnikz', 'rarity': 0.13900000000000002, img: Dolge},
 ]
 export default {
     components: {
