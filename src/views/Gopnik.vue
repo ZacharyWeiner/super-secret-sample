@@ -7,7 +7,7 @@
         <div class="p-2 m-2">
             <Listbox as="div" v-model="selectedFace">
                 <ListboxLabel class="block text-sm font-medium text-gray-700">
-                <div class="text-2xl">Face: {{selectedFace.rarity}}</div>
+                <div class="text-2xl">Face: {{selectedFace.name}}</div>
                 </ListboxLabel>
                 <div class="mt-1 relative">
                 <ListboxButton class="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -40,7 +40,7 @@
         <div class="col-span-1 p-2 m-2">
             <Listbox as="div" v-model="selectedBackground">
                 <ListboxLabel class="block text-sm font-medium text-gray-700">
-                Background: {{selectedBackground.rarity}}
+                Background: <img class='h-12' :src="selectedBackground.img" />
                 </ListboxLabel>
                 <div class="mt-1 relative">
                 <ListboxButton class="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -72,7 +72,7 @@
         <div class="col-span-1 p-2 m-2">
             <Listbox as="div" v-model="selectedPants">
                 <ListboxLabel class="block text-sm font-medium text-gray-700">
-                Pants: {{selectedPants.rarity}}
+                Pants: <img class="h-12" :src="selectedPants.img" />
                 </ListboxLabel>
                 <div class="mt-1 relative">
                 <ListboxButton class="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -105,7 +105,7 @@
         <div class="col-span-1 p-2 m-2">
             <Listbox as="div" v-model="selectedUpperbody">
                 <ListboxLabel class="block text-sm font-medium text-gray-700">
-                Upperbody: {{selectedUpperbody.rarity}}
+                Upperbody: {{selectedUpperbody.name}}
                 </ListboxLabel>
                 <div class="mt-1 relative">
                 <ListboxButton class="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -138,7 +138,7 @@
          <div class=" p-2 m-2">
              <Listbox as="div" v-model="selectedHands">
                 <ListboxLabel class="block text-sm font-medium text-gray-700">
-                Hands: {{selectedHands.rarity}}
+                Hands: <img class='h-12' :src="selectedHands.img" />
                 </ListboxLabel>
                 <div class="mt-1 relative">
                 <ListboxButton class="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -152,6 +152,7 @@
                     <ListboxOptions class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
                     <ListboxOption as="template" v-for="hand in hands" :key="hand.name" :value="hand" v-slot="{ active, selectedHands }">
                         <li :class="[active ? 'text-white bg-indigo-600' : 'text-gray-900', 'cursor-default select-none relative py-2 pl-3 pr-9']">
+                        <img :src="hand.img" />
                         <span :class="[selectedHands ? 'font-semibold' : 'font-normal', 'block truncate']">
                             {{ hand.name }}
                         </span>
@@ -169,7 +170,7 @@
          <div class="col-span-1 p-2 m-2">
              <Listbox as="div" v-model="selectedFaceElm">
                 <ListboxLabel class="block text-sm font-medium text-gray-700">
-                Face Element: {{selectedFaceElm.rarity}}
+                Face Element: <img class='h-12' :src="selectedFaceElm.img" />
                 </ListboxLabel>
                 <div class="mt-1 relative">
                 <ListboxButton class="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -201,7 +202,7 @@
          <div class="col-span-1 p-2 m-2">
              <Listbox as="div" v-model="selectedHead">
                 <ListboxLabel class="block text-sm font-medium text-gray-700">
-                Head: {{selectedHead.rarity}}
+                Head: {{selectedHead.name}}
                 </ListboxLabel>
                 <div class="mt-1 relative">
                 <ListboxButton class="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -232,7 +233,7 @@
          <div class="col-span-1 p-2 m-2">
              <Listbox as="div" v-model="selectedGlasses">
                 <ListboxLabel class="block text-sm font-medium text-gray-700">
-                Glasses: {{selectedGlasses.rarity}}
+                Glasses: <img class='h-12' :src="selectedGlasses.img" />
                 </ListboxLabel>
                 <div class="mt-1 relative">
                 <ListboxButton class="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -382,6 +383,25 @@ import Aviators from './../assets/gopniks/Sunglasses/Aviators.png'
 import Cyclop from './../assets/gopniks/Sunglasses/Cyclop.png'
 import Dolge from './../assets/gopniks/Sunglasses/Dolge.png'
 import Viper from './../assets/gopniks/Sunglasses/Viper.png'
+import AK47 from './../assets/gopniks/Hands/AK47.png'
+import BottleBlueLiquid from './../assets/gopniks/Hands/BottleBlueLiquid.png'
+import BottleGreenLiquid from './../assets/gopniks/Hands/BottleGreenLiquid.png'
+import BottlePurpleLiquid from './../assets/gopniks/Hands/BottlePurpleLiquid.png'
+import BottlePinkLiquid from './../assets/gopniks/Hands/BottlePinkLiquid.png'
+import BottleRedLiquid from './../assets/gopniks/Hands/BottleRedLiquid.png'
+import BottleMagicLiquid from './../assets/gopniks/Hands/BottleMagicLiquid.png'
+import BottleYellowLiquid from './../assets/gopniks/Hands/BottleYellowLiquid.png'
+import MetalCrowBar from './../assets/gopniks/Hands/MetalCrowBar.png'
+import KBAC from './../assets/gopniks/Hands/KBAC.png'
+import Empty from './../assets/gopniks/Hands/Empty.png'
+import GopnokiaPhone from './../assets/gopniks/Hands/GopnokiaPhone.png'
+import Cigarette from './../assets/gopniks/Hands/Cigarette.png'
+import Cigar from './../assets/gopniks/Hands/Cigar.png'
+import Vodka from './../assets/gopniks/Hands/Vodka.png'
+import Joint from './../assets/gopniks/Hands/Joint.png'
+import SunseedsCone from './../assets/gopniks/Hands/SunseedsCone.png'
+import ButterflyKnife from './../assets/gopniks/Hands/ButterflyKnife.png'
+
 
 //src="@/assets/media/powlogo.jpg"
 let backgrounds = [
@@ -469,24 +489,26 @@ let upperbody = [
     {'name': 'Marine Top', 'rarity': 0.005},
 ]
 let hands = [
-    {'name':'Bottle Green Liquid', 'rarity':  0.04366666666666666},
-    {'name':'AK47', 'rarity':  0.046},
-    {'name':'Metal Crow Bar', 'rarity':  0.06333333333333334},
-    {'name':'KBAC', 'rarity':  0.07433333333333334},
-    {'name':'Empty', 'rarity':  0.012},
-    {'name':'Gopnokia Phone', 'rarity':  0.06933333333333333},
-    {'name':'Bottle Blue Liquid', 'rarity':  0.05166666666666667},
-    {'name':'Cigarette', 'rarity':  .10433333333333334},
-    {'name':'Bottle Red Liquid', 'rarity':  0.03833333333333333},
-    {'name':'Cigar', 'rarity':  0.06966666666666667},
-    {'name':'Vodka', 'rarity':  0.07199999999999999},
-    {'name':'Joint', 'rarity':  0.07333333333333333},
-    {'name':'Bottle Purple Liquid', 'rarity':  0.04833333333333333},
-    {'name':'Sunseeds Cone', 'rarity':  0.06800000000000001},
-    {'name':'Bottle Pink Liquid', 'rarity':  0.04466666666666667},
-    {'name':'Butterfly Knife', 'rarity':  0.06633333333333333},
-    {'name':'Bottle Magic Liquid', 'rarity':  0.010666666666666667},
-    {'name':'Bottle Yellow Liquid', 'rarity':  0.043999999999999995},
+    {'name':'Bottle Green Liquid', 'rarity':  0.04366666666666666, img: BottleGreenLiquid },
+    {'name':'Bottle Blue Liquid', 'rarity':  0.05166666666666667, img: BottleBlueLiquid },
+    {'name':'Bottle Red Liquid', 'rarity':  0.03833333333333333, img: BottleRedLiquid },
+    {'name':'Bottle Purple Liquid', 'rarity':  0.04833333333333333, img: BottlePurpleLiquid },
+    {'name':'Bottle Pink Liquid', 'rarity':  0.04466666666666667, img: BottlePinkLiquid },
+    {'name':'Bottle Magic Liquid', 'rarity':  0.010666666666666667, img: BottleMagicLiquid },
+    {'name':'Bottle Yellow Liquid', 'rarity':  0.043999999999999995, img: BottleYellowLiquid },
+    {'name':'AK47', 'rarity':  0.046, img: AK47},
+    {'name':'Metal Crow Bar', 'rarity':  0.06333333333333334, img: MetalCrowBar},
+    {'name':'KBAC', 'rarity':  0.07433333333333334, img: KBAC},
+    {'name':'Empty', 'rarity':  0.012, img: Empty},
+    {'name':'Gopnokia Phone', 'rarity':  0.06933333333333333, img: GopnokiaPhone},
+    {'name':'Cigarette', 'rarity':  .10433333333333334, img: Cigarette},
+    {'name':'Cigar', 'rarity':  0.06966666666666667, img: Cigar},
+    {'name':'Vodka', 'rarity':  0.07199999999999999, img: Vodka},
+    {'name':'Joint', 'rarity':  0.07333333333333333, img: Joint},
+    {'name':'Sunseeds Cone', 'rarity':  0.06800000000000001, img: SunseedsCone}, 
+    {'name':'Butterfly Knife', 'rarity':  0.06633333333333333, img: ButterflyKnife},
+    
+    
 ]
 
 let faces = [
@@ -800,17 +822,21 @@ export default {
                 }
             })
             console.log(this.selectedHead.name);
-            if(this.selectedHead.name &&  (this.selectedHead.name.includes('Slav') || this.selectedHead.name ==='Beanie')){
-                console.log("Black hat")
-                if(this.selectedUpperbody.name && this.selectedUpperbody.name.includes('Black')){
-                    console.log("Black hat & top")
+            if(this.selectedUpperbody.name && this.selectedUpperbody.name.includes('Black')){
+                console.log("Blacktop")
+                if(this.selectedHead.name &&  (this.selectedHead.name.includes('Slav') || this.selectedHead.name ==='Beanie')){
+                    console.log("Black hat")
                     _score = _score +1; 
                     _description = _description +  "+1 the Hat To Match"
-                    if(this.selectedPants.name && this.selectedPants.name.includes('Black')){
-                         _score = _score +1; 
-                        _description = _description +  "+1 Black on Black on Black"
-                    }
                 }
+                if(this.selectedPants.name && this.selectedPants.name.includes('Black')){
+                        _score = _score +1; 
+                    _description = _description +  "+1 Black"
+                }
+            }
+            if(this.selectedBackground && this.selectedBackground.name.includes("Radio")){
+                _score = _score +1; 
+                _description = _description +  "+1 Radioacive Background"
             }
             return {score: _score, description: _description}; 
         },
@@ -818,17 +844,37 @@ export default {
              let _score = 0; 
             let _description = ""
             if(this.selectedHands.name && this.selectedHands.name.includes('AK')){
-                _score = _score + 1;
-                _description = _description = " +1 Has AK" 
+                _score = _score + 3;
+                _description = _description = " +3 Has AK" 
+            }
+            if(this.selectedHands.name && this.selectedHands.name.includes('Joint')){
+                _score = _score + 2;
+                _description = _description = " +2 Has Joint" 
+            }
+            if(this.selectedHands.name && this.selectedHands.name.includes('KBAC')){
+                _score = _score + 2;
+                _description = _description = " +2 Has Beer" 
             }
             return {score: _score, description: _description};
         },
         glasses(){
              let _score = 0; 
             let _description = ""
-            if(this.selectedGlasses.name && this.selectedGlasses.name.includes('Dolge')){
+             if(this.selectedGlasses.name && this.selectedGlasses.name.includes('Cyclop')){
                 _score = _score + 1;
-                _description = _description = " +1 Has Dolge" 
+                _description = _description = " +1 Has Cyclop" 
+            }
+            if(this.selectedGlasses.name && this.selectedGlasses.name.includes('Viper')){
+                _score = _score + 1;
+                _description = _description = " +1 Has Viper" 
+            }
+             if(this.selectedGlasses.name && this.selectedGlasses.name.includes('Aviator')){
+                _score = _score + 2;
+                _description = _description = " +2 Has Aviator" 
+            }
+            if(this.selectedGlasses.name && this.selectedGlasses.name.includes('Dolge')){
+                _score = _score + 3;
+                _description = _description = " +3 Has Dolge" 
             }
             return {score: _score, description: _description};
         }
