@@ -3,6 +3,13 @@
      <div class="flex w-full grid  p-2 m-2">
         <div class='text-4xl text-indigo-700'>Tell Me Bout Your Gopnik </div>
      </div>
+     <div class="flex w-full p-2 m-2">
+         <div class='flex-grow p-2 m-2'> <button @click='setFace("CHAD")' class=" w-full   px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"> CHAD </button> </div>
+         <div class='flex-grow p-2 m-2'> <button @click='setFace("BORIS")'  class=" w-full   px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"> BORIS </button> </div>
+         <div class='flex-grow p-2 m-2'> <button @click='setFace("IGOR") ' class=" w-full  px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"> IGOR </button> </div>
+         <div class='flex-grow p-2 m-2'> <button @click='setFace("VLAD") ' class=" w-full  px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"> VLAD </button> </div>
+
+     </div>
     <div class="flex w-full grid  p-2 m-2">
         <div class="p-2 m-2">
             <Listbox as="div" v-model="selectedFace">
@@ -19,7 +26,7 @@
 
                 <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
                     <ListboxOptions class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-                    <ListboxOption as="template" v-for="face in faces" :key="face.name" :value="face" v-slot="{ active, selectedFace }">
+                    <ListboxOption as="template" v-for="face in filteredFaces" :key="face.name" :value="face" v-slot="{ active, selectedFace }">
                         <li :class="[active ? 'text-white bg-indigo-600' : 'text-gray-900', 'cursor-default select-none relative py-2 pl-3 pr-9']">
                         <span :class="[selectedFace ? 'font-semibold' : 'font-normal', 'block truncate']">
                             {{ face.name }}
@@ -281,15 +288,23 @@
             </div>
         </div>
     </div>
-        <div> {{coolScore.description}}</div>
-    <div class='w-full p-2 m-2 pt-6'>
-        Send Me BSV / TSC / ETC...: <span class='bold'>1NVZHRegc5nYXBthaZ51FfX5MYY1D8m4er </span>
-    </div>
-      <div class='w-full pb-2'>
-       Send Me NFTs: ZackWins@relayx.io
-        
-    </div>
-     <div class='w-full p-2 m-2 ' >
+    <div> {{coolScore.description}}</div>
+    <div class="flex">
+        <div class='flex-col max-w-50%'>
+            <div class='w-full p-2 m-2 pt-6 text-xl text-indigo-600 font-semibold'>
+            Send Me BSV / TSC / ETC...: 
+            </div>
+            <div class='w-full'>
+             1NVZHRegc5nYXBthaZ51FfX5MYY1D8m4er
+            </div>
+            <div class='w-full pb-2 pt-4 text-xl text-indigo-600 font-semibold'>
+            Fund w. Gopniks: 
+            </div>
+            <div class='w-full pb-2 pt-1 text-xl font-semibold'>
+            ZackWins@relayx.io
+            </div>
+        </div>
+        <div class='w-full p-2 m-2 ' >
           <div class="text-3xl undeline pb-4"> The Secret Legend </div>
          <div class="flex flex-col-reverse flex-grow">
             
@@ -320,6 +335,12 @@
             <div> 99 percentile = 99.78689115635629 </div>
          </div> -->
     </div>
+
+    </div>
+    
+    
+      
+     
     <div class='w-full flex'>
         <div class='flex-grow'></div>
         <div class='flex-grow'>
@@ -762,6 +783,7 @@ export default {
         const selectedFace = ref("")
         const selectedHead= ref("")
         const selectedGlasses= ref("")
+        const faceFilter = ref("");
         console.log(backgrounds)
         return {
             selectedBackground,
@@ -780,6 +802,7 @@ export default {
             face_elements,
             heads,
             sunglasses,
+            faceFilter,
             ...toRefs(state),
         }
     },
@@ -805,20 +828,55 @@ export default {
             _totalCool.score = _totalCool.score + result.score;
             _description = _description + result.description;
 
+            result = this.bgPop()
+            _totalCool.score = _totalCool.score + result.score;
+            _description = _description + result.description;
+
+             result = this.faceEl()
+            _totalCool.score = _totalCool.score + result.score;
+            _description = _description + result.description;
+
+            result = this.character()
+            _totalCool.score = _totalCool.score + result.score;
+            _description = _description + result.description;
+
             _totalCool.description = _description;
             console.log(_description)
             return _totalCool
         },
+        filteredFaces(){
+            if(this.faceFilter === ""){return this.faces}
+            return this.faces.filter((f) => f.name.includes(this.faceFilter));
+        }
     },
     methods:{
+        setFace(_face){
+            this.faceFilter = _face;
+        },
+        character(){
+             let _score = 0; 
+            let _description = ""
+            if(!this.selectedFace.name){
+                return {score: 0, description: ""}
+            }
+            if(this.selectedFace.name.includes("CHAD")){
+                 _score = _score +5; 
+                 _description = _description +  "+5 Chad"
+            }
+            if(this.selectedFace.name.includes("Drunk")){
+                 _score = _score +2; 
+                 _description = _description +  "+2 Drunk"
+            }
+            return {score: _score, description: _description}; 
+        },
         isMatching(){
             let _score = 0; 
             let _description = ""
             let _pantsArr = this.selectedPants ? this.selectedPants.name.split(' ') : [];
             _pantsArr.forEach((w)=> {
                 if(this.selectedUpperbody.name && this.selectedUpperbody.name.includes(w)){
-                    _score = _score +1; 
-                    _description = _description +  "+1 Matching Outfit"
+                    _score = _score +5; 
+                    _description = _description +  "+5 Matching Outfit"
                 }
             })
             console.log(this.selectedHead.name);
@@ -835,25 +893,89 @@ export default {
                 }
             }
             if(this.selectedBackground && this.selectedBackground.name.includes("Radio")){
-                _score = _score +1; 
-                _description = _description +  "+1 Radioacive Background"
+                _score = _score +5; 
+                _description = _description +  "+5 Radioacive Background"
             }
             return {score: _score, description: _description}; 
+        },
+        bgPop(){
+            let _name = this.selectedBackground.name; 
+            let _score = 0; 
+            let _description = ""
+            if(_name === "Blue"){
+                if(this.selectedUpperbody && 
+                (this.selectedUpperbody.name === "Hoodie Blue" ||
+                this.selectedUpperbody.name === "Hoodie Black")){
+                     _score = _score + 1;
+                    _description = _description = " +1 Pop on BG" 
+                }
+                if(this.selectedUpperbody && (this.selectedUpperbody.name === "Hoodie Pink" || this.selectedUpperbody.name === "Hoodie Red")){
+                     _score = _score + 2;
+                    _description = _description = " +2 Pop on BG" 
+                }
+            }
+            if(this.selectedBackground.name === "Green"){
+                if(this.selectedUpperbody && this.selectedUpperbody.name === "Pink Hoodie"){
+                     _score = _score + 2;
+                    _description = _description = " +2 Pop on BG" 
+                }
+            }
+            if(this.selectedBackground.name === "Red"){
+                if(this.selectedUpperbody && this.selectedUpperbody.name === "Blue Hoodie"){
+                     _score = _score + 1;
+                    _description = _description = " +1 Pop on BG" 
+                }
+            }
+            if(this.selectedBackground.name === "Purple"){
+                if(this.selectedUpperbody && this.selectedUpperbody.name === "Pink Hoodie"){
+                     _score = _score + 2;
+                    _description = _description = " +2 Pop on BG" 
+                }
+            }
+            if(this.selectedBackground.name === "Yellow"){
+                if(this.selectedUpperbody && this.selectedUpperbody.name.includes("Black")){
+                     _score = _score + 2;
+                    _description = _description = " +2 Pop on BG" 
+                }
+                if(this.selectedUpperbody && this.selectedUpperbody.name === "Pink Hoodie"){
+                     _score = _score + 2;
+                    _description = _description = " +2 Pop on BG" 
+                }
+            }
+            if(this.selectedBackground.name === "Radioactive"){
+                if(this.selectedUpperbody && this.selectedUpperbody.name.includes("Red")){
+                     _score = _score + 2;
+                    _description = _description = " +2 Pop on BG" 
+                }
+            }
+            if(this.selectedBackground.name === "Radioactive Pink"){
+                if(this.selectedUpperbody && this.selectedUpperbody.name.includes("Jaguar")){
+                     _score = _score + 2;
+                    _description = _description = " +2 Pop on BG" 
+                }
+            }
+            return {score: _score, description: _description}
         },
         holding(){
              let _score = 0; 
             let _description = ""
             if(this.selectedHands.name && this.selectedHands.name.includes('AK')){
-                _score = _score + 3;
+                _score = _score + 5;
                 _description = _description = " +3 Has AK" 
             }
-            if(this.selectedHands.name && this.selectedHands.name.includes('Joint')){
-                _score = _score + 2;
-                _description = _description = " +2 Has Joint" 
+            if(this.selectedHands.name && (this.selectedHands.name.includes('KBAC') || this.selectedHands.name.includes('Vodka'))){
+                _score = _score + 3;
+                _description = _description + " +2 Drinkin'" 
             }
-            if(this.selectedHands.name && this.selectedHands.name.includes('KBAC')){
-                _score = _score + 2;
-                _description = _description = " +2 Has Beer" 
+            if(this.selectedHands.name && ( this.selectedHands.name.includes('Joint')|| this.selectedHands.name.includes('Cigarette') || this.selectedHands.name.includes('Cigar'))){
+                if(this.selectedHands.name.includes('Cigarette')){
+                    _score = _score + 1;
+                    _description = _description = " +1 Smokin'" 
+                }else {
+                     _score = _score + 2;
+                    _description = _description = " +2 Smokin'" 
+                }
+               
             }
             return {score: _score, description: _description};
         },
@@ -875,6 +997,15 @@ export default {
             if(this.selectedGlasses.name && this.selectedGlasses.name.includes('Dolge')){
                 _score = _score + 3;
                 _description = _description = " +3 Has Dolge" 
+            }
+            return {score: _score, description: _description};
+        },
+        faceEl(){
+             let _score = 0; 
+            let _description = ""
+            if(this.selectedFaceElm.name === "Tattoo"){
+                 _score = _score + 2;
+                _description = _description = " +2 Has Face Tattoo" 
             }
             return {score: _score, description: _description};
         }
