@@ -249,7 +249,7 @@ export default {
             while(this.stagedTransactions.length > 0){
                  _txs.push(this.stagedTransactions.pop())
                  let paymentParameters = {
-                    description: "To Follow Us",
+                    description: "Do It!",
                     appAction: "Party",
                     payments: _txs
                 };
@@ -269,17 +269,18 @@ export default {
                 // this.outputReport = this.outputReport + " " + paymentResult.participants[0].alias;
                 // await this.sleep(1000)
 
-                // paymentParameters = {
-                //     description: "To Follow Us",
-                //     appAction: "Party",
-                //     payments: _txs
-                // };
-                // paymentResult = await account.wallet.pay(paymentParameters);
-                // console.log(paymentResult);
-                // this.outputReport = this.outputReport + " " + paymentResult.participants[0].alias;
-                // await this.sleep(1000);      
                 paymentParameters = {
-                    description: "Tell your Friends ",
+                    description: "Post It On Twitter",
+                    appAction: "Party",
+                    payments: _txs
+                };
+                paymentResult = await account.wallet.pay(paymentParameters);
+                console.log(paymentResult);
+                this.outputReport = this.outputReport + " " + paymentResult.participants[0].alias;
+                await this.sleep(1000);    
+
+                paymentParameters = {
+                    description: "If U got a ZomBTC🧟",
                     appAction: "Party",
                     payments: _txs
                 };
@@ -289,7 +290,7 @@ export default {
                 await this.sleep(1000);
 
                 paymentParameters = {
-                    description: "This is a PewParty",
+                    description: "🎉ZomBTC PewParty🥳",
                     appAction: "Party",
                     payments: _txs
                 };

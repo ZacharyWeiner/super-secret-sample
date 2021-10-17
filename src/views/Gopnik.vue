@@ -1,5 +1,50 @@
 <template>
 <div> 
+    <div class='w-full p-2 m-2 pt-6 text-xl text-indigo-600 font-semibold'>
+        Tip Me BSV / TSC / CEO...: 
+    </div>
+    <div class="grid grid-cols-4 text-left pl-2">
+        <div class="col-span-1">
+             <div class='w-full  text-xl text-indigo-600 font-semibold'>
+                VOLT:
+             </div>
+        </div>
+        <div class='w-full col-span-3'>
+            <span class='w-full font-semibold text-sm text-gray-800'>
+                1NVZHRegc5nYXBthaZ51FfX5MYY1D8m4er
+            </span>
+        </div>
+        <div class="col-span-1">
+             <div class='w-full text-xl text-indigo-600 font-semibold'>
+                Handcash:
+             </div>
+        </div>
+        <div class='w-full col-span-3 '>
+            <span class='w-full font-semibold text-lg text-gray-800'>
+                $Zack
+            </span>
+        </div>
+        <div class="col-span-1">
+             <div class='w-full text-xl text-indigo-600 font-semibold'>
+                Relay X:
+             </div>
+        </div>
+        <div class='w-full col-span-3 '>
+            <span class='w-full font-semibold text-lg text-gray-800'>
+                $ZackWins@relayx.io
+            </span>
+        </div>
+         <div class="col-span-1">
+             <div class='w-full text-xl text-indigo-600 font-semibold'>
+                Twitter & Telegram
+             </div>
+        </div>
+        <div class='w-full col-span-3 pt-4'>
+            <span class='w-full font-semibold text-lg text-gray-800 '>
+                @Developing Zack
+            </span>
+        </div>
+    </div>             
      <div class="flex w-full grid  p-2 m-2">
         <div class='text-4xl text-indigo-700'>Tell Me Bout Your Gopnik </div>
      </div>
@@ -159,7 +204,7 @@
                     <ListboxOptions class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
                     <ListboxOption as="template" v-for="hand in hands" :key="hand.name" :value="hand" v-slot="{ active, selectedHands }">
                         <li :class="[active ? 'text-white bg-indigo-600' : 'text-gray-900', 'cursor-default select-none relative py-2 pl-3 pr-9']">
-                        <img :src="hand.img" />
+                        <img class='h-24' :src="hand.img" />
                         <span :class="[selectedHands ? 'font-semibold' : 'font-normal', 'block truncate']">
                             {{ hand.name }}
                         </span>
@@ -271,9 +316,10 @@
          </div>
      </div>
     <div class="w-full md:flex mb-4 shadow-xl ">
-        <div class="text-3xl flex-grow text-gray-700 p-1 m-1 "> UNIQ Score: <br/> <span class='text-4xl text-indigo-700'>{{totalRarity}} </span> </div>
+        <div class="text-3xl flex-grow text-gray-700 p-1 m-1 "> UNIQ Score: <br/> <span class='text-4xl text-indigo-700'>{{totalRarity.toString().substring(0, 10)}} </span> </div>
+        <div class="text-3xl flex-grow p-1 m-1 "> Weighted UNIQ: <br/> <span class='text-4xl text-indigo-700'>{{modifiedRarity.toString().substring(0, 10)}} </span> </div>
         <div class="text-3xl flex-grow p-1 m-1 "> Dopeness Score: <br/> <span class='text-4xl text-indigo-700'>{{coolScore.score}} </span> </div>
-        <div class="text-3xl flex-grow p-1 m-1 "> Avg Rarez: <br/> <span class='text-4xl text-indigo-700'>{{averageRarity}} </span> </div>
+        <div class="text-3xl flex-grow p-1 m-1 "> Avg Rarez: <br/> <span class='text-4xl text-indigo-700'>{{averageRarity.toString().substring(0, 10)}} </span> </div>
     </div>
 
     <div class="w-full">
@@ -289,7 +335,7 @@
         </div>
     </div>
     <div> {{coolScore.description}}</div>
-    <div class="flex">
+    <div class="md:flex">
         <div class='flex-col max-w-50%'>
             <div class='w-full p-2 m-2 pt-6 text-xl text-indigo-600 font-semibold'>
             Send Me BSV / TSC / ETC...: 
@@ -426,13 +472,13 @@ import ButterflyKnife from './../assets/gopniks/Hands/ButterflyKnife.png'
 
 //src="@/assets/media/powlogo.jpg"
 let backgrounds = [
-    {'name':'Red', 'rarity': 0.18666666666666668, img: RedBackground},
-    {'name': 'Purple', 'rarity': 0.19, img: PurpleBackground},
-    {'name': 'Blue', 'rarity': 0.197, img: BlueBackground},
-    {'name': 'Yellow', 'rarity': 0.20133333333333333, img: YellowBackground},
-    {'name': 'Green', 'rarity': 0.185, img: GreenBackground},
-    {'name': 'Radioactive', 'rarity': 0.021333333333333333, img: RadioActiveBackground},
-    {'name': 'Radioactive Pink', 'rarity': 0.01866666666666667, img: RadioActivePinkBackground},
+    {'name':'Red', 'rarity': 0.18666666666666668, img: RedBackground, categories: ["Red", "Bright", "Common"]},
+    {'name': 'Purple', 'rarity': 0.19, img: PurpleBackground, categories: ["Purple", "Dark", "Common"]},
+    {'name': 'Blue', 'rarity': 0.197, img: BlueBackground, categories: ["Blue", "Bright", "Common"]},
+    {'name': 'Yellow', 'rarity': 0.20133333333333333, img: YellowBackground, categories: ["Bright", "Common"]},
+    {'name': 'Green', 'rarity': 0.185, img: GreenBackground, categories: ["Bright", "Common"]},
+    {'name': 'Radioactive', 'rarity': 0.021333333333333333, img: RadioActiveBackground, categories: ["Dark", "Rare"]},
+    {'name': 'Radioactive Pink', 'rarity': 0.01866666666666667, img: RadioActivePinkBackground, categories: ["Dark", "Super Rare"]},
     ]
 let pants = [
     {'name':'Black', 'rarity':  0.05566666666666667, img: BlackPants},
@@ -510,13 +556,13 @@ let upperbody = [
     {'name': 'Marine Top', 'rarity': 0.005},
 ]
 let hands = [
-    {'name':'Bottle Green Liquid', 'rarity':  0.04366666666666666, img: BottleGreenLiquid },
-    {'name':'Bottle Blue Liquid', 'rarity':  0.05166666666666667, img: BottleBlueLiquid },
-    {'name':'Bottle Red Liquid', 'rarity':  0.03833333333333333, img: BottleRedLiquid },
-    {'name':'Bottle Purple Liquid', 'rarity':  0.04833333333333333, img: BottlePurpleLiquid },
-    {'name':'Bottle Pink Liquid', 'rarity':  0.04466666666666667, img: BottlePinkLiquid },
-    {'name':'Bottle Magic Liquid', 'rarity':  0.010666666666666667, img: BottleMagicLiquid },
-    {'name':'Bottle Yellow Liquid', 'rarity':  0.043999999999999995, img: BottleYellowLiquid },
+    {'name':'Bottle Green Liquid', 'rarity':  0.04366666666666666, img: BottleGreenLiquid, modifiedRarity:0.2111111 },
+    {'name':'Bottle Blue Liquid', 'rarity':  0.05166666666666667, img: BottleBlueLiquid, modifiedRarity:0.2111111 },
+    {'name':'Bottle Red Liquid', 'rarity':  0.03833333333333333, img: BottleRedLiquid, modifiedRarity:0.2111111 },
+    {'name':'Bottle Purple Liquid', 'rarity':  0.04833333333333333, img: BottlePurpleLiquid, modifiedRarity:0.2111111 },
+    {'name':'Bottle Pink Liquid', 'rarity':  0.04466666666666667, img: BottlePinkLiquid, modifiedRarity:0.2111111 },
+    {'name':'Bottle Magic Liquid', 'rarity':  0.010666666666666667, img: BottleMagicLiquid, modifiedRarity:0.01066 },
+    {'name':'Bottle Yellow Liquid', 'rarity':  0.043999999999999995, img: BottleYellowLiquid, modifiedRarity:0.2111111 },
     {'name':'AK47', 'rarity':  0.046, img: AK47},
     {'name':'Metal Crow Bar', 'rarity':  0.06333333333333334, img: MetalCrowBar},
     {'name':'KBAC', 'rarity':  0.07433333333333334, img: KBAC},
@@ -810,6 +856,14 @@ export default {
         totalRarity(){
             return (100 - (( this.selectedBackground.rarity * this.selectedPants.rarity  * this.selectedUpperbody.rarity * this.selectedHands.rarity * this.selectedFace.rarity * this.selectedFaceElm.rarity * this.selectedHead.rarity * this.selectedGlasses.rarity) * 10000000000))
         },
+        modifiedRarity(){
+            let modRare = 0; 
+            if(this.selectedHands.modifiedRarity && this.selectedHands.modifiedRarity > 0.000){
+                modRare = this.selectedHands.modifiedRarity
+                console.log(modRare)
+            }else {modRare = this.selectedHands.rarity}
+            return (100 - (( this.selectedBackground.rarity * this.selectedPants.rarity  * this.selectedUpperbody.rarity * modRare * this.selectedFace.rarity * this.selectedFaceElm.rarity * this.selectedHead.rarity * this.selectedGlasses.rarity) * 10000000000))
+        },
         averageRarity(){
             return 100 - (100 * ((this.selectedBackground.rarity + this.selectedPants.rarity  + this.selectedUpperbody.rarity + this.selectedHands.rarity + this.selectedFace.rarity + this.selectedFaceElm.rarity + this.selectedHead.rarity + this.selectedGlasses.rarity) / 9));
         },
@@ -854,7 +908,7 @@ export default {
             this.faceFilter = _face;
         },
         character(){
-             let _score = 0; 
+            let _score = 0; 
             let _description = ""
             if(!this.selectedFace.name){
                 return {score: 0, description: ""}
@@ -866,6 +920,10 @@ export default {
             if(this.selectedFace.name.includes("Drunk")){
                  _score = _score +2; 
                  _description = _description +  "+2 Drunk"
+            }
+            if(this.selectedFace.name.includes("Gold")){
+                 _score = _score +2; 
+                 _description = _description +  "+5 $ Tooths"
             }
             return {score: _score, description: _description}; 
         },
