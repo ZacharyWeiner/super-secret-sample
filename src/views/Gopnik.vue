@@ -317,7 +317,7 @@
      </div>
     <div class="w-full md:flex mb-4 shadow-xl ">
         <div class="text-3xl flex-grow text-gray-700 p-1 m-1 "> UNIQ Score: <br/> <span class='text-4xl text-indigo-700'>{{totalRarity.toString().substring(0, 10)}} </span> </div>
-        <div class="text-3xl flex-grow p-1 m-1 "> Weighted UNIQ: <br/> <span class='text-4xl text-indigo-700'>{{modifiedRarity.toString().substring(0, 10)}} </span> </div>
+        <div class="text-3xl flex-grow p-1 m-1 "> MOD UNIQ: <br/> <span class='text-4xl text-indigo-700'>{{modifiedRarity.toString().substring(0, 10)}} </span> </div>
         <div class="text-3xl flex-grow p-1 m-1 "> Dopeness Score: <br/> <span class='text-4xl text-indigo-700'>{{coolScore.score}} </span> </div>
         <div class="text-3xl flex-grow p-1 m-1 "> Avg Rarez: <br/> <span class='text-4xl text-indigo-700'>{{averageRarity.toString().substring(0, 10)}} </span> </div>
     </div>
