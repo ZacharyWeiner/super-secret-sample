@@ -16,6 +16,7 @@ import CreateAnswers from "./../views/admin/CreateAnswers.vue"
 import GameList from '../views/admin/GameList.vue';
 import PewTest from "../views/PewTest.vue"
 import Gopnik from "../views/Gopnik.vue"
+import GopnikGames from "../views/GopnikGames.vue"
 const routes = [
   {
     path: '/',
@@ -26,6 +27,11 @@ const routes = [
     path: '/gopnik',
     name: 'Gopnik',
     component: Gopnik
+  },
+  {
+    path: '/gopnik-games',
+    name: 'Gopnik Games ',
+    component: GopnikGames
   },
   {
     path: '/pew-test',
